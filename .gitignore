@@ -12,5 +12,6 @@
 *.aux
 *.out
 *.toc
-*.pdf
+# *.pdf
 \#*\#
+*.dvi
