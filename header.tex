@@ -1,0 +1,71 @@
+% Main LaTeX header, used by many files
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{construction}{Construction}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem{question}{Question}
+\newtheorem{answer}{Answer}
+\newtheorem{observation}{Observation}
+\newtheorem{notation}{Notation}
+\newtheorem{remark}{Remark}
+\newcommand{\lc}[1]{\prescript{\mathrlap{\pitchfork}{\kern .1em}\pitchfork}{}{#1}}
+\newcommand{\rc}[1]{{#1}^{\mathrlap{\pitchfork}{\kern .1em}\pitchfork}}{}
+\newcommand{\dbl}[1]{\mathbb{#1}}
+\newcommand{\Sq}{\mathbb{S}\mathrm{q}}
+% \DeclareRobustCommand{\dotvartriangleright}{%
+%   \mathrel{%
+%     \vphantom{\vartriangleleft}%
+%     \mathpalette\dot@vartriangle{{\vartriangleright}{-5mu}}%
+%   }%
+% }
+% \newcommand{\dot@vartriangle}[2]{%
+%   \dot@@vartriangle#1#2%
+% }
+\newcommand*{\ghdot}{\mathbin{\ooalign{$\rhd$\cr$\gtrdot$}}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Nat}{\operatorname{Nat}}
+\newcommand*{\sheafhom}{\mathrm{H}\kern -.5pt om}
+\newcommand{\proves}{\vdash}
+\newcommand\pfun{\mathrel{\ooalign{\hfil$\mapstochar\mkern5mu$\hfil\cr$\to$\cr}}}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\holim}{holim}
+\DeclareMathOperator{\hocolim}{hocolim}
+\newcommand{\tensor}{\otimes}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coim}{\operatorname{coim}}
+\newcommand{\cod}{\operatorname{cod}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\comp}{\mathsf{c}}
+%% Symbols
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\evat}[2]{\left. #1 \right\rvert_{#2}}
+%% Observe the format. The number in brackets denotes the
+%% number of parameters. We refer to the n-th parameter by #n.
+\newcommand{\id}{\mathrm{id}}

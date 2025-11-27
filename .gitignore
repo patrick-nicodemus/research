@@ -1,0 +1,16 @@
+# Latex
+*.tex~
+*.blg
+*.bbl
+*.bcf
+*.run.xml
+*.fls
+*.synctex.gz
+*.fdb_latexmk
+*/_region_.tex
+*.log
+*.aux
+*.out
+*.toc
+*.pdf
+\#*\#

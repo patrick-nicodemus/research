@@ -1,0 +1,1513 @@
+% A limit lifting theorem for fibrations between 2-categories
+\documentclass{article}
+\input{../header.tex}
+
+\newcommand{\todot}{%
+  \mathrel{\ooalign{\hfil$\vcenter{
+    \hbox{$\scriptscriptstyle\bullet$}}$\hfil\cr$\to$\cr}
+  }%
+}
+
+\usepackage{amsmath}
+\usepackage{biblatex}
+\usepackage{quiver}
+% \usepackage{enumitem}
+\addbibresource{../refs.bib}
+
+% -----------------------------
+
+% Conventional choices
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand\TwoCat{\mathop{\mbox{$\mathbf{2}$-$\mathbf{Cat}$}}}
+
+% --------------------
+
+\begin{document}
+\title{A limit lifting theorem for fibrations between 2-categories}
+\author{Patrick Nicodemus}
+\date{\today}
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\JJ}{\mathcal{J}}
+Let $p: \EE\to\BB$ be a Grothendieck fibration between
+1-categories. It is a standard theorem of 1-category theory that if
+$\BB$ has limits of shape $\JJ$, the fibers of $p$ have limits
+of shape $\JJ$, and the reindexing functors of the
+Grothendieck fibration preserve these limits, then $p$ lifts limits of
+shape $\JJ$.
+
+Here, we generalize this theorem to the situation where $\EE$ and
+$\BB$ are 2-categories, and $p$ is a 2-fibration.
+
+It is possible to directly adapt the usual proof to the 2-categorical
+setting, but this only works for conical limits, and it seems more
+appropriate to prove a limit lifting theorem for weighted limits.
+Fortunately, Grandis and Par\'e have shown
+(\cite{parePersistentDoubleLimits}) that there is a
+category-of-elements construction for 2-categories that allows us to
+reduce weighted 2-limits to conical limits whose diagram shape is a
+double category rather than a 2-category. By means of this
+construction we can reduce the problem of lifting weighted limits in a
+fibration to a more general problem of lifting conical double limits
+in a fibration, and there the conical technique generalizes.
+
+\section{Definitions and Notational Conventions}
+\subsection{On 2-categories}
+We recall the definition of a fibration of 2-categories from \cite{buckleyFibred2categoriesBicategories2014}.
+
+\begin{definition}
+  Let $p : \mathbb{E}\to \mathbb{B}$ be a
+  (strict) functor between 2-categories.
+  A $1$-cell $f : x \to y$ in $\mathbb{E}$ is \textit{cartesian} when
+  \begin{itemize}
+  \item for each $h : z \to y$ and $u: pz \to px$ with $ph = pf \circ
+    u$,
+    there exists a unique 1-cell $\hat{u}: z\to x$ with $p\hat{u}=u$
+    and $h = f\circ\hat{u}$
+  \item for all $\sigma : h \Rightarrow k$ and $\tau: u \Rightarrow v$
+    such that $p \sigma = pf \circ \tau$, and lifts $\hat{u},\hat{v}$
+    of $u,v$ respectively, there is a unique $\hat{\tau}
+    :\hat{u}\Rightarrow \hat{v}$ over $\tau$ such that
+    $\sigma = f\circ\tau$.
+  \end{itemize}
+  $p$ is a \textit{fibration} when:
+  \begin{itemize}
+  \item for each $e$ in $\mathbb{E}$ and $f : b\to pe$ in
+    $\mathbb{B}$, there is a Cartesian lift $h : a\to e$
+    with $ph = f$
+  \item $p$ is \textit{locally fibered} - the local hom-functors
+    $p_{x,y}: \mathbb{E}_{x,y}\to \mathbb{B}_{px,py}$ are
+    1-categorical fibrations
+  \item the horizontal composite of cartesian 2-cells is again cartesian.
+  \end{itemize}
+\end{definition}
+
+We are here primarily interested in the 2-dualization of this
+definition, the notion of co-2-fibration, where we ask instead that
+\begin{itemize}
+\item $p$ is \textit{locally op-fibred} - the local hom-functors
+  $p_{x,y} : \mathbb{E}_{x,y}\to \mathbb{B}_{px,py}$ are opfibrations
+\item the horizontal composite of opcartesian 2-cells is again opcartesian
+\end{itemize}
+
+Co-2-fibrations arise naturally via the Grothendieck construction
+applied to functors
+$\mathcal{C}^{\rm op}\to \TwoCat$
+given, as can be seen by dualizing
+\cite{buckleyFibred2categoriesBicategories2014}, 2.2.
+
+It will be convenient to combine the properties of Cartesian 1-cells
+and Cartesian 2-cells in a fibration into a more powerful lifting condition for
+Cartesian 1-cells.
+\begin{theorem}\label{mixed-clp}
+  Let $p : \mathbb{E}\to \mathbb{B}$ be a co-2-fibration of
+  2-categories.
+  Let $f : x \to y$ be a Cartesian 1-cell in $\mathbb{E}$.
+  Then the lifting property of $f$ on 2-cells
+  can be strengthened as follows:
+
+  Let $h : z\to y$, and let $\hat{u},\hat{v}: z\to x$ be
+  1-cells lying over $u, v : pz\to px$ respectively.
+  Let $\kappa : h\Rightarrow f\cdot \hat{u}$ be an opcartesian 2-cell,
+  $\sigma : h\Rightarrow f\cdot \hat{v}$ an arbitrary 2-cell,
+  and $\rho: u\Rightarrow v$, such that $pf\rho \cdot p\kappa =
+  p\sigma$.
+  Then there is a unique $\hat{\rho}: \hat{u}\Rightarrow
+  \hat{v}$ such that  $f\rho \cdot \kappa = \sigma$.
+\end{theorem}
+\begin{proof}
+  Because $f$ is 1-cartesian, cells
+  $\hat{\rho}:\hat{u}\Rightarrow \hat{v}$ over
+  $\rho$ are in bijective correspondence with
+  cells $f\circ\hat{u}\Rightarrow f\circ \hat{v}$
+  lying over $p(f)\rho$. Because $\kappa$
+  is 2-opcartesian, such cells are in
+  bijective correspondence with 2-cells
+  $h\Rightarrow f\circ\hat{v}$ lying over
+  $p(f)\rho\cdot p(\kappa)$.
+\end{proof}
+\subsection{On double categories}
+We follow conventions of \cite{CTGDC_1999__40_3_162_0} and
+\cite{parePersistentDoubleLimits2019}, with one distinction:
+we will not make the simplifying assumption that
+the double categories are unitary.
+We will consider both pseudo and strict double categories,
+and take pains to clarify which is meant at each time.
+
+A pseudo double category has an associated \textit{category of objects and
+horizontal arrows}, and an associated \textit{category of vertical arrows
+and 2-cells} under horizontal composition.
+
+In a pseudo double category, the vertical arrows and 2-cells are equipped with a
+weak vertical composition that is only associative and unital up to a
+\textit{special} isomorphism of vertical arrows, that is, an
+invertible 2-cell whose boundaries above and below are horizontal
+identity morphisms.
+
+The assumption that the double categories are unitary does not appear to be used in a critical way
+in \cite{CTGDC_1999__40_3_162_0} or \cite{parePersistentDoubleLimits2019}, it is only for the sake of convenience.
+For example, it is clear that for $\mathbb{D}$ a double category,
+there is a strict 2-category whose objects are objects of
+$\mathbb{D}$, whose 1-cells are the horizontal 1-cells of $\mathbb{D}$,
+and whose 2-cells $f \Rightarrow g$ are vertical 2-cells with
+top and bottom $f, g$ respectively, and whose left sides are the unit
+$1_x$ and $1_y$. The vertical composition of these 2-cells can then be
+strictified by making use of the special isocells $1_x\cong 1_x\cdot
+1_x$ and $1_y\cong 1_y\cdot 1_y$; that this composition is strictly
+unital and associative follows from the coherence laws for a double
+category. Similarly, on page 272 of
+\cite{parePersistentDoubleLimits2019},
+the given definition of modification relies on an equality 
+$e \cdot rI = rI\cdot e$, but this can clearly be generalized to
+non-unitary categories by inserting the canonical special isomorphism
+between them. Where there is ambiguity as to how a result
+about unitary double categories should be generalized to the
+non-unitary setting, we will address it.
+
+We refer to \cite{CTGDC_1999__40_3_162_0} for the definition of a lax functor
+between bicategories and a horizontal natural transformation between
+bicategories. We refer to \cite{parePersistentDoubleLimits2019}
+for the definition of a pseudonatural horizontal transformation,
+and a modification.
+
+In \cite{CTGDC_1999__40_3_162_0}
+Grandis and Par\'e have also introduced a general notion of modification
+that allows them to define a double category of lax double functors,
+horizontal and vertical natural transformations, with
+modifications as the general 2-cell.
+
+In this paper we are primarily interested in what
+\cite{parePersistentDoubleLimits2019} refer to as \textit{globular}
+modifications, i.e., those which have left and right side the identity
+vertical natural transformation.
+
+% In this paper
+% we will not be interested in vertical natural transformations,
+% and we will consider only modifications between
+% horizontal natural transformations with the same source
+% and target functor. Therefore, we use a definition
+% of modification between horizontal natural transformations which
+% evidently agrees with theirs when the
+% vertical natural transformations are constrained to be
+% identity natural transformations and the categories
+% are assumed to be unitary.
+
+\begin{definition}[Globular Modification]
+  Let $\mathbb{D}, \mathbb{E}$ be weak double categories.
+  Let $F, G : \mathbb{D}\to \mathbb{E}$ be lax functors.
+  Let $H, K : F\Rightarrow G$ be horizontal natural transformations.
+  A \textbf{modification} $\sigma : H\Rightarrow K$ associates
+  to each object $d$ in $\mathbb{D}$ a 2-cell $\sigma_d$
+  bounded to the left and right by the vertical identities of
+  $F(d)$ and $G(d)$ respectively, and bounded above
+  and below by $H(d)$, $K(d)$ respectively, subject to the following
+  equations:
+
+  for each horizontal $f : a\to b$,
+  
+\begin{equation}\label{modification-1}
+\begin{tikzcd}
+	Fa & Ga & Gb \\
+	Fa & Fb & Gb \\
+	Fa & Fb & Gb
+	\arrow["Ha", from=1-1, to=1-2]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
+	\arrow["Gf", from=1-2, to=1-3]
+	\arrow["Hf"{description}, draw=none, from=1-2, to=2-2]
+	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
+	\arrow["Ff"', from=2-1, to=2-2]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
+	\arrow["{1_{Ff}}"{description}, draw=none, from=2-1, to=3-2]
+	\arrow["Hb"', from=2-2, to=2-3]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-2, to=3-2]
+	\arrow["{\sigma_b}"{description}, draw=none, from=2-2, to=3-3]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-3, to=3-3]
+	\arrow["Ff"', from=3-1, to=3-2]
+	\arrow["Kb"', from=3-2, to=3-3]
+      \end{tikzcd}=
+\begin{tikzcd}
+	Fa & Ga & Gb \\
+	Fa & Ga & Gb \\
+	Fa & Fb & Gb
+	\arrow["Ha", from=1-1, to=1-2]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
+	\arrow["{\sigma_a}"{description}, draw=none, from=1-1, to=2-2]
+	\arrow["Gf", from=1-2, to=1-3]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-2, to=2-2]
+	\arrow["{1_{Gf}}"{description}, draw=none, from=1-2, to=2-3]
+	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
+	\arrow["Ka"', from=2-1, to=2-2]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
+	\arrow["Gf"', from=2-2, to=2-3]
+	\arrow["{K_f}"{description}, draw=none, from=2-2, to=3-2]
+	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-3, to=3-3]
+	\arrow["Ff"', from=3-1, to=3-2]
+	\arrow["Kb"', from=3-2, to=3-3]
+\end{tikzcd}
+  \end{equation}
+  % \begin{equation}\label{modification-1}
+  %   1_{G(f)}\circ \sigma_a = \sigma_b\circ 1_{F(f)}
+  % \end{equation}
+  and for each vertical $s : a\todot b$,
+  \begin{equation}\label{modification-2}
+    \rho_{G(s)}\circ(Ks \cdot \sigma_a)\circ\rho^{-1}_{F(s)} =
+    \lambda_{G(s})\circ (\sigma_b\cdot H(s))\circ \lambda^{-1}_{F(s)}
+  \end{equation}
+  where $\lambda_s : 1\cdot s\cong s$ and $\rho_s: s\cdot 1\cong s$
+  are the special right and left unitors of the pseudocategory
+  structure for $\mathbb{E}$; we can drop these if
+  $\mathbb{E}$ is assumed to be unitary (as in \cite{CTGDC_1999__40_3_162_0}).
+\end{definition}
+
+\begin{theorem}
+  Let $\mathbb{I}, \mathbb{A}$ be weak double categories.
+  There is a 2-category $\mathbf{Lax}(\mathbb{I},\mathbb{A})$
+  of lax functors, pseudonatural horizontal transformations,
+  and globular modifications.
+\end{theorem}
+\begin{proof}
+  This is Theorem 4.3 of \cite{parePersistentDoubleLimits2019}.
+\end{proof}
+
+% We will denote this 2-category as $\mathbf{H}(\mathbb{A}^{\mathbb{I}})$
+% in the style of \cite{parePersistentDoubleLimits}.
+
+\section{The exponential fibration, double categories}
+
+Reviewing the standard limit lifting theorem for Grothendieck
+fibrations between 1-categories, a key lemma is that when
+$p : \mathbb{E}\to \mathbb{B}$ is a fibration, so is the induced
+post-composition functor between functor categories,
+$p \circ - : \mathbb{E}^{\mathbb{A}}\to \mathbb{B}^{\mathbb{A}}$ for
+all categories $\mathbb{A}$. We state and prove an appropriate
+adaptation of this theorem to the double-categorical
+case.
+
+In this section, we fix a (strict) double fibration
+$p : \mathbb{E}\to \mathbb{B}$ of weak double categories.
+
+Note a pseudo double category $\mathbb{D}$
+involves two vertical bicategories, $\mathbf{V}_0\mathbb{D}$ and
+$\mathbf{V}_1\mathbb{D}$:
+\begin{itemize}
+\item $\mathbf{V}_0\mathbb{D}$ has for its objects the objects of
+  $\mathbb{D}$, for its arrows the vertical arrows of $\mathbb{D}$, and
+  for its 2-cells the special 2-cells
+\item $\mathbf{V}_1\mathbb{D}$ has for its objects the horizontal
+  arrows of $\mathbb{D}$, for its 1-cells the 2-cells of $\mathbb{D}$
+  under their vertical composition, and for its 2-cells
+  pairs of special cells forming a commutative square
+  under horizontal composition
+\end{itemize}
+
+There are then \textit{strict} source and target functors
+$\mathbf{src,tar}: \mathbf{V}_1\mathbb{D}\to \mathbf{V}_0\mathbb{D}$.
+
+If $p : \mathbb{E}\to \mathbb{B}$ is a double fibration, then in
+particular it induces strict functors $\mathbf{V}_0p:
+\mathbf{V}_0\mathbb{E}\to \mathbf{V}_0\mathbb{B}$, $\mathbf{V}_1p:
+\mathbf{V}_1\mathbb{E}\to \mathbf{V}_1\mathbb{B}$.
+Therefore, a plausible notion of ``Cartesian pro-arrow'' or
+vertically Cartesian 2-cell would be a cell that is Cartesian
+with respect to $\mathbf{V}_0p$ or $\mathbf{V}_1p$, respectively,
+in the sense established by
+\cite{buckleyFibred2categoriesBicategories2014}.
+% and a plausible definition of a double fibration which
+% is a double fibration in the \textit{vertical} direction as well,
+% would assume additionally that
+In this section, we assume the following of $p$:
+\begin{itemize}
+\item $\mathbf{V}_0p$
+and $\mathbf{V}_1p$ are \textit{fibrations of bicategories} in the
+sense of \cite{buckleyFibred2categoriesBicategories2014}
+\item $\mathbf{src}, \mathbf{tar}$ preserve Cartesian cells of the
+bicategories
+\item  the horizontal composite of vertically Cartesian 2-cells is vertically Cartesian.
+\end{itemize}
+\begin{theorem}
+  Let $\mathbb{A}, \mathbb{E},\mathbb{B}$ be weak double categories,
+  and let $p : \mathbb{E}\to \mathbb{B}$ be a double fibration.
+
+  Then the induced functor
+  $\mathbf{Lax}(\mathbb{A},\mathbb{E})\to \mathbf{Lax}(\mathbb{A},\mathbb{B})$ has enough Cartesian
+  pseudonatural horizontal transformations.
+\end{theorem}
+\begin{proof}
+  Let $F : \mathbb{A}\to \mathbb{B}, G : \mathbb{A}\to \mathbb{E}$ be
+  lax functors, $\tau : F \Rightarrow pG$ be a pseudonatural
+  horizontal transformation. We define a pseudofunctor $\overline{F}$
+  over $F$ and a Cartesian pseudonatural transformation
+  $\overline{\tau}:\overline{F}\Rightarrow G$ over $\tau$.
+\end{proof}
+
+
+
+% Let $\mathbf{V}(p)$ be the 
+
+% \begin{theorem}
+%   Let $\mathbb{A}, \mathbb{E},\mathbb{B}$ be weak double categories,
+%   and let $p : \mathbb{E}\to \mathbb{B}$ be a double fibration.
+
+%   Then the induced functor $\mathbf{H}(\mathbb{E}^{\mathbb{A}})\to
+%   \mathbf{H}(\mathbb{B}^{\mathbb{A}})$ has enough Cartesian
+%   horizontal pseudonatural transformations, and a horizontal
+%   natural transformation whose horizontal 1-cells and 2-cells are
+%   Cartesian is a Cartesian horizontal natural transformation.
+% \end{theorem}
+% \begin{proof}
+  
+% \end{proof}
+\newpage
+\begin{theorem}
+  Let $\mathbb{A}, \mathbb{E},\mathbb{B}$ be weak double categories,
+  and let $p : \mathbb{E}\to \mathbb{B}$ be a double fibration.
+
+  Then the induced functor $\mathbf{H}(\mathbb{E}^{\mathbb{A}})\to
+  \mathbf{H}(\mathbb{B}^{\mathbb{A}})$ has enough Cartesian
+  horizontal natural transformations, and a horizontal
+  natural transformation whose horizontal 1-cells and 2-cells are
+  Cartesian is a Cartesian horizontal natural transformation.
+\end{theorem}
+\begin{proof}
+  Let $F : \mathbb{A}\to \mathbb{B}$ and
+  $G : \mathbb{A}\to \mathbb{E}$, and let $\tau : F\Rightarrow pG$ be
+  a horizontal natural transformation. We will first construct a
+  pullback $\tau^{\ast}G$ of $G$ along $\tau$, a lax double functor
+  which lies strictly over $F$, and
+  $\overline{\tau}:\tau^{\ast}G\Rightarrow G$, a horizontal natural
+  transformation which lies strictly over $\tau$.
+
+  First, we define the behavior of $\tau^{\ast}G$ on objects
+  and horizontal morphisms of $\mathbb{A}$.
+  This is just the usual 1-categorical argument, applied to
+  the categories of objects and horizontal arrows of
+  $\mathbb{A}, \mathbb{E}$ and $\mathbb{B}$; we define
+  $((\tau^{\ast}G)(d), \overline{\tau}(d))$ to be the
+  horizontal lift of $\tau(d)$ with codomain $G(d)$
+  supplied by the cleavage of the fibration.
+  For $f : a\to b$ a horizontal arrow in $\mathbb{A}$,
+  we define $(\tau^{\ast}G)(f)$ as the unique
+  morphism lying over $F f$ such that
+  $\overline{\tau}(b)\circ(\tau^{\ast}G)(f)=G(f)\circ\overline{\tau}(a)$.
+  It is now standard that $(\tau^{\ast}G)$ is ax
+  1-functor on objects and horizontal arrows, and $\overline{\tau}$
+  is a natural transformation.
+
+  The action of $\tau^{\ast}(G)$ acts on vertical cells and
+  2-cells of $\mathbb{A}$ is defined the same way, by appeal to
+  the fact that the projection functor between the
+  associated categories of vertical arrows and 2-cells
+  is a fibration. These two functors are compatible
+  because of the requirement that the cleavages
+  commute strictly with the source and target functors.
+
+  It remains to construct the lax unit constraint
+  $(\tau^{\ast}G)^0$ and lax composition
+  constraints $(\tau^{\ast}G)^2$ for $\tau^{\ast}G$. For the lax unit,
+  for each $d \in \mathbb{D}$ we must give a ``special''
+  2-cell in $\mathbb{E}$ from the vertical identity
+  $1_{\tau^{\ast}Gd}$
+  to $(\tau^{\ast}G)(1_d)$. We make use of the
+  fact that $\overline{\tau}(1_d)$ is Cartesian by assumption;
+  therefore to construct a 2-cell
+  $1_{\tau^{\ast}Gd}\Rightarrow (\tau^{\ast}G)(1_d)$ it
+  is necessary and sufficient to give a horizontal cell
+  $\rho: 1_{\tau^{\ast}Gd}\Rightarrow G(1_{\tau^{\ast}d})$
+  and a factoring $\sigma$ of $p\rho$ through $\tau(1_d)$.
+  We take $\rho:= G^0_d\circ \overline{\tau}(1_d)$
+  (where $G^0_d$ is the lax unit constraint for $G$)
+  and $\sigma = F^0_d$; the commutativity
+  of the diagram comes from the
+  lax unit law for $\tau$, and the fact that
+  the defined cell $(\tau^{\ast}G)^0_d$ is special follows from the
+  fact that $F^0_d$ is special. It also follows
+  immediately from the construction that
+  $\overline{\tau}$ satisfies the appropriate lax unit law
+  for a horizontal natural transformation.
+
+  The construction of the lax composition cell is by
+  an identical argument: for composable vertical cells
+  $s: a\todot b, t : b\todot c$ in $\mathbb{A}$, we
+  we define $(\tau^{\ast}G)^2_{s,t}$ as the unique
+  2-cell $(\tau^{\ast}G)(t)\circ(\tau^{\ast}G)(s)\Rightarrow
+  (\tau^{\ast}G)(t\circ s)$ which lies above
+  $F^2_{s,t}$ and which makes the lax composition
+  law for $\overline{\tau}$ valid at the pair $s,t$.
+
+  This concludes the construction of the data of the lax functor
+  $\tau^{\ast}G$ and the horizontal transformation $\overline{\tau}$.
+  We have already argued that the components of $\tau^{\ast}G$ on
+  objects and arrows define functors on $\mathbb{A}_{Ob}$ and
+  $\mathbb{A}_{Arr}$ respectively, and that $\overline{\tau}$ defines
+  a pair of natural transformations compatible with the source and
+  target functors, so that $\tau^{\ast}G$ determines a diagram of
+  1-cells and 2-cells in the 2-category $\Cat$.
+  
+  It is necessary to verify the lax functor coherence laws.
+  We prove the appropriate statement for the associator law,
+  the proofs for the left and right unitor are similar.
+  Let $f : a\todot b, g : b\todot c, h: c\todot b$
+  be a chain of composable vertical arrows in $\mathbb{A}$.
+
+  We need to prove that
+  \begin{equation}
+  \label{eq:5}
+  \begin{tikzcd}[column sep=large,outer sep = 2pt]
+    \tau^{\ast}h \circ(\tau^{\ast}g\circ \tau^{\ast}f)
+    \arrow[r,"1_{\tau^{\ast}h} ((\tau^{\ast}G)^2_{f,g})"]
+    \arrow[d,"\alpha_{\tau^{\ast}Gf,\tau^{\ast}Gg,\tau^{\ast}Gh}"]    
+    &
+    \tau^{\ast}h\circ (\tau^{\ast}(g\circ f))
+    \arrow[r,"(\tau^{\ast}G)^2_{g\circ f,h}"]
+    &
+    \tau^{\ast}(h\circ (g \circ f))
+    \arrow[d,"\tau^{\ast}(\alpha_{f,g,h})"]
+    \\
+    (\tau^{\ast}h\circ \tau^{\ast}g) \circ \tau^{\ast}f
+    \arrow[r,"(\tau^{\ast}G)^2_{g,h}\cdot 1_f"']
+    &
+    \tau^{\ast}(h\circ g)\circ \tau^{\ast}f
+    \arrow[r,"(\tau^{\ast}G)^2_{f,h\circ g}"']
+    &
+    \tau^{\ast}((h\circ g)\circ f)
+  \end{tikzcd}
+\end{equation}
+Because the 2-cell $\overline{\tau}((h\circ g)\circ f)$
+is Cartesian, to prove this equation it suffices to show that
+both sides of the equation lie over the same 2-cell in $\mathbb{B}$,
+and to prove that both sides of the equation
+are equal after post-composing with $\overline{\tau}((h\circ g)\circ
+f)$. The first condition is satisfied because
+after applying $p$, the equation reduces to the corresponding coherence
+hexagon for the lax functor $F$. The second condition is satisfied
+because by rewriting using the definitions of $(\tau^{\ast}G)^2$
+and $\tau^{\ast}(\alpha_{f,g,h})$ we can reduce the given
+equation to the coherence hexagon for $G$.
+
+The coherence laws for a horizontal natural transformation are evident
+by construction of $\overline{\tau}$ and $\overline{\tau}^{\ast}G$.
+
+This completes the definition of
+the lax functor $\tau^{\ast}G$ over $F$
+and the horizontal natural transformation $\overline{\tau}$ lying over
+$\tau$.
+
+We now prove that $\overline{\tau}$ is Cartesian; we will use only the
+fact that $\overline{\tau}$ is composed of Cartesian 1-cells and
+Cartesian 2-cells, so that the proof generalizes to any such $\tau$,
+not only the one we have constructed by appeal to the given cleavage.
+
+We start by proving the 1-categorical lifting property for
+$\overline{\tau}$. Therefore, let $H$ be a lax functor
+$\mathbb{A}\to \mathbb{E}$, and let $\sigma : H\Rightarrow G$ be a
+horizontal natural transformation. Let $\gamma : pH\rightarrow F$ be a
+horizontal natural transformation such that
+$p\sigma\circ\gamma = \tau$; we will prove that there is a unique
+horizontal natural transformation
+$\overline{\gamma} : H\Rightarrow (\tau^{\ast}G)$ lying over $\gamma$
+such that $\overline{\tau}\circ\overline{\gamma}=\sigma$.
+
+As in the construction of $\tau^{\ast}G$ and $\overline{\tau}$, we
+decompose the problem into the characterization of $\overline{\gamma}$
+on the category of objects and horizontal arrows, and on the
+category of vertical arrows on 2-cells. The hypotheses we have
+given then establish the existence of unique natural transformations
+$(\overline{\gamma})_O$ over the 1-functor $\gamma_O$ such that
+$\overline{\tau}_O\circ (\overline{\gamma})_O = \sigma_O$ and
+$p\overline{\gamma}_O= \gamma_O$, and similarly for the
+associated categories and fibrations of vertical arrows and
+2-cells. This fully specifies the data of a horizontal
+natural transformation $\overline{\gamma}$, which indicates
+that $\overline{\gamma}$ is unique if it is indeed a horizontal
+natural transformation. It remains to verify
+the compatibility of $\overline{\gamma}$ with the
+lax unit and lax composition constraints. We
+verify the lax composition constraint; the lax unit constraint
+is similar. Let $s: a\todot b, t: b\todot c$ be composable
+vertical morphisms in $\mathbb{A}$; we want to prove
+\begin{equation}
+\label{eq:19}
+\overline{\gamma}(t\cdot s)\circ H^2_{s,t}=
+(\tau^{\ast}G)^2_{s,t}\circ (\overline{\gamma}_t\cdot\overline{\gamma}_s)
+\end{equation}
+Because the 2-cell $\overline{\tau}_{t\cdot s}$ is Cartesian,
+it suffices to verify that both of these cells lie over
+the same 2-cell in $\mathbb{B}$, and then prove \ref{eq:19} after
+post-composition of both sides with $\overline{\tau}_{t\cdot s}$.
+The first of these holds because after applying $p$
+\label{eq:19} is equivalent to the condition that $\gamma$ satisfies
+the lax composition constraint coherence condition, and the second
+holds because after unfolding the definitions of
+$\overline{\gamma}_s,\overline{\gamma}_t, \overline{\gamma}_{t\cdot
+  s},$ and $(\tau^{\ast}G)^2_{s,t}$, we can show that this condition
+is implied by the lax composition coherence law for $\sigma_{s,t}$.
+
+Now we show that $(\tau^{\ast}G,\overline{\tau})$ has the
+appropriate 2-categorical lifting property. Let
+$H$ be as above, and let $\sigma,\sigma' : H \Rightarrow G$
+be horizontal natural transformations, with $\chi : \sigma\Rightarrow
+\sigma'$ a modification between them. Let
+$\rho,\rho' : H\Rightarrow (\tau^{\ast}G)$ be
+horizontal natural transformations and $\pi:p\rho\Rightarrow p\rho'$
+a modification, such that $\tau\cdot \pi = p\chi$.
+We will prove that there is a unique modification
+$\hat{\pi}:\rho\Rightarrow \rho'$ such that
+$p\hat{\pi}=\pi$ and $\overline{\tau}\cdot \hat{\pi}=\chi$.
+
+Regarding the fibration $p$ as a pseudocategory internal to $\mathbf{Fib}$,
+the unit morphism $i: p_{\mathbf{Ob}}\to p_{\mathbf{Arr}}$ is assumed
+to preserve Cartesian morphisms; thus, if $f : x\to y$
+is a horizontal Cartesian arrow in $\mathbb{E}$, then the
+vertical identity 2-cell $1_f: 1_x\Rightarrow 1_y$ is a Cartesian
+2-cell. We apply this observation to construct a factoring of
+$\chi_d: 1_{Hd}\Rightarrow 1_{Gd}$  through the Cartesian 2-cell
+$1_{\overline{\tau}d}$; by assumption, the required diagram commutes,
+so there is a unique 2-cell
+$\hat{\pi}_d: 1_{Hd}\Rightarrow 1_{\tau^{\ast}Gd}$
+bounded by $\rho_d$ and $\rho'_d$ such that $p(\hat{\pi}_d)=\pi_d$
+and $1_{\overline{\tau}d}\circ \hat{\pi}_d = \chi_d$.
+
+Let us prove the coherence conditions required for a modification.
+First, introduce a horizontal morphism $f : a\to b$ in $\mathbb{A}$;
+we will show that
+$1_{\tau^{\ast}Gf}\circ \hat{\pi}_a=\hat{\pi}\circ 1_{Hf}$.
+As before, we appeal to the fact that $1_{\overline{\tau}b}$ is a
+Cartesian 2-cell, so it suffices to show that
+$p(1_{\tau^{\ast}Gf}\circ \hat{\pi}_a)=p(\hat{\pi}\circ 1_{Hf})$
+and that both left and right sides of the equation agree after
+post-composing with $1_{\overline{\tau}b}$. The first
+equation is clear because this reduces to one
+of the modification equations for $\pi$. The second
+equation reduces to one of the modification equations for $\chi$.
+
+Second, let $s : a\todot b$. We want to prove
+\begin{equation}
+  r_{G(s)}\circ(\rho's \cdot \sigma_a)\circ r^{-1}_{F(s)} = \ell_{G(s})\circ (\sigma_b\cdot \rho(s))\circ \ell^{-1}_{F(s)}  
+\end{equation}
+where $r, \ell$ are the special right and left unitors of
+$\mathbb{E}$.
+We use that $\overline{\tau_s}$ is a Cartesian 2-cell, so it
+suffices to prove the equations after applying $p$ to both sides
+and after post-composing left and right with $\overline{\tau}_{s}$.
+The first of these evidently reduces to one of the modification
+equations for $\pi$. The second is similar, with the additional
+complexity that one must invoke the left and right unitor laws
+for the lax natural transformation $\overline{\tau}$.
+
+This proves that $\hat{\pi}$ is a modification. It is evidently
+unique.
+\end{proof}
+
+\begin{lemma}
+  A horizontal natural transformation $\tau' : F'\Rightarrow G$
+  between double functors $F', G: \mathbb{A}\to \mathbb{E}$
+  is Cartesian with respect to the 2-functor $p\cdot - :
+  \mathbf{H}(\mathbb{E}^{\mathbb{A}})\to
+  \mathbf{H}(\mathbb{B}^{\mathbb{A}})$
+  iff it is composed of Cartesian 1-cells and Cartesian 2-cells.
+\end{lemma}
+\begin{proof}
+  We have just proved the right-to-left direction,
+  so let $\tau': F'\Rightarrow G$ be a Cartesian horizontal natural
+  transformation. Let $F = pF'$ and $\tau = p \tau'$.
+  By means of the cleavage associated to $p$,
+  we can construct a Cartesian lift $\tau^{\ast}G,
+  \overline{\tau}:\tau^{\ast}G\Rightarrow G$.
+  It is then easy to show that $F'$ and $\tau^{\ast}F$
+  are horizontally naturally isomorphic
+  by a natural isomorphism which is vertical with
+  respect to the fibration $p$.
+  Applying this natural isomorphism pointwise,
+  we see that each arrow in $\tau'$ is isomorphic
+  to an arrow in $\overline{\tau}$, which is Cartesian by
+  construction; since being Cartesian is
+  invariant under these isomorphisms,
+  $\tau'$ is composed of Cartesian 1- and 2-cells.
+\end{proof}
+\begin{lemma}
+  The horizontal composite of Cartesian
+  horizontal natural transformations is Cartesian.
+\end{lemma}
+\begin{proof}
+  We have just argued that a horizontal natural transformation is
+  Cartesian iff its 1- and 2-cells are Cartesian,
+  so this reduces to the standard 1-categorical fact
+  that the composition of Cartesian morphisms is again Cartesian.
+\end{proof}
+
+If we could prove that the postcomposition functor
+$p \cdot - :\mathbf{H}(\mathbb{E}^{\mathbb{A}})\to
+\mathbf{H}(\mathbb{B}^{\mathbb{A}})$
+were locally fibered, it would thus be a 2-fibration.
+However, this probably is not true in general, because
+it would require a notion of ``Cartesian proarrow'', and
+the definition of double fibration proposed in
+\cite{cruttwellDoubleFibrations2022} avoids discussing Cartesian proarrows
+as orthogonal to the development of their theory.
+
+We have briefly explored this notion of Cartesian pro-arrow and we
+will briefly comment on it.
+
+Note a pseudo double category $\mathbb{D}$
+involves two vertical bicategories, $\mathbf{V}_0\mathbb{D}$ and
+$\mathbf{V}_1\mathbb{D}$:
+\begin{itemize}
+\item $\mathbf{V}_0\mathbb{D}$ has for its objects the objects of
+  $\mathbb{D}$, for its arrows the vertical arrows of $\mathbb{D}$, and
+  for its 2-cells the special 2-cells
+\item $\mathbf{V}_1\mathbb{D}$ has for its objects the horizontal
+  arrows of $\mathbb{D}$, for its 1-cells the 2-cells of $\mathbb{D}$
+  under their vertical composition, and for its 2-cells
+  pairs of special cells forming a commutative square
+  under horizontal composition
+\end{itemize}
+
+There are then \textit{strict} source and target functors
+$\mathbf{src,tar}: \mathbf{V}_1\mathbb{D}\to \mathbf{V}_0\mathbb{D}$.
+
+If $p : \mathbb{E}\to \mathbb{B}$ is a double fibration, then in
+particular it induces strict functors $\mathbf{V}_0p:
+\mathbf{V}_0\mathbb{E}\to \mathbf{V}_0\mathbb{B}$, $\mathbf{V}_1p:
+\mathbf{V}_1\mathbb{E}\to \mathbf{V}_1\mathbb{B}$.
+Therefore, a plausible notion of ``Cartesian pro-arrow'' or
+vertically Cartesian 2-cell would be a cell that is Cartesian
+with respect to $\mathbf{V}_0p$ or $\mathbf{V}_1p$, respectively,
+in the sense established by
+\cite{buckleyFibred2categoriesBicategories2014},
+and a plausible definition of a double fibration which
+is a double fibration in the \textit{vertical} direction as well,
+would assume additionally that
+\begin{itemize}
+\item $\mathbf{V}_0p$
+and $\mathbf{V}_1p$ are \textit{fibrations of bicategories} in the
+sense of \cite{buckleyFibred2categoriesBicategories2014}
+\item $\mathbf{src}, \mathbf{tar}$ preserve Cartesian cells of the
+bicategories
+\item  the horizontal composite of vertically Cartesian 2-cells is vertically Cartesian.
+\end{itemize}
+
+% Initial inquiries in this direction have met the following
+% obstacle:
+% attempts to pull back a horizontal natural transformation $\tau$
+% vertically along a modification $\varepsilon^{\ast}\tau: \sigma \Rightarrow p \tau$
+% yields data which does not satisfy the horizontal naturality condition
+% strictly on the nose, but only up to a bicategorical equivalence in
+% $\mathbf{V}_1\mathbb{E}$. Given this obstacle we develop our theory
+% further only under stronger strictness conditions.
+
+% \begin{lemma}
+%   Let $p: \mathbb{E}\to \mathbb{B}$ be a double fibration, and suppose
+%   that
+%   $\mathbb{E}$ is horizontally invariant.
+%   Let $u: x\todot y$ be a vertical arrow in $\mathbb{E}$.
+%   Let $f: x' \to x, g : y'\to y$ be horizontal arrows
+%   which are Cartesian with respect to $p$.
+%   Then for any Cartesian 2-cell $\alpha$ whose right
+%   side is $pu$ and whose top and bottom are $pf,pg$
+%   respectively, there is a Cartesian lift $\hat{\alpha}$
+%   whose right side is $u$ and whose top and bottom are $f,g$
+%   respectively.
+% \end{lemma}
+% \begin{proof}
+%   Let $\hat{\alpha}_0$ be any Cartesian lift of $\alpha$
+%   with right side $u$ and top, bottom $f_0, g_0$ respectively.
+%   Because $\mathbf{src}$ and $\mathbf{tar}$
+%   preserve Cartesian cells, $f_0,f$ are horizontal Cartesian
+%   1-cells with the same codomain, and so they
+%   are isomorphic in the slice category; similarly
+%   $g,g_0$ are vertically isomorphic in the slice category.
+%   By the assumption that $\mathbb{E}$ is horizontally invariant,
+%   we can extend $\hat{\alpha}_0$ along these vertical isomorphisms.
+% \end{proof}
+% \begin{corollary}
+%   Let $p: \mathbb{E}\to \mathbb{B}$ be a double fibration, and suppose
+%   that
+%   $\mathbb{E}$ is horizontally invariant. Then we can choose a
+%   cleavage
+%   $\chi$
+%   for $p$ such that, for any 2-cell $u$ in $\mathbb{B}$
+%   whose top and bottom are horizontal identities, and any
+%   vertical 1-cell $t$ in $\mathbb{E}$ lying over the right side of
+%   $u$,
+%   $\chi(u,t)$ has top and bottom which are horizontal identities.
+% \end{corollary}
+% \begin{proof}
+%   Any horizontal identity in $\mathbb{E}$ is Cartesian,
+%   and by the lemma we can modify a Cartesian 2-cell
+%   to have prescribed Cartesian top and bottom.
+% \end{proof}
+\begin{theorem}
+  Let $\mathbb{D}, \mathbb{E}, \mathbb{B}$ be strict
+  double categories, $p : \mathbb{E}\to \mathbb{B}$ a double
+  fibration,
+  and assume that the transpose of $p$
+  ($p^{\top} : \mathbb{E}^{\top}\to \mathbb{B}^{\top}$)
+  is also a double fibration.
+  Assume that $p^{\top}$ satisfies in addition the following
+  properties:
+  \begin{itemize}
+  \item the chosen cleavage for $p^{\top}$
+  always sends identity morphisms in the base category
+  to identity morphisms in the total category
+\item the composition and unit functors preserve the
+  cleavage
+  \end{itemize}
+  % Furthermore, assume $\mathbb{E}^{\top}$ is horizontally invariant.
+
+  Then the induced functor
+  $p\cdot - : \mathbf{H}(\mathbb{E}^{\mathbb{D}})\to
+  \mathbf{H}(\mathbb{B}^{\mathbb{D}})$
+  is a locally fibered functor, and the
+  horizontal composite of vertically Cartesian modifications
+  is again vertically Cartesian, so $p\cdot -$ is a 2-fibration.
+\end{theorem}
+\begin{proof}
+  Let $F, G : \mathbb{D}\to \mathbb{E}$ be lax double functors,
+  let $\tau : F \Rightarrow G$ and $\sigma : pF \Rightarrow pG$
+  be horizontal natural transformations, and
+  $\epsilon : \sigma\Rightarrow p\tau$ a modification.
+  We construct a horizontal natural transformation
+  $\epsilon^{\ast}\tau : F\Rightarrow G$ lying over $\sigma$ and
+  a modification $\overline{\epsilon} : \epsilon^{\ast}\tau\Rightarrow
+  \tau$ lying over $\epsilon$, and prove $\overline{\epsilon}$ is
+  1-categorically Cartesian.
+
+  For $a\in \mathbb{D}$ we define $(\epsilon^{\ast}\tau)_a$
+  and $\overline{\epsilon}_a$ using the cleavage,
+  choosing a vertically Cartesian lift of $\epsilon_a$ with bottom
+  side $\tau_a$.
+  By our assumption on the cleavage, the left and right sides of
+  $\overline{\epsilon}$
+  are vertical identities.
+  For vertical $u: a \todot b$, we define $(\epsilon^{\ast}\tau)_u$
+  using the fact that $\overline{\epsilon}_b$ is chosen to be
+  Cartesian, it should be chosen so that
+  $\overline{\epsilon}_b\cdot (\epsilon^{\ast}\tau)_u =
+  \tau_u\cdot \overline{\epsilon}_{a}$; thus \ref{modification-2}
+  is satisfied immediately by construction.
+  
+  The horizontal natural transformation
+  law for 0-cells and horizontal 1-cells of $\mathbb{D}$
+  holds, as well as \ref{modification-1}, both hold
+  because of the assumption that vertical
+  identity 2-cells belong to the cleavage of $p^{\top}$ and
+  that the cleavage of $p^{\top}$ respects composition;
+  using these we reduce to the horizontal natural transformation law
+  for $\tau$.
+
+  It remains to prove the horizontal
+  natural transformation law for vertical 1-cells and 2-cells of $\mathbb{D}$.
+  If $\alpha$ is a 2-cell in $\mathbb{D}$,
+  with left and right side $u,v$ respectively
+  and top and bottom $f,g$ respectively,
+  we want to
+  prove that
+  $G(\alpha) \circ \epsilon^{\ast}u= \epsilon^{\ast}v\circ F(\alpha)$.
+  We have already proved \ref{modification-1},
+  that is, we know $\overline{\epsilon}_b\circ 1_{Fg}=1_{Gg}\circ
+  \overline{\epsilon}_a$.
+  Because horizontal composition respects the cleavage
+  and $1_{Fg},1_{Gg}$ belong to the cleavage,
+  both sides of this equation are Cartesian and so it
+  suffices to prove
+  \begin{equation}
+  \label{eq:20}
+  (\overline{\epsilon}_b\circ 1_{Fg})\cdot(G(\alpha) \circ
+  \epsilon^{\ast}u)=
+  (1_{Gg}\circ
+  \overline{\epsilon}_a)\cdot(\epsilon^{\ast}v\circ F(\alpha))
+  \end{equation}
+  because Cartesian 2-cells are monic.
+  This follows by the definition of $(\epsilon^{\ast}\tau)_u$,
+  and $(\epsilon^{\ast}\tau)_{v}$,
+  and the horizontal naturality law for $\tau_u$.
+  Thus, $\epsilon^{\ast}\tau$ is a horizontal natural transformation
+  and $\overline{\epsilon}$ is a modification. Let us prove now that
+  $\overline{\epsilon}$ is indeed a Cartesian modification; the proof
+  will rely only on the assumption that $\overline{\epsilon}_a$ is a
+  vertically Cartesian 2-cell.
+
+  Let $\kappa$ be another horizontal natural transformation
+  $F\Rightarrow G$, introduce $\gamma : \kappa\Rightarrow \tau$
+  a modification, and introduce $\pi: p\kappa\Rightarrow \sigma$
+  such that $\epsilon\circ \pi = p(\gamma)$.
+  We will show here is a unique $\overline{\pi}: \kappa\to
+  \epsilon^{\ast}\tau$
+  with the property that
+  $\overline{\epsilon}\cdot\overline{\pi}=\gamma$
+  and $p(\overline{\pi})=\pi$.
+
+  $\overline{\pi}$ is constructed pointwise in the evident way,
+  because $\overline{\epsilon}_a$ is vertically Cartesian there is
+  evidently a unique
+  $\overline{\pi}_a: \kappa_a\Rightarrow (\epsilon^{\ast}\tau)_a$ such
+  that $\overline{\epsilon}_a\cdot \overline{\pi}_a=\gamma_a$ and
+  $\epsilon_a\cdot \pi_a= p(\gamma_a)$. (It is easy to see that the
+  left and right side of $\overline{\pi}_a$ are forced to be vertical
+  identities.)
+
+  The law \ref{modification-1} for $\overline{\pi}$ is reduced to the
+  same law \ref{modification-1} for $\gamma$ and $\overline{\epsilon}$
+  by composing below with $\overline{\epsilon}$ and applying the
+  definition of $\overline{\pi}$.
+
+  The law \ref{modification-2} for $\overline{\pi}$ (for some vertical
+  arrow $s : a\todot b$ in $\mathbb{D}$) is reduced to the same law
+  \ref{modification-2} for $\gamma$ by composing below with
+  $\overline{\epsilon}_b$ and appealing to the definition of
+  $(\epsilon^{\ast}\tau)s$ and the definition of $\overline{\pi}_b$,
+  and using that $\overline{\epsilon}_b$ is vertically monic because
+  it is vertically Cartesian. Thus, $\overline{\pi}$ is a
+  modification, and it is evidently unique.
+
+  We turn to the second claim, that the horizontal composite of these
+  modifications is a Cartesian modification. The proof is familiar:
+  Every vertically Cartesian modification is isomorphic to one of
+  Cartesian modifications canonically constructed by the cleavage, and
+  so by virtue of being (pointwise) isomorphic, it also has the
+  property that every cell is vertically Cartesian. Since the
+  horizontal composition of vertically Cartesian 2-cells is assumed to
+  be vertically Cartesian, the horizontal composite of the
+  modifications is Cartesian by the argument above.
+\end{proof}
+% \begin{proof}
+%   Let $\mathbf{E}, \mathbf{B}$ be 2-categories,
+%   and $p : \mathbf{E}\to \mathbf{B}$ a 2-categorical
+%   fibration. The double category of oplax quintets
+%   is
+% \end{proof}
+
+\begin{definition}[Limit of a diagram indexed by a double category]
+  Let $\mathbb{D}$ be a double category, and $\mathbf{E}$ a
+  2-category.
+  Let $F : \mathbb{D}\to \mathbb{Q}(\mathbf{E})$ be a
+  double functor. For $c$ an object in $\mathbb{D}$,
+  we define a 2-\textbf{cone} $c\to F$ as a horizontal natural
+  transformation from the constant double functor $\Delta(c)$
+  to $F$; the \textbf{category of 2-cones} $\operatorname{Cone}(c,F)$
+  is the category whose objects are cones and whose morphisms
+  are modifications. It is clear that this induces a strict 2-functor
+  $\operatorname{Cone}(-,F) : \mathbf{E}^{\rm op}\to \Cat$
+  (which is covariant on 2-cells.)
+
+  A 2-\textbf{limit} of $F$ is an object of $\mathbf{E}$ which
+  represents this 2-functor.
+  A pseudo-2-limit is an object which represents this functor
+  up to pseudonatural equivalence.
+\end{definition}
+
+Let $i_{\mathbb{H}\mathbb{Q}} : \mathbb{H}\mathbf{E}\to
+\mathbb{Q}\mathbf{E}$
+be the double functor which is the evident inclusion of
+$\mathbb{H}(\mathbf{E})$
+into $\mathbb{Q}(\mathbf{E})$. Then for double functors
+$F, G : \mathbb{D}\to \mathbb{H}(\mathbf{E})$,
+there is an isomorphism of categories of horizontal
+natural transformations and modifications:
+\begin{equation}
+\label{eq:21}
+\mathbb{H}(\mathbf{E})^{\mathbb{D}}(F,G) \cong \mathbb{Q}(\mathbf{E})^{\mathbb{D}}(i_{\mathbb{H}\mathbb{Q}}F,i_{\mathbb{H}\mathbb{Q}}G)
+\end{equation}
+This observation is key to the following proof.
+Thus, for $F : \mathbb{D}\to \mathbb{H}(\mathbf{E})$ and
+$F: \mathbb{D}\to \mathbb{Q}(\mathbf{E})$ alike,
+we will speak of $\operatorname{Cone}(c,F)$, as
+there is no risk of confusion; in both cases there is a well-defined
+2-functor $\mathbf{E}^{\rm op}\to \Cat$.
+
+\begin{definition}
+  Let $p: \mathbf{E}\to \mathbf{B}$ be a co-2-fibration.
+
+  If $f, g: b_0\to b_1$ and $\sigma : f \Rightarrow g$,
+  then:
+  \begin{itemize}
+  \item for any $e\in p^{-1}(b_1)$ equipped with
+    Cartesian 1-cells $\overline{f}:f^{\ast}e\to e, \overline{g}:
+    g^{\ast}e\to e$, define $\sigma^{\ast}e, \sigma^{\sharp}e$
+    to be any pair of a vertical 1-cell
+    $\sigma^{\ast}e : f^{\ast}e\to g^{\ast}e$
+    and an op-cartesian 2-cell $f^{\ast}e \Rightarrow g^{\ast}e\circ
+    \sigma^{\ast}e$
+  \item for any $e_0,e_1$ in $p^{-1}(b_1)$ and $s : e_0\to e_1$
+    vertical, and Cartesian 1-cells $\overline{f}_0 : f^{\ast}e_0\to
+    e_0$,
+    $\overline{g}_0 : g^{\ast}e_0\to e_0$,
+    $\overline{f}_1 : f^{\ast}e_1\to e_1$,
+    $\overline{g}_1 : g^{\ast}e_1\to e_1$,
+    and given choices of $\sigma^{\ast}e_0, \sigma^{\ast}e_1$,
+    $\sigma^{\sharp}e_0,\sigma^{\sharp}e_1$, define
+    $\sigma^{\ast}s : g^{\ast}s \circ \sigma^{\ast}e_0\cong
+    \sigma^{\ast}e_1\circ f^{\ast}s$ to be the unique 2-isomorphism
+    compatible with the other maps. We will omit the details of this
+    construction; the key facts required are that $\overline{g}_{1}$
+    is 1-Cartesian and that in a 2-fibration the horizontal composite
+    of Cartesian 2-cells is assumed to be Cartesian.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Reindexing preserves limits]
+  Let $p : \mathbf{E}\to \mathbf{B}$ be a co-2-fibration,
+  and $\mathbb{D}$ a double category.
+  Say that \textbf{reindexing preserves $\mathbb{D}$-shaped limits}
+  if:
+  \begin{itemize}
+  \item for $f : b_0\to b_1$ in $\mathbf{B}$,
+    if $F : \mathbb{D}\to \mathbb{Q}(p^{-1}(b_1))$ is a diagram,
+    and $\lambda : c \Rightarrow F$ is its 2-limit cone in
+    $\mathbb{Q}(p^{-q}(b_1)$, then $f^{\ast}\lambda$ is a 2-limit
+    cone in $p^{-1}(b_0)$
+  \item for $f, g : b_0\to b_1$ in $\mathbf{B}$, $F, c, \lambda$
+    as above, the induced oplax morphism of cones
+    $\sigma^{\ast}\lambda : f^{\ast}\lambda\Rightarrow
+    g^{\ast}\lambda$
+    is an isomorphism.
+  \end{itemize}
+\end{definition}
+
+We turn to the proof of our main theorem.
+
+\begin{theorem}
+  Let $\mathbf{E}, \mathbf{B}$ be 2-categories,
+  and $p : \mathbf{E}\to \mathbf{B}$ a co-2-fibration of 2-categories.
+  Let $\mathbb{D}$ be a double category.
+  Then $\mathbb{H}(\mathbf{E})$ has limits of shape $\mathbb{D}$
+  if $\mathbf{H}(\mathbb{B})$ has limits of shape $\mathbb{D}$,
+  $\mathbb{Q}(p^{-1}(E))$ has those limits
+  and reindexing preserves those limits.
+\end{theorem}
+\begin{proof}
+  Let $F : \mathbb{D}\to \mathbb{H}(\mathbf{E})$ be a double functor.
+  We have assumed that $\mathbf{B}$ has limits, so let $b_0$
+  be the limit of $pF$, and $\tau : \Delta(b_0) \to F$
+  the universal horizontal natural transformation.
+
+  It is possible to regard $\mathbb{H}(\mathbf{E})$ and
+  $\mathbb{H}(\mathbf{B})$ as sub-double categories
+  of the larger double categories of quintets
+  $\mathbb{Q}(\mathbf{E}), \mathbf{Q}(\mathbb{E})$,
+  and $\Delta(c_0), F, pF$ as functors valued in
+  $\mathbb{Q}(\mathbf{B})$ and $\mathbb{Q}(\mathbf{B})$,
+  and $\tau$ as a horizontal natural transformation between such
+  functors; thus, because $\mathbb{Q}(p)$ is a double fibration,
+  there is a Cartesian lift $\overline{\tau}$ of $\tau$
+  with codomain $F$, a double functor
+  $\tau^{\ast}F : \mathbb{D}\to \mathbb{Q}(p^{-1}(b_0))$.
+
+  Let $\operatorname{Cone}_1(c,\tau^{\ast}F)$ be the
+  category whose objects are horizontal natural transformations
+  $c\Rightarrow \tau^{\ast}F$ which lie over a constant
+  natural transformation $\Delta(f) : p(c)\to b_0$,
+  where $f: c\to b_0$ is a 1-cell; the morphisms
+  in this category are defined to be modifications
+  $\kappa: \sigma\Rightarrow \sigma'$
+  such that $p(\kappa) = \Delta(\rho) : \Delta(f)\Rightarrow
+  \Delta(g)$,
+  i.e., morphisms in this category are modifications
+  that lie over a constant modification between constant
+  natural transformations. Then it is clear by
+  construction that
+  \begin{equation}
+  \label{eq:22}
+  \operatorname{Cone}(c, F) \cong \operatorname{Cone}_1(c, \tau^{\ast}F)
+\end{equation}
+2-naturally in $c$.
+
+Evidently, there is a 1-functor
+\begin{equation}
+\label{eq:23}
+\mathbf{E}(c, \operatorname{lim}_{p^{-1}b_0}\tau^{\ast}F)
+\to
+\operatorname{Cone}_1(c,\tau^{\ast}F)
+\end{equation}
+given by whiskering with the limit cone, naturally in $c$. I claim that \ref{eq:23}
+is an isomorphism of categories.
+
+First, we establish a bijection on objects. For each
+$\rho : p(c)\to b_0$, fix a Cartesian horizontal natural
+transformation
+$\overline{\rho}_{\tau^{\ast}F}: \rho^{\ast}\tau^{\ast}F\Rightarrow
+\tau^{\ast}F$, similarly $\overline{\rho}_{\lim \tau^{\ast}F}$, and
+let $\overline{\rho}^{\ast}\lambda$ be the pullback of the (vertical) limit cone
+$\lambda : \lim \tau^{\ast} F\Rightarrow \tau^{\ast}F$.
+
+Let $\gamma : c \Rightarrow \tau^{\ast}F$ be a cone lying over $\rho$.
+Then $\gamma$ factors through $\overline{\rho}_{\tau^\ast F}$ by some
+vertical cone $\gamma' : c\Rightarrow \rho^{\ast}\tau^{\ast}F$.
+Because of the assumption that $\rho^{\ast}$ preserves limit cones,
+$\gamma'$ factors through $\rho^{\ast}\lambda$ by a unique 1-cell;
+$\hat{\gamma}$; it is then evident that
+$\overline{\rho}_{\lim\tau^{\ast}F}\circ\hat{\gamma}$
+is the unique factoring of $\gamma$ through $\lambda$. This argument
+is the same as in the 1-categorical case.
+
+Now we establish a bijection on hom-sets. Let
+$\rho_0,\rho_1 : p(c)\to b_0$ and let $\sigma : \rho_0\Rightarrow
+\rho_1$.
+Let $\gamma_0, \gamma_1$ be cones lying over $\rho_0,\rho_1$
+respectively. We will establish a bijective correspondence between
+pseudonatural transformations $\gamma_0\Rightarrow \gamma_1$
+lying over $\sigma$ and 2-cells between the associated 1-cells
+$(\overline{\rho}_0)_{\lim\tau^{ast}F}\hat{\gamma}_0\Rightarrow
+(\overline{\rho}_1)_{\lim\tau^{ast}F}\hat{\gamma}_1$;
+quantifying over all $\sigma$ gives the result.
+
+First, because $(\overline{\rho}_0)_{\tau^{\ast}F}$
+is 1-cartesian and $\sigma^{\sharp}(\rho^{\ast}F)$ is 2-cartesian,
+modifications $\gamma_0\Rightarrow \gamma_1$ lying over $\sigma$
+are in bijective correspondence with vertical modifications
+$\sigma^{\ast}(\tau^{\ast}F)\circ \gamma'_0\Rightarrow \gamma'_1$.
+Because $\sigma^{\ast}\lambda$ is an invertible modification,
+this set is in turn in bijection with vertical 2-cells
+$\sigma^{\ast}(\lim\tau^{\ast}F)\hat{\gamma}_0\Rightarrow
+\hat{\gamma}_1$. Last, these are in bijection with cells
+$(\overline{\rho}_0)_{\lim\tau^{ast}F}\hat{\gamma}_0\Rightarrow
+(\overline{\rho}_1)_{\lim\tau^{ast}F}\hat{\gamma}_1$ lying over $\sigma$
+because $(\overline{\rho}_{1})_{\lim\tau^{\ast}F}$ is 1-Cartesian
+and $\sigma^{\ast}(\lim\tau^{\ast}F)$ is 2-Cartesian.
+
+This proves the result.
+\end{proof}
+
+\newpage
+\subsection{The exponential fibration}
+Reviewing the standard limit lifting theorem for Grothendieck
+fibrations between 1-categories, a key lemma is that when
+$p : \mathbb{E}\to \mathbb{B}$ is a fibration, so is the induced
+post-composition functor between functor categories,
+$p \circ - : \mathbb{E}^{\mathbb{A}}\to \mathbb{B}^{\mathbb{A}}$ for
+all categories $\mathbb{A}$. We state and prove an appropriate
+adaptation of this theorem to the 2-categorical and double-categorical
+case. In this section we use boldface letters to denote 2-categories
+and blackboard bold to denote double categories.
+
+Grandis and Pare have given \cite{CTGDC_1999__40_3_162_0} a definition
+of a double category of functors $\mathbb{D}\to \mathbb{A}$, whose
+vertical arrows are vertical natural transformations, whose horizontal
+arrows are horizontal natural transformations, and whose 2-cells are a
+kind of modification. The notions of lax double functor and
+horizontal natural transformations we will use are
+the specializations of the definitions introduced earlier for pseudocategories;
+we unfold these definitions as far as is necessary to carry out our arguments.
+
+-- DEFINITIONS --
+
+\begin{definition}[Lax functor between double categories,
+  pseudofunctor between double categories]
+  Let $\mathbb{D},\mathbb{A}$ be double categories.
+  A \textbf{lax double functor} $F: \mathbb{D}\to \mathbb{A}$
+  is a lax functor from $\mathbb{D}$ to $\mathbb{A}$
+  as regarded as pseudocategories internal to $\Cat$.
+  A \textbf{pseudo double functor} is a
+  lax functor whose comparison cells are all invertible.
+\end{definition}
+
+% \begin{definition}[Horizontal transformation between lax functors]
+%   Let $\mathbb{D},\mathbb{A}$ be double categories,
+%   and let $F, G : \mathbb{D}\to \mathbb{A}$ be lax functors.
+
+%   A \textbf{horizontal transformation} $\tau: F\Rightarrow G$
+%   is a pair of two natural transformations
+%   $(\tau_O : F_O\Rightarrow G_O)$, $(\tau_A : F_A\Rightarrow G_A)$
+% \end{definition}
+
+-- END DEFINITIONS --
+
+\begin{theorem}
+  Let $\mathbb{D}$ be a strict double category. Let
+  $p : \mathbf{E}\to \mathbf{B}$ be a co-2-fibration; we regard $p$ as
+  as inducing a double functor between the associated categories of
+  lax quintets $\mathbb{Q}\mathbf{E}\to \mathbb{Q}\mathbf{B}$.
+
+  By postcomposition, $p$ induces a functor
+  $\mathbf{H}(\mathbb{Q}\mathbf{E}^{\mathbb{D}})\to
+  \mathbf{H}(\mathbb{Q}\mathbf{B}^{\mathbb{D}})$
+  between the associated 2-categories of lax double
+  functors, horizontal natural transformations and modifications.
+
+  Then $p$ is a co-2-fibration.
+\end{theorem}
+\begin{proof}
+  First, we show that to each lax double functor
+  $F : \mathbb{D}\to \mathbb{Q}\mathbf{B}$ and
+  $G : \mathbb{D}\to \mathbb{Q}\mathbf{E}$, and each horizontal
+  natural transformation $\tau : F \Rightarrow p G$, we can associate
+  a lax functor $\tau^{\ast}G$ which is a strict lift
+  of $F$ along $p$ and a horizontal natural
+  transformation $\overline{\tau} : \tau^{\ast}(G)\Rightarrow G$
+  which lies strictly over $\tau$.
+
+  Therefore, introduce $F, G$ and $\tau$. For $d$ in $\mathbb{D}$, we
+  define $(\tau^{\ast}G)(d)$ as the pullback of $G(d)$ along the
+  horizontal arrow $\tau(d)$, and $\overline{\tau}(d)$ to be the
+  associated Cartesian 1-cell from $(\tau^{\ast}G)(d)$ to $G(d)$.
+
+  The action of $(\tau^{\ast}G)$ on horizontal 1-cell of $\mathbb{D}$ is
+  the same as in the 1-categorical case, i.e., for $f : a\to b$
+  a horizontal 1-cell in $\mathbb{D}$, we define $(\tau^{\ast}G)f$
+  as the unique 1-cell $(\tau^{\ast}G)(a) \to (\tau^{\ast}F)(b)$
+  lying over $F(f)$ and satisfying
+  $\overline{\tau}(b)\circ(\tau^{\ast}F)f=G(f)\circ\overline{\tau}(a)$.
+
+  The action of $\tau^\ast$ on a vertical cell $s : a\todot b$ is
+  defined as follows: choose an opcartesian lift $\kappa$
+  of the 2-cell $\tau(s)$ with domain $G(s)\circ \tau^{\ast}a$.
+  The codomain of this 2-cell lies over $\tau(b)\circ F(s)$, so
+  there is a unique factoring of this 1-cell
+  as $\overline{\tau}(b)\circ (\tau^{\ast}F)(s)$ by
+  $(\tau^{\ast}F)(s)$ lying over $F(s)$; we define
+  $\overline{\tau}(s)=\kappa$.
+
+  Let $\alpha$ be a 2-cell in $\mathbb{D}$,
+  $\alpha : (s_0: a_0\todot b_0)\Rightarrow (s_1:a_1\todot b_1)$, with
+  top boundary $f_a: a_0\to a_1$ and bottom boundary $f_b:b_0\to b_1$;
+  we define $(\tau^{\ast}F)(\alpha)$ by appeal to \ref{mixed-clp} (and
+  using the notation from that theorem statement) by taking
+  $\overline{\tau}(b)$ as the Cartesian 1-cell $f$,
+  $\hat{u}:=(\tau^{\ast}F)(s_1)\circ(\tau^{\ast}F)(f_a)$,
+  $\hat{v}:=(\tau^{\ast}F)(f_b)\circ(\tau^{\ast}F)(s_0)$, opcartesian
+  2-cell $\kappa := \overline{\tau}(s_1) (\tau^{\ast}F)(f_a)$ (which
+  is opcartesian because $\overline{\tau}(s_1)$ is opcartesian by
+  definition, because the identity 2-cell on $(\tau^{\ast}F)(f_a)$ is
+  evidently opcartesian, and by assumption the horizontal composition
+  of opcartesian 2-cells is opcartesian),
+  $\sigma := \overline{\tau}(s_0)\mid G(\alpha)$ (where we use $\mid$
+  to denote the pasting of these 2-cells along their common boundary
+  $G(s_0)$) and $\rho:=F(\alpha)$. The commutativity of the diagram
+  required to apply \ref{mixed-clp} is a consequence of the fact that
+  $\tau$ is assumed to be a horizontal natural transformation.
+
+  It remains to construct the lax unit constraint and lax composition
+  constraint cells. Let $d\in \mathbb{D}$; we must
+  give a ``special'' 2-cell $1_{\tau^{\ast}Fd}\Rightarrow
+  (\tau^{\ast}F)(1_d)$ (where we need the \textit{vertical}
+  identities). As before we appeal to \ref{mixed-clp},
+  by taking
+  $\hat{u}:=1_{\tau^{\ast}F d}, \hat{v}:=\tau^{\ast}F(1_d)$,
+  $\kappa = \overline{\tau}(1_d)$,
+  $\sigma:=\overline{\tau(d)}\overline{\tau}(1_d)$,
+  and $\rho = F^0_d$. That the diagram for \ref{mixed-clp} commutes
+  follows from $\tau$ being a horizontal
+  natural transformation.
+
+  The lax composition constraint is defined by a similar argument.
+  Let $s : a\todot b, t : b\todot c$ be composable vertical
+  morphisms in $\mathbb{D}$.
+  It is necessary to construct a ``special'' 2-cell
+  $(\tau^{\ast}F)(t)\circ(\tau^{\ast}F)(s)\Rightarrow (\tau^{\ast}F)$
+ We apply \ref{mixed-clp}
+  with the 
+
+  We will demonstrate the associativity coherence proof for
+  the lax composition constraint; the left and right unit laws are
+  similar.
+  
+  % Therefore, introduce $F, G$ and $\tau$. For $d$ in $\mathbb{D}$, we
+  % define $(\tau^{\ast}F)(d)$ as the pullback of $G(d)$ along the
+  % horizontal arrow $\tau(d)$, and $\overline{\tau}(d)$ to be the
+  % associated Cartesian 1-cell from $(\tau^{\ast}F)(d)$ to $G(d)$.
+
+
+  % Let $\alpha$ be a 2-cell in $\mathbb{D}$,
+  % $\alpha : (s_0: a_0\todot b_0)\Rightarrow (s_1:a_1\todot b_1)$, with
+  % top boundary $f_a: a_0\to a_1$ and bottom boundary $f_b:b_0\to b_1$;
+  % we define $(\tau^{\ast}F)(\alpha)$ by appeal to \ref{mixed-clp} (and
+  % using the notation from that theorem statement) by taking
+  % $\overline{\tau}(b)$ as the Cartesian 1-cell $f$,
+  % $\hat{u}:=(\tau^{\ast}F)(s_1)\circ(\tau^{\ast}F)(f_a)$,
+  % $\hat{v}:=(\tau^{\ast}F)(f_b)\circ(\tau^{\ast}F)(s_0)$, opcartesian
+  % 2-cell $\kappa := \overline{\tau}(s_1) (\tau^{\ast}F)(f_a)$ (which
+  % is opcartesian because $\overline{\tau}(s_1)$ is opcartesian by
+  % definition, because the identity 2-cell on $(\tau^{\ast}F)(f_a)$ is
+  % evidently opcartesian, and by assumption the horizontal composition
+  % of opcartesian 2-cells is opcartesian),
+  % $\sigma := \overline{\tau}(s_0)\mid G(\alpha)$ (where we use $\mid$
+  % to denote the pasting of these 2-cells along their common boundary
+  % $G(s_0)$) and $\rho:=F(\alpha)$. The commutativity of the diagram
+  % required to apply \ref{mixed-clp} is a consequence of the fact that
+  % $\tau$ is assumed to be a horizontal natural transformation.
+
+  % We verify some of the less obvious equations that $(\tau^{\ast})(F)$
+  % is a double functor and $\overline{\tau}$ is a horizontal natural
+  % transformation. It is obvious that $\tau^{\ast}F$ is functorial on
+  % horizontal 1-cells; for $s : a\todot b, t : b\todot c$ in
+  % $\mathbb{D}$, the conditions
+  % $(\tau^{\ast}F)(t\circ s) = (\tau^{\ast}F)(t)\circ(\tau^{\ast}F)(s)$
+  % and
+  % $\overline{\tau}(t\circ s)=\overline{\tau}(t)\mid
+  % \overline{\tau}(s)$ are both derived from the fact that
+  % $F,\tau$ and $G$ are all functorial on vertical 1-cells,
+  % and the uniqueness of factorings through the Cartesian 1-cell
+  % $\overline{\tau}(c)$.
+\end{proof}
+
+% \begin{proof}
+%   First, we show that to each double functor
+%   $F : \mathbb{D}\to \mathbb{Q}\mathbf{B}$ and
+%   $G : \mathbf{D}\to \mathbb{Q}\mathbf{E}$, and each horizontal
+%   natural transformation $\tau : F \Rightarrow p G$, we can associate
+%   a lift $\tau^{\ast}F$ of $F$ along $p$ and a horizontal natural
+%   transformation $\overline{\tau} : \tau^{\ast}(F)\Rightarrow G$.
+
+%   Therefore, introduce $F, G$ and $\tau$. For $d$ in $\mathbb{D}$, we
+%   define $(\tau^{\ast}F)(d)$ as the pullback of $G(d)$ along the
+%   horizontal arrow $\tau(d)$, and $\overline{\tau}(d)$ to be the
+%   associated Cartesian 1-cell from $(\tau^{\ast}F)(d)$ to $G(d)$. The
+%   action of $(\tau^{\ast} F)$ on horizontal 1-cell of $\mathbb{D}$ is
+%   the same as in the 1-categorical case, i.e., for $f : a\to b$
+%   a horizontal 1-cell in $\mathbb{D}$, we define $(\tau^{\ast}F)f$
+%   as the unique 1-cell $(\tau^{\ast}F)(a) \to (\tau^{\ast}F)(b)$
+%   lying over $F(f)$ and satisfying
+%   $\overline{\tau}(b)\circ(\tau^{\ast}F)f=G(f)\circ\overline{\tau}(a)$.
+
+%   The action of $\tau^\ast$ on a vertical cell $s : a\todot b$ is
+%   defined as follows: choose an opcartesian lift $\kappa$
+%   of the 2-cell $\tau(s)$ with domain $G(s)\circ \tau^{\ast}a$.
+%   The codomain of this 2-cell lies over $\tau(b)\circ F(s)$, so
+%   there is a unique factoring of this 1-cell
+%   as $\overline{\tau}(b)\circ (\tau^{\ast}F)(s)$ by
+%   $(\tau^{\ast}F)(s)$ lying over $F(s)$; we define
+%   $\overline{\tau}(s)=\kappa$.
+
+%   Let $\alpha$ be a 2-cell in $\mathbb{D}$,
+%   $\alpha : (s_0: a_0\todot b_0)\Rightarrow (s_1:a_1\todot b_1)$, with
+%   top boundary $f_a: a_0\to a_1$ and bottom boundary $f_b:b_0\to b_1$;
+%   we define $(\tau^{\ast}F)(\alpha)$ by appeal to \ref{mixed-clp} (and
+%   using the notation from that theorem statement) by taking
+%   $\overline{\tau}(b)$ as the Cartesian 1-cell $f$,
+%   $\hat{u}:=(\tau^{\ast}F)(s_1)\circ(\tau^{\ast}F)(f_a)$,
+%   $\hat{v}:=(\tau^{\ast}F)(f_b)\circ(\tau^{\ast}F)(s_0)$, opcartesian
+%   2-cell $\kappa := \overline{\tau}(s_1) (\tau^{\ast}F)(f_a)$ (which
+%   is opcartesian because $\overline{\tau}(s_1)$ is opcartesian by
+%   definition, because the identity 2-cell on $(\tau^{\ast}F)(f_a)$ is
+%   evidently opcartesian, and by assumption the horizontal composition
+%   of opcartesian 2-cells is opcartesian),
+%   $\sigma := \overline{\tau}(s_0)\mid G(\alpha)$ (where we use $\mid$
+%   to denote the pasting of these 2-cells along their common boundary
+%   $G(s_0)$) and $\rho:=F(\alpha)$. The commutativity of the diagram
+%   required to apply \ref{mixed-clp} is a consequence of the fact that
+%   $\tau$ is assumed to be a horizontal natural transformation.
+
+%   We verify some of the less obvious equations that $(\tau^{\ast})(F)$
+%   is a double functor and $\overline{\tau}$ is a horizontal natural
+%   transformation. It is obvious that $\tau^{\ast}F$ is functorial on
+%   horizontal 1-cells; for $s : a\todot b, t : b\todot c$ in
+%   $\mathbb{D}$, the conditions
+%   $(\tau^{\ast}F)(t\circ s) = (\tau^{\ast}F)(t)\circ(\tau^{\ast}F)(s)$
+%   and
+%   $\overline{\tau}(t\circ s)=\overline{\tau}(t)\mid
+%   \overline{\tau}(s)$ are both derived from the fact that
+%   $F,\tau$ and $G$ are all functorial on vertical 1-cells,
+%   and the uniqueness of factorings through the Cartesian 1-cell
+%   $\overline{\tau}(c)$.
+% \end{proof}
+
+% This double category, does not, in general,
+% degenerate to a horizontal double category (a 2-category) when
+% $\mathbb{A}$ is a 2-category; there are nontrivial vertical morphisms
+% in this double category, related to icons.
+% However, for our purposes it is not necessary to consider these
+% vertical morphisms, as we are interested in double limits of functors
+% $\mathbb{D}\to \mathbb{A}$, and the only vertical morphisms that arise
+% when considering this problem are vertical natural transformations
+% between \textit{constant} functors (appearing as the vertex of a cone)
+% which are trivial when $\mathbb{A}$ is constrained to be a 2-category.
+% For this reason we simplify the presentation by considering the
+% ``horizontal 2-category'' of functors from $\mathbb{D}$ to $\mathbb{A}$, the full
+% double category containing only \textit{identity}
+vertical morphisms. We will use the notation $\mathbb{A}^{\mathbb{D}}$
+for this horizontal 2-category; we will not have need for the full
+double category, so this is unlikely to lead to confusion.
+Double categories are rich in data and constraints, so we choose
+to give specialized definitions for 2-categories where appropriate.
+
+We now define these notions; they are instances of the more general
+notion of internal functor between internal categories and internal
+natural transformation between double categories.
+
+\begin{definition}[Double functor from $\mathbb{D}$ to $\mathbb{A}$]
+  Let $\mathbb{D}$ be a double category and $\mathbb{A}$ a 2-category.
+  A double functor $F : \mathbb{D}\to \mathbb{A}$ is given by:
+  \begin{itemize}
+  \item a 1-functor $F_{h,0}$ from the
+    category $\mathbb{D}_{h,0}$ of objects and
+    horizontal arrows of $\mathbb{D}$ to the underlying
+    1-category $\mathbb{A}_{h,0}$ of objects and 1-cells of
+    $\mathbb{A}$,
+    subject to the constraint that $F_h(a) = F_h(b)$
+    whenever there exists a vertical 1-cell from $a$ to $b$ in $\mathbb{D}$
+  \item a 1-functor $F_{h,1}$ from the category $\mathbb{D}_{h,1}$
+    of vertical 1-cells and 2-cells under horizontal composition,
+    to the 1-category $\mathbb{A}_{h,1}$ of objects and 2-cells under
+    horizontal composition, which is compatible with $F_{h,0}$
+    in the evident way - the vertical boundaries of the 2-cell $F_{h,1}(\alpha)$
+    agree with where $F_{h,0}$ sends the horizontal 1-cells bounding
+    $\alpha$ above and below.
+  \item $F_{h,0}$ and $F_{h,1}$ taken together define a graph
+    homomorphism $F_v$
+    from the graph of horizontal arrows and 2-cells of
+    $\mathbb{D}$ to the graph of 1-cells and 2-cells
+    of $\mathbb{A}$; we require that this graph homomorphism
+    is a functor with respect to vertical composition.
+  \end{itemize}
+\end{definition}
+\begin{definition}[Horizontal natural transformation]
+  Let $F, G : \mathbb{D}\to \mathbb{A}$ be double functors.
+  A horizontal natural transformation $\tau : F\Rightarrow G$
+  is defined to be a functor from the category $\mathbb{D}_{v,0}$
+  of objects and vertical arrows of $\mathbb{D}$ to
+  the category $\mathbb{A}_{v,1}$ of 1-cells
+  and 2-cells of $\mathbb{A}$ under vertical composition
+  such that:
+  \begin{itemize}
+  \item the object function of $\tau$ defines a natural transformation
+    $F_{h,0}\Rightarrow G_{h,0}$, and
+  \item the morphism function of $\tau$ defines a natural
+    transformation
+    $F_{h,1}\Rightarrow G_{h,1}$.
+  \end{itemize}
+\end{definition}
+\begin{definition}[Modification]
+  Let $F, G : \mathbb{D}\to \mathbb{A}$ be double functors,
+  and let $\tau, \sigma : F\Rightarrow G$ be horizontal natural
+  transformations.
+  A modification $\gamma: \tau\Rightarrow \sigma$ associates
+  to each $d$ in $\mathbb{D}$ a 2-cell
+  $\gamma_d : \tau_d\Rightarrow \sigma_d$ such that
+  \begin{itemize}
+  \item for each vertical morphism $s : d\to d'$ in $\mathbb{D}$,
+    the equation $\sigma_s\cdot \gamma_d =\gamma_{d'} \cdot \tau_s$
+    holds in $\mathbb{A}(F(d),G(d'))$
+  \item for each horizontal morphism $f: d\to d'$ in $\mathbb{D}$
+    the equation $G(f)\circ\gamma_d = \gamma_{d'}\circ F(f)$ holds
+    in $\mathbb{A}(F(d),G(d'))$
+  \end{itemize}
+\end{definition}
+
+The main theorem of this subsection is the following:
+\begin{theorem}
+  Let $p : \mathbb{E}\to \mathbb{B}$ be a 2-categorical
+  fibration, and let $\mathbb{A}$ be a double category.
+  Then the induced functor $p\cdot - : \mathbb{E}^{\mathbb{A}}\to
+  \mathbb{B}^{\mathbb{A}}$ is a 2-categorical fibration.
+\end{theorem}
+There are many details to check here, so we break it down into
+a series of simpler statements. For the rest of this section,
+$p : \mathbb{E}\to \mathbb{B}$ is a (strict) fibration of
+2-categories,
+and $\mathbb{A}$ a double category.
+
+\begin{definition}[Pullback of a double functor along a horizontal
+  natural transformation]
+  Let $F : \mathbb{A}\to \mathbb{B}$ and $G : \mathbb{A}\to
+  \mathbb{E}$
+  be double functors, and $\tau : F \Rightarrow p G$
+  a horizontal natural transformation of double functors.
+  We define a double functor $\tau^{\ast}F : \mathbb{A}\to \mathbb{E}$
+  and a horizontal natural transformation
+  $\overline{\tau}: \tau^{\ast} \to G$ which lies over $\tau$.
+\end{definition}
+\begin{proof}
+  Let $a$ be an object of $\mathbb{A}$.
+  We define $(\tau^{\ast}F)(a)$ as $\tau^{\ast}(G(a))$,
+  and $\overline{\tau}(a) = \overline{tau}(G(a))$, as in
+  1-dimensional category theory; since $p : \mathbb{E}\to \mathbb{B}$
+  restricts to a 1-categorical Grothendieck fibration between
+  the underlying categories of 0-cells and 1-cells, the same
+  construction can be carried out without difficulty.
+\end{proof}
+
+Grandis and Par\'e have given a notion of a ``category of elements'' construction
+for a functor $W : A \to \Cat$, that associates to $J$
+
+a double category $\mathbb{E}l(W)$ equipped with a
+projection double functor $\pi : \mathbb{E}l(W)\to A$.
+\begin{definition}
+  
+\end{definition}
+\subsection{A limit lifting theorem}
+\subsection{Reducing weighted 2-limits to double limits}
+\subsubsection{A Grothendieck construction for 2-functors}
+In this section, let $P$ be a 2-category, and $\mathcal{J} : P \to
+\Cat$ a system of weights.
+We describe a construction $\int\mathcal{J}$ which yields
+a (strict) double category over $P$.
+
+Formally,
+\begin{itemize}
+\item the objects of $\int \mathcal{J}$ are pairs $(p,c)$ where
+  $p\in P$ and $c\in \mathcal{J}(p)$
+\item the vertical morphisms $(p,c)\to (p,d)$ are morphisms
+  $c\to d$ in $\mathcal{J}(p)$; there are no vertical morphisms
+  $(p,c)\to (q,d)$ for $p\neq q$
+\item for each 1-cell $f : p\to q$ in $P$,
+  and for each $c \in \mathcal{J}(p)$,
+  there is an associated
+  horizontal morphism
+  $\mathcal{J}(c,f) : (p,c)\to (q,\mathcal{J}(f)(c))$.
+\item for each pair of parallel 1-cells $f,g : p \to q$ in $P$,
+  and for each $\alpha:f\Rightarrow g$,
+  and for each morphism $s : c\to d$ in $\mathcal{J}(p)$
+  there is
+  an associated 2-cell in $\int \mathcal{J}$ with top
+  $\mathcal{J}(c,f)$, bottom $\mathcal{J}(d,g)$,
+  left side $s$, and right side
+  $\mathcal{J}(\alpha)(d)\circ\mathcal{J}(f)(s)$.
+\end{itemize}
+
+Composition of vertical arrows is inherited from $\mathcal{J}$.
+The composition of horizontal arrows is inherited from $P$,
+it is equivalently the category of elements of the underlying
+presheaf of sets of $\mathcal{J}$.
+The horizontal pasting law for 2-cells glues
+$(s, \alpha)$ with $(\mathcal{J}(\alpha)(d)\circ\mathcal{J}(f)(s),
+\beta)$
+and returns $(s, \beta\circ\alpha)$; it
+is straightforward to check that this composite
+is well-typed (has the correct top and right hand side).
+Similarly, the vertical pasting $(s : c\to d, \alpha : f \Rightarrow
+g)$
+with $(t : d\to e, \beta : g\Rightarrow h)$ is $(t\circ s,
+\beta\cdot\alpha)$;
+again it is straightforward that this composite is well-typed
+(has the expected top and right-hand-side).
+
+The interchange law is trivial.
+
+\subsubsection{Reduction of weighted limits to conical double limits}
+In this section we view 2-categories as strict double categories
+whose category of objects and horizontal morphisms is discrete.
+An 1-cell in a 2-category is regarded as a vertical arrow
+(an object in the category of arrows) and a 2-cell is regarded
+as a morphism in the category of arrows.
+
+\begin{theorem}
+  Let $P$ and $\mathcal{A}$ be 2-categories.
+  Let $\mathcal{J}: P\to \Cat$ be a system of weights on $P$,
+  and let $F : P\to \mathcal{A}$ be a diagram.
+  Then the limit of $\mathcal{J}$ with weights in $F$
+  can equivalently expressed as the conical double limit
+  $F\circ \pi_\mathcal{J} : \int \mathcal{J}\to P\to \mathcal{A}$.
+\end{theorem}
+\begin{proof}
+  Let $a$ be an object in $\mathcal{A}$.
+  A horizontal double cone from $a$ to $F\circ \pi_{\mathcal{J}}$
+  consists of:
+  \begin{itemize}
+  \item for each pair $(p,c)$ in $\int_{\mathcal{J}}$,
+    a 1-cell $\tau_{(p,c)} : a \to F(p)$
+  \item for each \textbf{horizontal} morphism
+    $(p,c) \to (q,\mathcal{J}(f)(c))$ (where $f : p -> q$ in $P$),
+    a 2-cell
+  \end{itemize}  
+\end{proof}
+
+\subsection{Applications to 2-categorical universal algebra}
+
+
+
+
+\end{document}

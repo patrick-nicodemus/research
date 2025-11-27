@@ -1,0 +1,18 @@
+name: build
+uses: hspaans/latexmk-action@v2.1.1
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Generate PDF document
+        uses: hspaans/latexmk-action@v2.1.0
+        run: cd LimitLiftingThm
+        with:
+          format: pdf
+          filename: limit_lifting.tex
+          options: -shell-escape

@@ -1,0 +1,73 @@
+\documentclass{article}
+\input{../../header.tex}
+\begin{document}
+Let $p : \mathbf{E}\to \mathbf{B}$ be a
+fibration of 2-categories. What exactly is the claim?
+
+Let $\mathcal{J} : \mathbf{A}\to \mathbf{E}$ be a (strict!)
+2-functor and let $P : \mathbf{A}\to \mathbf{Cat}$ be a
+(strict!) 2-functor.
+
+Remember that there are two distinct definitions of cone.
+
+A strict cone would be a family of functors
+$P(e) \Rightarrow \mathbf{Hom}_{\mathbf{Cat}}(\mathcal{J}(-), e)$,
+indexed by $e \in \mathbf{E}$, forming a strict natural
+transformation, i.e., the functor diagrams commute on the nose.
+
+A pseudocone is defined to be a pseudonatural transformation,
+i.e., all the squares commute up to (coherent) natural isomorphism.
+
+I ran into a problem. What is my problem?
+Something is false. What was it?
+
+The following theorem is, I think, false.
+
+\begin{theorem}
+  Let $p: \mathbf{E}\to \mathbf{B}$ be a (strict) 2-fibration.
+  Let $\mathbb{A}$ be a double category.
+  There are double functor categories
+  $\mathbb{Q}(\mathbf{E})^{\mathbb{A}}$,
+  $\mathbb{Q}(\mathbf{B})^{\mathbb{A}}$,
+  and $p$ induces a double functor between them by
+  postcomposition. Restricting to $\mathbf{H}(p)$
+  (i.e., only caring about the behavior of $p$
+  on horizontal 1-cells) induces a fibration of 2-categories.
+\end{theorem}
+
+I no longer think this is true, without further
+assumptions on the categories involved.
+The problem is that the pullback of a natural transformation
+along a modification may not be strictly natural, in general.
+It will only be ``pseudonatural.'' And the concept
+of a pseudonatural transformation between double functors
+goes beyond what we are prepared to handle.
+
+Recall that $\mathbf{H}(\mathbb{Q}(\mathbf{E})^{\mathbb{A}})$
+consists of
+\begin{itemize}
+\item objects: pseudo double functors $\mathbb{A}\to \mathbf{E}$
+\item 1-cells: horizontal natural transformations
+  (these are required to commute strictly)
+\item 2-cells: modifications, etc.
+\end{itemize}
+
+So, let us go back to the drawing board.
+
+\section{What we have to work with}
+Let $p : \mathbf{E}\to \mathbf{B}$ be a (strict) 2-fibration between
+2-categories. Let $\mathbb{A}$ be a (strict) double category.
+Let $F : \mathbb{A}\to \mathbf{E}$.
+
+For each $e$ there is a category $\operatorname{Cone}(c, F)$
+whose \textit{objects} are (strict) horizontal natural transformations $c\Rightarrow F$
+and whose objects are modifications between them.
+
+then for fixed $e$, there is a correspondence between
+\begin{itemize}
+\item strict, 
+\end{itemize}
+
+
+
+\end{document}
