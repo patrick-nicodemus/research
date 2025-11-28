@@ -170,9 +170,10 @@ non-unitary setting, we will address it.
 
 We refer to \cite{CTGDC_1999__40_3_162_0} for the definition of a lax functor
 between bicategories and a horizontal natural transformation between
-bicategories. We refer to \cite{parePersistentDoubleLimits2019}
-for the definition of a pseudonatural horizontal transformation,
-and a modification.
+bicategories.
+% We refer to \cite{parePersistentDoubleLimits2019}
+% for the definition of a pseudonatural horizontal transformation,
+% and a modification.
 
 In \cite{CTGDC_1999__40_3_162_0}
 Grandis and Par\'e have also introduced a general notion of modification
@@ -200,7 +201,7 @@ vertical natural transformation.
   Let $\mathbb{D}, \mathbb{E}$ be weak double categories.
   Let $F, G : \mathbb{D}\to \mathbb{E}$ be lax functors.
   Let $H, K : F\Rightarrow G$ be horizontal natural transformations.
-  A \textbf{modification} $\sigma : H\Rightarrow K$ associates
+  A (globular) \textbf{modification} $\sigma : H\Rightarrow K$ associates
   to each object $d$ in $\mathbb{D}$ a 2-cell $\sigma_d$
   bounded to the left and right by the vertical identities of
   $F(d)$ and $G(d)$ respectively, and bounded above
@@ -209,49 +210,49 @@ vertical natural transformation.
 
   for each horizontal $f : a\to b$,
   
-\begin{equation}\label{modification-1}
-\begin{tikzcd}
-	Fa & Ga & Gb \\
-	Fa & Fb & Gb \\
-	Fa & Fb & Gb
-	\arrow["Ha", from=1-1, to=1-2]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
-	\arrow["Gf", from=1-2, to=1-3]
-	\arrow["Hf"{description}, draw=none, from=1-2, to=2-2]
-	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
-	\arrow["Ff"', from=2-1, to=2-2]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
-	\arrow["{1_{Ff}}"{description}, draw=none, from=2-1, to=3-2]
-	\arrow["Hb"', from=2-2, to=2-3]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-2, to=3-2]
-	\arrow["{\sigma_b}"{description}, draw=none, from=2-2, to=3-3]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-3, to=3-3]
-	\arrow["Ff"', from=3-1, to=3-2]
-	\arrow["Kb"', from=3-2, to=3-3]
-      \end{tikzcd}=
-\begin{tikzcd}
-	Fa & Ga & Gb \\
-	Fa & Ga & Gb \\
-	Fa & Fb & Gb
-	\arrow["Ha", from=1-1, to=1-2]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
-	\arrow["{\sigma_a}"{description}, draw=none, from=1-1, to=2-2]
-	\arrow["Gf", from=1-2, to=1-3]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-2, to=2-2]
-	\arrow["{1_{Gf}}"{description}, draw=none, from=1-2, to=2-3]
-	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
-	\arrow["Ka"', from=2-1, to=2-2]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
-	\arrow["Gf"', from=2-2, to=2-3]
-	\arrow["{K_f}"{description}, draw=none, from=2-2, to=3-2]
-	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-3, to=3-3]
-	\arrow["Ff"', from=3-1, to=3-2]
-	\arrow["Kb"', from=3-2, to=3-3]
-\end{tikzcd}
+% \begin{equation}\label{modification-1}
+% \begin{tikzcd}
+% 	Fa & Ga & Gb \\
+% 	Fa & Fb & Gb \\
+% 	Fa & Fb & Gb
+% 	\arrow["Ha", from=1-1, to=1-2]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
+% 	\arrow["Gf", from=1-2, to=1-3]
+% 	\arrow["Hf"{description}, draw=none, from=1-2, to=2-2]
+% 	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
+% 	\arrow["Ff"', from=2-1, to=2-2]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
+% 	\arrow["{1_{Ff}}"{description}, draw=none, from=2-1, to=3-2]
+% 	\arrow["Hb"', from=2-2, to=2-3]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-2, to=3-2]
+% 	\arrow["{\sigma_b}"{description}, draw=none, from=2-2, to=3-3]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-3, to=3-3]
+% 	\arrow["Ff"', from=3-1, to=3-2]
+% 	\arrow["Kb"', from=3-2, to=3-3]
+%       \end{tikzcd}=
+% \begin{tikzcd}
+% 	Fa & Ga & Gb \\
+% 	Fa & Ga & Gb \\
+% 	Fa & Fb & Gb
+% 	\arrow["Ha", from=1-1, to=1-2]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
+% 	\arrow["{\sigma_a}"{description}, draw=none, from=1-1, to=2-2]
+% 	\arrow["Gf", from=1-2, to=1-3]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-2, to=2-2]
+% 	\arrow["{1_{Gf}}"{description}, draw=none, from=1-2, to=2-3]
+% 	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
+% 	\arrow["Ka"', from=2-1, to=2-2]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
+% 	\arrow["Gf"', from=2-2, to=2-3]
+% 	\arrow["{K_f}"{description}, draw=none, from=2-2, to=3-2]
+% 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-3, to=3-3]
+% 	\arrow["Ff"', from=3-1, to=3-2]
+% 	\arrow["Kb"', from=3-2, to=3-3]
+% \end{tikzcd}
+%   \end{equation}
+  \begin{equation}\label{modification-1}
+    1_{G(f)}\circ \sigma_a = \sigma_b\circ 1_{F(f)}
   \end{equation}
-  % \begin{equation}\label{modification-1}
-  %   1_{G(f)}\circ \sigma_a = \sigma_b\circ 1_{F(f)}
-  % \end{equation}
   and for each vertical $s : a\todot b$,
   \begin{equation}\label{modification-2}
     \rho_{G(s)}\circ(Ks \cdot \sigma_a)\circ\rho^{-1}_{F(s)} =
@@ -263,15 +264,27 @@ vertical natural transformation.
   $\mathbb{E}$ is assumed to be unitary (as in \cite{CTGDC_1999__40_3_162_0}).
 \end{definition}
 
+% \begin{theorem}
+%   Let $\mathbb{I}, \mathbb{A}$ be weak double categories.
+%   There is a 2-category $\mathbf{Lax}(\mathbb{I},\mathbb{A})$
+%   of lax functors, pseudo natural horizontal transformations,
+%   and globular modifications.
+% \end{theorem}
+% \begin{proof}
+%   This is Theorem 4.3 of \cite{parePersistentDoubleLimits2019}.
+% \end{proof}
 \begin{theorem}
   Let $\mathbb{I}, \mathbb{A}$ be weak double categories.
-  There is a 2-category $\mathbf{Lax}(\mathbb{I},\mathbb{A})$
-  of lax functors, pseudonatural horizontal transformations,
-  and globular modifications.
+  There is a 2-category $\mathbf{H}(\mathbb{A}^{\mathbb{I}})$
+  of lax functors, (strict) natural horizontal transformations,
+  and globular modifications.  
 \end{theorem}
 \begin{proof}
-  This is Theorem 4.3 of \cite{parePersistentDoubleLimits2019}.
+  This is the horizontal 2-category of the double category defined in the appendix of
+  \cite{parePersistentDoubleLimits}.
+  % This is Theorem 4.3 of \cite{parePersistentDoubleLimits2019}.
 \end{proof}
+
 
 % We will denote this 2-category as $\mathbf{H}(\mathbb{A}^{\mathbb{I}})$
 % in the style of \cite{parePersistentDoubleLimits}.
@@ -290,78 +303,82 @@ case.
 In this section, we fix a (strict) double fibration
 $p : \mathbb{E}\to \mathbb{B}$ of weak double categories.
 
-Note a pseudo double category $\mathbb{D}$
-involves two vertical bicategories, $\mathbf{V}_0\mathbb{D}$ and
-$\mathbf{V}_1\mathbb{D}$:
-\begin{itemize}
-\item $\mathbf{V}_0\mathbb{D}$ has for its objects the objects of
-  $\mathbb{D}$, for its arrows the vertical arrows of $\mathbb{D}$, and
-  for its 2-cells the special 2-cells
-\item $\mathbf{V}_1\mathbb{D}$ has for its objects the horizontal
-  arrows of $\mathbb{D}$, for its 1-cells the 2-cells of $\mathbb{D}$
-  under their vertical composition, and for its 2-cells
-  pairs of special cells forming a commutative square
-  under horizontal composition
-\end{itemize}
+% Note a pseudo double category $\mathbb{D}$
+% involves two vertical bicategories, $\mathbf{V}_0\mathbb{D}$ and
+% $\mathbf{V}_1\mathbb{D}$:
+% \begin{itemize}
+% \item $\mathbf{V}_0\mathbb{D}$ has for its objects the objects of
+%   $\mathbb{D}$, for its arrows the vertical arrows of $\mathbb{D}$, and
+%   for its 2-cells the special 2-cells
+% \item $\mathbf{V}_1\mathbb{D}$ has for its objects the horizontal
+%   arrows of $\mathbb{D}$, for its 1-cells the 2-cells of $\mathbb{D}$
+%   under their vertical composition, and for its 2-cells
+%   pairs of special cells forming a commutative square
+%   under horizontal composition
+% \end{itemize}
 
-There are then \textit{strict} source and target functors
-$\mathbf{src,tar}: \mathbf{V}_1\mathbb{D}\to \mathbf{V}_0\mathbb{D}$.
+% There are then \textit{strict} source and target functors
+% $\mathbf{src,tar}: \mathbf{V}_1\mathbb{D}\to \mathbf{V}_0\mathbb{D}$.
 
-If $p : \mathbb{E}\to \mathbb{B}$ is a double fibration, then in
-particular it induces strict functors $\mathbf{V}_0p:
-\mathbf{V}_0\mathbb{E}\to \mathbf{V}_0\mathbb{B}$, $\mathbf{V}_1p:
-\mathbf{V}_1\mathbb{E}\to \mathbf{V}_1\mathbb{B}$.
-Therefore, a plausible notion of ``Cartesian pro-arrow'' or
-vertically Cartesian 2-cell would be a cell that is Cartesian
-with respect to $\mathbf{V}_0p$ or $\mathbf{V}_1p$, respectively,
-in the sense established by
-\cite{buckleyFibred2categoriesBicategories2014}.
-% and a plausible definition of a double fibration which
-% is a double fibration in the \textit{vertical} direction as well,
-% would assume additionally that
-In this section, we assume the following of $p$:
-\begin{itemize}
-\item $\mathbf{V}_0p$
-and $\mathbf{V}_1p$ are \textit{fibrations of bicategories} in the
-sense of \cite{buckleyFibred2categoriesBicategories2014}
-\item $\mathbf{src}, \mathbf{tar}$ preserve Cartesian cells of the
-bicategories
-\item  the horizontal composite of vertically Cartesian 2-cells is vertically Cartesian.
-\end{itemize}
-\begin{theorem}
-  Let $\mathbb{A}, \mathbb{E},\mathbb{B}$ be weak double categories,
-  and let $p : \mathbb{E}\to \mathbb{B}$ be a double fibration.
-
-  Then the induced functor
-  $\mathbf{Lax}(\mathbb{A},\mathbb{E})\to \mathbf{Lax}(\mathbb{A},\mathbb{B})$ has enough Cartesian
-  pseudonatural horizontal transformations.
-\end{theorem}
-\begin{proof}
-  Let $F : \mathbb{A}\to \mathbb{B}, G : \mathbb{A}\to \mathbb{E}$ be
-  lax functors, $\tau : F \Rightarrow pG$ be a pseudonatural
-  horizontal transformation. We define a pseudofunctor $\overline{F}$
-  over $F$ and a Cartesian pseudonatural transformation
-  $\overline{\tau}:\overline{F}\Rightarrow G$ over $\tau$.
-\end{proof}
-
-
-
-% Let $\mathbf{V}(p)$ be the 
-
+% If $p : \mathbb{E}\to \mathbb{B}$ is a double fibration, then in
+% particular it induces strict functors $\mathbf{V}_0p:
+% \mathbf{V}_0\mathbb{E}\to \mathbf{V}_0\mathbb{B}$, $\mathbf{V}_1p:
+% \mathbf{V}_1\mathbb{E}\to \mathbf{V}_1\mathbb{B}$.
+% Therefore, a plausible notion of ``Cartesian pro-arrow'' or
+% vertically Cartesian 2-cell would be a cell that is Cartesian
+% with respect to $\mathbf{V}_0p$ or $\mathbf{V}_1p$, respectively,
+% in the sense established by
+% \cite{buckleyFibred2categoriesBicategories2014}.
+% % and a plausible definition of a double fibration which
+% % is a double fibration in the \textit{vertical} direction as well,
+% % would assume additionally that
+% In this section, we assume the following of $p$:
+% \begin{itemize}
+% \item $\mathbf{V}_0p$
+% and $\mathbf{V}_1p$ are \textit{fibrations of bicategories} in the
+% sense of \cite{buckleyFibred2categoriesBicategories2014}
+% % \item $\mathbf{src}, \mathbf{tar}$ preserve Cartesian cells of the
+% % bicategories
+% % \item  the horizontal composite of vertically Cartesian 2-cells is vertically Cartesian.
+% \end{itemize}
 % \begin{theorem}
 %   Let $\mathbb{A}, \mathbb{E},\mathbb{B}$ be weak double categories,
 %   and let $p : \mathbb{E}\to \mathbb{B}$ be a double fibration.
 
-%   Then the induced functor $\mathbf{H}(\mathbb{E}^{\mathbb{A}})\to
-%   \mathbf{H}(\mathbb{B}^{\mathbb{A}})$ has enough Cartesian
-%   horizontal pseudonatural transformations, and a horizontal
-%   natural transformation whose horizontal 1-cells and 2-cells are
-%   Cartesian is a Cartesian horizontal natural transformation.
+%   Then the induced functor
+%   $\mathbf{Lax}(\mathbb{A},\mathbb{E})\to \mathbf{Lax}(\mathbb{A},\mathbb{B})$ has enough Cartesian
+%   pseudonatural horizontal transformations.
 % \end{theorem}
 % \begin{proof}
+%   Let $F : \mathbb{A}\to \mathbb{B}, G : \mathbb{A}\to \mathbb{E}$ be
+%   lax functors, $\tau : F \Rightarrow pG$ be a pseudonatural
+%   horizontal transformation. We define a pseudofunctor $\overline{F}$
+%   over $F$ and a Cartesian pseudonatural transformation
+%   $\overline{\tau}:\overline{F}\Rightarrow G$ over $\tau$.
+
+%   For $a$ in $\mathbb{A}$,
+%   define $\overline{\tau}_a$ to be any Cartesian 1-cell
+%   over $\tau_a$ with codomain $Ga$.
+
+%   Let $f : a -> a'$ in $\mathbb{A}$.
+%   Let $(\tau_f)^{-1}$ be the vertical inverse of $\tau_f$,
+%   whose vertical domain is $\tau_{a'}\circ Ff$ and whose
+%   vertical codomain is $pGf\circ \overline{\tau}_a$;
+%   there is a \textit{vertically} Cartesian 2-cell
+%   (a 1-cell in $\mathbf{V}_1(\mathbb{E})$)
+%   $\gamma$ over $(\tau_f)^{-1}$ whose
+%   domain is a horizontal 1-cell
+%   $g : \overline{F}a\to Ga'$ lying strictly over
+%   $\tau_{a'}\circ Ff$.
+%   Thus by the Cartesian lifting property of
+%   $\overline{\tau}_{a'}$, there is
+%   a unique morphism
+%   $\overline{F}f : \overline{F}a \to \overline{F}a'$
+%   with $p(\overline{F}f) = Ff$ and $g = \overline{\tau}_{a'}\circ
+%   \overline{F}f$.
   
 % \end{proof}
-\newpage
+% \newpage
 \begin{theorem}
   Let $\mathbb{A}, \mathbb{E},\mathbb{B}$ be weak double categories,
   and let $p : \mathbb{E}\to \mathbb{B}$ be a double fibration.
