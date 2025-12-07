@@ -131,7 +131,7 @@ Cartesian 1-cells.
   $p(f)\rho\cdot p(\kappa)$.
 \end{proof}
 \subsection{On double categories}
-We follow conventions of \cite{CTGDC_1999__40_3_162_0} and
+We follow terminology of \cite{CTGDC_1999__40_3_162_0} and
 \cite{parePersistentDoubleLimits2019}, with one distinction:
 we will not make the simplifying assumption that
 the double categories are unitary.
@@ -140,13 +140,21 @@ and take pains to clarify which is meant at each time.
 
 A pseudo double category has an associated \textit{category of objects and
 horizontal arrows}, and an associated \textit{category of vertical arrows
-and 2-cells} under horizontal composition.
+and 2-cells} under horizontal composition. Composition in both
+categories is denoted $\circ$. The identity morphism in either
+category is denoted $1$.
 
 In a pseudo double category, the vertical arrows and 2-cells are equipped with a
 weak vertical composition that is only associative and unital up to a
 \textit{special} isomorphism of vertical arrows, that is, an
 invertible 2-cell whose boundaries above and below are horizontal
-identity morphisms.
+identity morphisms. This composition is denoted $(-\cdot-)$, the unit
+1-cell (or 2-cell) is denoted $e$.
+
+For a lax functor $F : \mathbb{D}\to \mathbb{E}$ between double
+categories, the lax unit and composition constraints are denoted
+$F^0$ and $F^2$ respectively. The left and right unitors are denoted
+$\lambda,\rho$. The associator is denoted $\alpha$.
 
 The assumption that the double categories are unitary does not appear to be used in a critical way
 in \cite{CTGDC_1999__40_3_162_0} or \cite{parePersistentDoubleLimits2019}, it is only for the sake of convenience.
@@ -155,9 +163,9 @@ there is a strict 2-category whose objects are objects of
 $\mathbb{D}$, whose 1-cells are the horizontal 1-cells of $\mathbb{D}$,
 and whose 2-cells $f \Rightarrow g$ are vertical 2-cells with
 top and bottom $f, g$ respectively, and whose left sides are the unit
-$1_x$ and $1_y$. The vertical composition of these 2-cells can then be
-strictified by making use of the special isocells $1_x\cong 1_x\cdot
-1_x$ and $1_y\cong 1_y\cdot 1_y$; that this composition is strictly
+$e_x$ and $e_y$. The vertical composition of these 2-cells can then be
+strictified by making use of the special isocells $e_x\cong e_x\cdot
+e_x$ and $e_y\cong e_y\cdot e_y$; that this composition is strictly
 unital and associative follows from the coherence laws for a double
 category. Similarly, on page 272 of
 \cite{parePersistentDoubleLimits2019},
@@ -222,7 +230,7 @@ vertical natural transformation.
 	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
 	\arrow["Ff"', from=2-1, to=2-2]
 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
-	\arrow["{1_{Ff}}"{description}, draw=none, from=2-1, to=3-2]
+	\arrow["{e_{Ff}}"{description}, draw=none, from=2-1, to=3-2]
 	\arrow["Hb"', from=2-2, to=2-3]
 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-2, to=3-2]
 	\arrow["{\sigma_b}"{description}, draw=none, from=2-2, to=3-3]
@@ -239,7 +247,7 @@ vertical natural transformation.
 	\arrow["{\sigma_a}"{description}, draw=none, from=1-1, to=2-2]
 	\arrow["Gf", from=1-2, to=1-3]
 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=1-2, to=2-2]
-	\arrow["{1_{Gf}}"{description}, draw=none, from=1-2, to=2-3]
+	\arrow["{e_{Gf}}"{description}, draw=none, from=1-2, to=2-3]
 	\arrow["e"{inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=2-3]
 	\arrow["Ka"', from=2-1, to=2-2]
 	\arrow["e"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
@@ -256,9 +264,9 @@ vertical natural transformation.
   and for each vertical $s : a\todot b$,
   \begin{equation}\label{modification-2}
     \rho_{G(s)}\circ(Ks \cdot \sigma_a)\circ\rho^{-1}_{F(s)} =
-    \lambda_{G(s})\circ (\sigma_b\cdot H(s))\circ \lambda^{-1}_{F(s)}
+    \lambda_{G(s)}\circ (\sigma_b\cdot H(s))\circ \lambda^{-1}_{F(s)}
   \end{equation}
-  where $\lambda_s : 1\cdot s\cong s$ and $\rho_s: s\cdot 1\cong s$
+  where $\lambda_s : e\cdot s\cong s$ and $\rho_s: s\cdot e\cong s$
   are the special right and left unitors of the pseudocategory
   structure for $\mathbb{E}$; we can drop these if
   $\mathbb{E}$ is assumed to be unitary (as in \cite{CTGDC_1999__40_3_162_0}).
@@ -303,7 +311,7 @@ case.
 In this section, we fix a (strict) double fibration
 $p : \mathbb{E}\to \mathbb{B}$ of weak double categories.
 
-We would like to prove that the induced functor
+The ideal result would be that the induced functor
 $p : \mathbf{Lax}(\mathbb{A},\mathbb{E}) \to
 \mathbf{Lax}(\mathbb{A},\mathbb{B})$ is a 2-categorical fibration.
 However, this appears to be false in general, because if
@@ -332,7 +340,7 @@ $\mathbf{V}_1\mathbb{D}$:
 \begin{definition}[Locally split 2-fibration, horizontally split 2-fibration]
   Let $p : \mathbf{E}\to \mathbf{B}$ be a 2-fibration of 2-categories.
   $p$ is \textbf{locally split} when the 1-fibration $p_{xy} :
-  \mathbf{E}(x,y) -> \mathbf{B}(px,py)$ is split, and
+  \mathbf{E}(x,y) \to \mathbf{B}(px,py)$ is split, and
   \textbf{horizontally split} when the chosen
   Cartesian 2-cells are closed under composition.
 \end{definition}
@@ -378,14 +386,14 @@ strict natural transformations.
   Let $f : a\to a'$ be a horizontal 1-cell in $\mathbb{A}$.
   We define $\overline{F}f, \overline{\tau}f$ as follows.
 
-  Let us regard $\tau_{\overline f}$ as a 2-cell in
+  Let us regard $\tau_f$ as a 2-cell in
   $\mathbf{V}_0(\mathbb{B})$ with domain 1-cell
   $\tau_{a'}\circ Ff$ and codomain 1-cell $pG(f)\circ\tau_a$.
   If $\mathbf{V}_0(p)$ is a 2-fibration that is locally and
-  horizontally split, then let $\overline{tau}_f$ be the 2-cell
-  over $\tau_{\overline(f)}$ with codomain
+  horizontally split, then let $\overline{\tau}_f$ be the 2-cell
+  over $\tau_{f}$ with codomain
   $G(f)\circ\overline{\tau}_a$
-  given by the splitting. Otherwise, let $\overline{tau}_f$
+  given by the splitting. Otherwise, if $\tau$ is strict, let $\overline{\tau}_f$
   be the identity 2-cell on $G(f)\circ\overline{\tau}_a$.
   Then the codomain 1-cell of $\overline{\tau}_f$
   lies over $\tau_{a'}\circ F(f)$, and so
@@ -393,24 +401,35 @@ strict natural transformations.
   \overline{F}a'$ such that $p(\overline{F}f)=F f$
   and $\overline{\tau}_f : \overline{\tau}_{a'}\circ \overline{F}f
   \Rightarrow Gf\tau_a$.
+  Because a Cartesian lift of an isomorphism in a fibration is again
+  an isomorphism, $\overline{\tau}_f$ is an isomorphism
+  by construction, as required by 3.2.(c) of \cite{parePersistentDoubleLimits2019}.
   
   It is now easy to see that if $\mathbf{V}_0(p)$ is locally and
   horizontally split, then $\overline{F}$ is a functor
-  on horizontal arrows in $\mathbb{A}$.
+  on the category of objects and horizontal arrows of $\mathbb{A}$.
 
   If $s : a\todot a'$ is a vertical arrow in $\mathbb{A}$,
   then the definition of $\overline{F}s$ and
-  $\overline{tau}s$ are analogous to that of $\overline{F}a$
-  and $\overline{\tau}a$, we choose $\overline{\tau}_{s}$
+  $\overline{\tau}_s$ are analogous to that of $\overline{F}a$
+  and $\overline{\tau}_{a}$, we choose $\overline{\tau}_{s}$
   to be the horizontally Cartesian 2-cell given by the cleavage
   living over $\tau_s$ and with horizontal codomain $Gs$,
   and define $\overline{F}s$ to be its horizontal codomain.
 
-  Similarly, $\overline{F}(\alpha)$ is defined in the same
+
+  Similarly, if $\alpha$ is a 2-cell in $\mathbb{A}$
+  with horizontal domain and codomain $s: x_0 \todot x_1, t :
+  y_0\todot a_1$ respectively, and with vertical domain and codomain
+  $f : x_0\to y_0, g : x_1\to y_1$ respectively,
+  $\overline{F}(\alpha)$ is defined in the same
   way as $\overline{F}(f)$ for $f$ a horizontal morphism.
-  Implicitly $\tau$ defines a 2-cell $\overline{\tau}_{\alpha}$
+  Implicitly $\tau$ defines a 2-cell $\tau_{\alpha}$
   in $\mathbf{V}_1(p)$ from $\tau_t\circ F(\alpha)\Rightarrow
-  pG(\alpha)\circ \tau_s$, and the splitting of
+  pG(\alpha)\circ \tau_s$
+  (formally, $\tau_{\alpha}$ is nothing but the pair
+  $(\tau_f,\tau_g)$)
+  and the splitting of
   $\mathbf{V}_1(p)$ gives a vertically Cartesian 2-cell
   $\overline{\tau}_{\alpha}$
   in $\mathbf{V}_1(p)$ over $\tau_{\alpha}$ with
@@ -420,15 +439,51 @@ strict natural transformations.
   $\overline{\tau}_t$ by a 2-cell $\overline{F}\alpha$
   such that $\overline{\tau}_{\alpha} : \overline{\tau}_t\circ
   \overline{F}\alpha\Rightarrow G\alpha\circ\overline{\tau}_s$.
+  It follows immediately from the definition that condition 3.2.(pht1)
+  of
+  \cite{parePersistentDoubleLimits2019} is satisfied.
 
   As before, assuming that $\mathbf{V}_1(p)$ is locally and
   horizontally a split fibration is enough to guarantee that
-  $\overline{F}$ defines a true functor on the category of vertical
+  $\overline{F}$ defines a functor on the category of vertical
   arrows and 2-cells under horizontal composition; the assumption that
   the splittings of $\mathbf{V}_1(p)$ and $\mathbf{V}_0(p)$ are
   consistent is necessary for $\overline{F}$ to be well-defined.
 
-  Thus, we 
+  We will now construct lax unit and lax composition constraints. Fix
+  $a\in \mathbb{A}$. It is necessary to construct a 2-cell between
+  vertical 1-cells $e_{\overline{F}a}\Rightarrow \overline{F}(e_a)$
+  whose vertical domain and codomain are horizontal identities. We
+  appeal to the assumption that $\overline{\tau}_{e_a}$ is horizontally
+  Cartesian, so it suffices to give a horizontal 2-cell
+  $\beta: e_{Fa}\Rightarrow pG(e_a)$ and a factoring of $p(\beta)$
+  through $\tau_{e_a}$. We take
+  $\beta = G^0(a)\circ e_{\overline{\tau}_a}$, where
+  $e_{\overline{\tau}_a}$ is the vertical identity 2-cell associated
+  to $\overline{\tau}_a$, and $G^0(a): 1_{G(a)}\Rightarrow G(1_a)$ is
+  the lax unit constraint for $G$. Then $p(\beta)$ factors as
+  $\tau(e_a)\circ F^0(a)$ by 3.2.(pht2) of
+  \cite{parePersistentDoubleLimits2019} applied to $\tau$;
+  thus there is a unique 2-cell $\overline{F}^0(a) : e_{\overline{F}a}\Rightarrow F(e_a)$
+  living over $F^0(a)$ such $\overline{F}^0a$ and $\overline{\tau}$
+  satisfy 3.2.(pht2). Note that the vertical source and target of this
+  cell $F^0(a)$ indeed must be horizontal identity maps
+  in order for the diagram to commute horizontally, because
+  $\overline{\tau}_a$ is Cartesian, thus monic.
+
+  The construction of the lax composition constraint is similar and it
+  can safely be omitted; it suffices to say here that for $f : a\todot
+  b, g : b\todot c$, $\overline{F}^2_{f,g} : \overline{F}(g)\cdot
+  \overline{F}(f)\Rightarrow
+  \overline{F}(g\cdot f)$
+  is the unique 2-cell with given horizontal domain and codomain,
+  whose vertical domain and codomain are horizontal identities,
+  which lives over $F^2_{f,g}$, and satisfying 3.2.(pht3) for
+  $\overline{\tau}:\overline{F}\Rightarrow G$.
+
+  It is necessary to prove that the lax unit and lax composition
+  constraints for $\overline{F}$ thus constructed are compatible with the left and right
+  unitors of $\mathbb{A}, \mathbb{E}$, and with the associators.
 \end{proof}
 
 \newpage
