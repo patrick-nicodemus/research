@@ -23,10 +23,15 @@ $Ab$ is the category of Abelian groups.
 #let colim = math.bold[colim]
 $colim$ is colimit
 
+#let WC(XX,YY) = [WeightedColimit(#XX,#YY)]
+
 #let Psh(x) = [$bold("Psh")(#x)$]
 $Psh(C)$ is the category of presheaves on $C$.
 #let el = math.bold[el]
 $el$ is the category of elements of a presheaf
+
+#let Sh(x) = [$bold("Sh")(#x)$]
+$Sh(X)$ is the category of sheaves on $X$.
 
 #let Hom(cat:[],x,y) = $bold("Hom")_(cat)(#x,#y)$
 The category of small categories
