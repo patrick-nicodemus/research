@@ -312,3 +312,12 @@ discarding all those objects for which the weight is zero. Write down this colim
     and so its left adjoint is the realization, which we have already established is
     equivalent to the bottom /right path.
 ]
+
+#corollary[
+    Let $P$ be a presheaf on $Y$. The fiber of $Lambda_Y (P)$ over $y$ is the stalk of $P$ at $y$.
+]
+#proof[
+    Apply the previous theorem with $X=1$, $f = x$. Thus it suffices to show that
+    the stalk functor $Psh(X) -> Set$ is right adjoint to the direct image functor
+    $x_ast : Set -> Psh(X)$. This was theorem 0.3.
+]
