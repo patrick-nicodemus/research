@@ -769,34 +769,3 @@ there is a small open neighborhood $U$ of $a$ such that the projection map $pi :
 is an open subspace embedding (i.e., it's homeomorphic onto its image).
 
 Read as much of II.5 and II.6 as you want and study the proofs of whatever theorems you find interesting.
-
-== A generalization
-
-Let $f : X->Y$ be a continuous map between topological spaces. Write $J_f : tau(X)-> Top\/Y$
-for the functor which sends $U$ to the map $(f | U) : U -> Y$, where inclusion maps $U subset V$
-are associated to commutative triangles. Observe that when $f$ is the identity map $id(X) : X->X$,
-we just get the inclusion functor $J$ from the last section. In this section we are interested in the nerve-realization adjunction between $Psh(X)$ and $Top\/Y$ arising from $J_f$.
-
-#theorem[
-    $N_(J_f)$ can be factored as $Gamma_X circ f^ast$, where $f^ast : Top\/Y -> Top\/X$ is the
-    pullback functor along $f$.
-]
-#proof[Easy]
-
-On the other hand, let $S : Psh(X) -> Psh(Y) -> Top\/Y$ be the functor which is a
-composite of "direct image and glue", i.e. $Lambda_Y circle.small f_ast$.
-This cannot possibly be left adjoint to $N_(J_f)$.
-
-The left adjoint to $N_(J_f)$ should be $(f circle.small -)circle.small Lambda_X$.
-
-Fuck!
-
-
-Look:
-
-// $Sh(X) -> Sh(Y)$ is the *right adjoint*. Direct image is the *right* adjoint.
-
-$Sh(Y) -> Top\/Y$ is the left adjoint, but $Sh(Y) -> text("Etale")(Y)$ is an equivalence,
-thus is a right adjoint as well.
-
-So there is a right adjoint $Sh(X) -> text("Etale")(Y)$.
