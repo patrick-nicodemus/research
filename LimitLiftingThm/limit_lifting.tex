@@ -337,6 +337,9 @@ $\mathbf{V}_1\mathbb{D}$:
   under horizontal composition
 \end{itemize}
 
+Similarly there are two horizontal 2-categories,
+$\mathbf{H}_0(\mathbb{D})$ and $\mathbf{H}_1(\mathbb{D})$.
+
 \begin{definition}[Locally split 2-fibration, horizontally split 2-fibration]
   Let $p : \mathbf{E}\to \mathbf{B}$ be a 2-fibration of 2-categories.
   $p$ is \textbf{locally split} when the 1-fibration $p_{xy} :
@@ -484,6 +487,66 @@ strict natural transformations.
   It is necessary to prove that the lax unit and lax composition
   constraints for $\overline{F}$ thus constructed are compatible with the left and right
   unitors of $\mathbb{A}, \mathbb{E}$, and with the associators.
+  (That is, we must prove 7.2.(i,ii,iii) of \cite{CTGDC_1999__40_3_162_0} for $\overline{F}$.)
+
+  % First, observe that if $\alpha : f \Rightarrow g$ is any 2-cell
+  % with vertical boundaries $s,t$, and there are isomorphisms $\sigma :
+  % s \cong s'$, $\tau : t\cong t'$ in $\mathbf{H}_0(\mathbb{E})$, then there
+  % is a \textit{unique} 2-cell $\alpha' : f\Rightarrow g$ such that
+  % $(\sigma,\tau) : \alpha\cong \alpha'$ in $\mathbf{H}_1(\mathbb{E})$.
+  % Thus to prove an equality $\alpha'_1, \alpha'_2$
+  % between two 2-cells sharing the same boundary, it suffices to
+  % prove that $(\sigma,\tau)$ define an isomorphism in $\mathbf{H}_1$
+  % $\alpha'_1\cong \alpha$ and also $\alpha'_2\cong \alpha$.
+  Let us look at the coherence laws for the lax unit and composition constraint. Let $s : a\todot b$ be a
+  vertical 1-cell in $\mathbb{A}$; we want to prove
+  \begin{equation}
+% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiXFxvdmVybGluZXtGfWEiXSxbMCwxLCJcXG92ZXJsaW5le0Z9YSJdLFswLDIsIlxcb3ZlcmxpbmV7Rn1iIl0sWzEsMSwiXFxvdmVybGluZXtGfWEiXSxbMSwwLCJcXG92ZXJsaW5le0Z9YSJdLFsyLDAsIlxcb3ZlcmxpbmV7Rn1hIl0sWzEsMiwiXFxvdmVybGluZXtGfWIiXSxbMiwyLCJcXG92ZXJsaW5le0Z9YiJdLFszLDAsIlxcb3ZlcmxpbmV7Rn1hIl0sWzMsMiwiXFxvdmVybGluZXtGfWIiXSxbMCw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDUsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMywiIiwxLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCIxX3tcXG92ZXJsaW5le0Z9YX0iLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJidWxsZXQgc29saWQifX19XSxbMSwyLCJcXG92ZXJsaW5le0Z9cyIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImJ1bGxldCBzb2xpZCJ9fX1dLFs0LDMsIlxcb3ZlcmxpbmV7Rn0xX2EiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJidWxsZXQgc29saWQifX19XSxbMyw2LCJcXG92ZXJsaW5le0Z9cyIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImJ1bGxldCBzb2xpZCJ9fX1dLFsyLDYsIiIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsNywiXFxvdmVybGluZXtGfShzXFxjZG90IDFfYSkiLDAseyJsYWJlbF9wb3NpdGlvbiI6MjAsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImJ1bGxldCBzb2xpZCJ9fX1dLFs2LDcsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsOCwiIiwyLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNyw5LCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs4LDksIlxcb3ZlcmxpbmV7Rn1zIiwyLHsibGFiZWxfcG9zaXRpb24iOjgwLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJidWxsZXQgc29saWQifX19XSxbMSw2LCI9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMywiXFxvdmVybGluZXtGfV4wYSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDcsIlxcb3ZlcmxpbmV7Rn1eMl97MV9hLHN9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsOSwiXFxvdmVybGluZXtGfVxccmhvX3MiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\begin{tikzcd}
+	{\overline{F}a} & {\overline{F}a} & {\overline{F}a} & {\overline{F}a} \\
+	{\overline{F}a} & {\overline{F}a} \\
+	{\overline{F}b} & {\overline{F}b} & {\overline{F}b} & {\overline{F}b}
+	\arrow[equals, from=1-1, to=1-2]
+	\arrow["{1_{\overline{F}a}}"'{inner sep=.8ex}, "\bullet"{marking}, from=1-1, to=2-1]
+	\arrow["{\overline{F}^0a}"{description}, draw=none, from=1-1, to=2-2]
+	\arrow[equals, from=1-2, to=1-3]
+	\arrow["{\overline{F}1_a}"{inner sep=.8ex}, "\bullet"{marking}, from=1-2, to=2-2]
+	\arrow["{\overline{F}^2_{1_a,s}}"{description}, draw=none, from=1-2, to=3-3]
+	\arrow[equals, from=1-3, to=1-4]
+	\arrow["{\overline{F}(s\cdot 1_a)}"{pos=0.2, inner sep=.8ex}, "\bullet"{marking}, from=1-3, to=3-3]
+	\arrow["{\overline{F}\rho_s}"{description}, draw=none, from=1-3, to=3-4]
+	\arrow["{\overline{F}s}"'{pos=0.8, inner sep=.8ex}, "\bullet"{marking}, from=1-4, to=3-4]
+	\arrow[equals, from=2-1, to=2-2]
+	\arrow["{\overline{F}s}"'{inner sep=.8ex}, "\bullet"{marking}, from=2-1, to=3-1]
+	\arrow["{=}"{description}, draw=none, from=2-1, to=3-2]
+	\arrow["{\overline{F}s}"{inner sep=.8ex}, "\bullet"{marking}, from=2-2, to=3-2]
+	\arrow[equals, from=3-1, to=3-2]
+	\arrow[equals, from=3-2, to=3-3]
+	\arrow[equals, from=3-3, to=3-4]
+\end{tikzcd} =
+      \begin{tikzcd}
+        \overline{F}a\arrow[d,"1_{{\overline{F}a}}"'{inner sep=.8ex}, "\bullet"{marking}]
+        \arrow[r,equals]
+        \arrow[ddr,"\rho_{\overline{F}s}"{description},draw=none]
+        & \overline{F}a \arrow[dd,"1_{\overline{F}s}"{inner sep=.8ex}, "\bullet"{marking}]\\
+      \overline{F}a\arrow[d,"\overline{F}s"'{inner sep=.8ex}, "\bullet"{marking}] \\
+      \overline{F}b \arrow[r,equals] & \overline{F}b
+     \end{tikzcd}
+   \end{equation}
+   Because $\overline{\tau}_s$ is horizontally Cartesian, it is monic,
+   and so it suffices to postcompose with $\overline{\tau}_s$.
+   By construction, $\overline{\tau}_s\circ \overline{F}\rho_s =
+   G\rho_s\circ \overline{\tau}_s$. By definition of
+   $\overline{F}^2_{1_a,s}$ and $F^0_a$, we can reduce it to the same
+   coherence
+   condition for $G$. The analogous theorem for $\lambda$, $F^0$ and
+   $F^2$ is similar.
+   \textbf{Still remaining:}
+   \begin{itemize}
+   \item 7.2.(i,iii) of ``Limits in Double Categories'' for
+     $\overline{F}$ (naturality and compatibility with associator)
+   \item 7.3 - all?
+   \end{itemize}
 \end{proof}
 
 \newpage
@@ -1715,5 +1778,5 @@ Still have to come back to this.
 
 
 
-
+\printbibliography
 \end{document}
