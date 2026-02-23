@@ -438,7 +438,30 @@ We will call a minimal element in the equivalence relation above an *interior po
   which is not zero at any point, and $x$ is a nondegenerate $n$-simplex.
 ]
 
-= Geometric realization of a simplicial set
+This characterization is not too bad, but it suffers from the slight
+defect that we have forgotten the topology on the simplices in order
+to perform this analysis, which is unfortunate. Thus, for all our
+work, this has not told us much about the topology of these points.
+This theorem is similar to theorem I.2.10 of Manin & Gelfand,
+but that theorem captures some topology in addition to simply
+classifying the points in the geometric realization
+
+For this reason it is interesting to try and pursue another approach
+which will let us prove the theorem in Manin and Gelfand.
+
+Let $j : bb(N) -> Delta_(s d)$ be the obvious inclusion functor. Let
+$G : bb(N) -> Top$ be the functor sending each $n$ to the interior of
+the $n-1$-simplex, where the interior of a point is regarded to be the
+point. There is a natural transformation of functors $s : G => F j$.
+
+If $X$ is a simplicial set on $Delta_(s d)$, then let $Y : bb(N)-> Set$
+be defined so that $Y_n$ is the set of all maximal nondegenerate simplices.
+There is a natural transformation of presheaves $t : Y => X j$.
+The pair $(s, t)$ together determines a morphism between the weighted colimits
+$WC(Y, G) -> WC(X,F)$. Now, we can use the same analysis as before to prove
+that this map is bjiective.
+
+= Geometric realization of a bisimplicial set
 
 In this section let $Delta_(s d)$ be the simplex category, whose
 objects are finite ordinals $n = {0,...,n-1}$ and whose morphisms are
@@ -507,13 +530,16 @@ realization of the simplicial set $X : op(Delta_(s d)) -> Set$.
 
 Bonus exercise: Characterize the geometric realization described in I.3.2(b) as a coend.
 
-Bonus exercise: Recall that in *Top*, for a compact Hausdorff space such as $Delta^n$,
-the set of maps $Delta^n -> X$ can be endowed with a topology (the compact-open topology)
-which makes $(-)^(Delta^n)$ into a right adjoint to $Delta^n times (-)$.
-From this point of view, there is a kind of *enriched nerve* functor $N_F : Top -> [Delta_(s d)^op;Top]$,
-which sends each topological space $Y$ to the *simplicial space* of singular simplices in $Y$.
-Prove that the coend of I.3.2.(b) gives a universal arrow from a simplicial space $X$
-into the enriched nerve functor $N_U$; i.e., the "fat geometric realization" is a kind of "enriched weighted colimit".
+Bonus exercise: Recall that in *Top*, for a compact Hausdorff space
+such as $Delta^n$, the set of maps $Delta^n -> X$ can be endowed with
+a topology (the compact-open topology) which makes $(-)^(Delta^n)$
+into a right adjoint to $Delta^n times (-)$. From this point of view,
+there is a kind of *enriched nerve* functor $N_F : Top -> [Delta_(s
+d)^op;Top]$, which sends each topological space $Y$ to the *simplicial
+space* of singular simplices in $Y$. Prove that the coend of I.3.2.(b)
+gives a universal arrow from a simplicial space $X$ into the enriched
+nerve functor $N_U$; i.e., the "fat geometric realization" is a kind
+of "enriched weighted colimit".
 
 
 = Left Kan extensions in homological algebra
