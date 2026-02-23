@@ -12,9 +12,11 @@
 *.aux
 *.out
 *.toc
-# *.pdf
+*.pdf
 \#*\#
 *.dvi
 
 # Emacs
 .dir-locals.el
+
+.claude

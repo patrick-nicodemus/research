@@ -1,0 +1,1733 @@
+% A triple profunctor of lifts associated to a category
+\documentclass{article}
+\input{../header.tex}
+\usepackage{bbold}
+\newsavebox{\pullback}
+\sbox\pullback{%
+  \begin{tikzpicture}%
+    \draw (0,0) -- (1ex,0ex);%
+    \draw (1ex,0ex) -- (1ex,1ex);%
+    \end{tikzpicture}%
+  }
+\newcommand{\todot}{%
+  \mathrel{\ooalign{\hfil$\vcenter{
+    \hbox{$\scriptscriptstyle\bullet$}}$\hfil\cr$\to$\cr}
+  }%
+}
+
+\usepackage{amsmath}
+
+\makeatletter
+\newcommand*{\relrelbarsep}{.386ex}
+\newcommand*{\relrelbar}{%
+  \mathrel{%
+    \mathpalette\@relrelbar\relrelbarsep
+  }%
+}
+\newcommand*{\@relrelbar}[2]{%
+  \raise#2\hbox to 0pt{$\m@th#1\relbar$\hss}%
+  \lower#2\hbox{$\m@th#1\relbar$}%
+}
+\providecommand*{\rightrightarrowsfill@}{%
+  \arrowfill@\relrelbar\relrelbar\rightrightarrows
+}
+\providecommand*{\leftleftarrowsfill@}{%
+  \arrowfill@\leftleftarrows\relrelbar\relrelbar
+}
+\providecommand*{\xrightrightarrows}[2][]{%
+  \ext@arrow 0359\rightrightarrowsfill@{#1}{#2}%
+}
+\providecommand*{\xleftleftarrows}[2][]{%
+  \ext@arrow 3095\leftleftarrowsfill@{#1}{#2}%
+}
+\makeatother
+
+
+\usepackage{biblatex}
+% \usepackage{enumitem}
+\addbibresource{../refs.bib}
+
+\title{A triple profunctor of lifts associated to a category}
+\author{Patrick Nicodemus}
+\date{\today}
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Introduction}
+Let $C$ be a 1-category, and $\Sq(C)$ its double category of
+commutative squares. Let $\mathbb{J}$ and $\mathbb{K}$ be two double
+categories, with $U : \mathbb{J}\to \Sq(C), V : \mathbb{K}\to
+\Sq(C)$. Bourke and Garner have given a definition of a
+$(U,V)$-lifting operation which associates to each vertical $j$ in
+$\mathbb{J}$ and $k$ in $\mathbb{K}$ a lifting operation which gives
+factorizations of commutative squares $U(j)\to V(k)$.
+Their definition seems to us very natural and well-motivated,
+and should be regarded as a basic tool in the
+study of lifting and extension problems.
+However, their
+definition is presented in a flat equational style, which begs
+the question of describing this structure categorically;
+the motivation of this paper is to give a categorical description of
+these $(U,V)$-lifting operations.
+
+In many ways the ``local data'' of a lifting operation is evocative of
+the structure of a double profunctor $\mathbb{J}\to \mathbb{K}$, but
+it is not a double profunctor, essentially because instead of the
+usual compositionality law $F(f\cdot g,h\cdot k)= F(f,h)\cdot F(g,k)$
+we have $F(f\cdot g,h)= F(f,h)\cdot F(g,h)$ and
+$F(g,h\cdot k) = F(g,h)\cdot F(g,k)$. These difficulties can be
+resolved by passing to three dimensions, and setting things up so that
+$f,g$ are morphisms along the ``horizontal'' axis and $h,k$ are
+morphisms along the ``vertical'' axis; this gives us the latter
+equations instead of the former equation for the product category. In
+this note we explain how we can give a \textit{triple} profunctor
+approach using the notion of ``intercategory'' due to Grandis and
+Par\'e.
+
+Because double and triple categories are such complex structures, we
+reduce the complexity of our arguments by treating them as
+pseudocategories internal to a certain 2-category.
+For this reason the early sections of the paper are primarily
+focused on developing enough 2-categorical
+universal algebra to ease our proofs and definitions
+concerning double and triple categories.
+\subsection{Structure of the paper}
+\subsection{Notation and Conventions}
+When working with 2-categories, we denote \textbf{horizontal
+  composition of} $1$-cells by $\circ$. We denote \textbf{vertical
+  composition} of 2-cells by $\cdot$. We denote \textbf{whiskering} of
+a 1-cell with a 2-cell by concatenation.
+
+When working with double categories, regarded as categories
+$(O,A,...)$ internal to $\mathbf{Cat}$, morphisms in the category $O$
+of objects are called ``horizontal arrows'' and objects in the
+category $A$ are called ``vertical arrows''.
+
+A \textit{horizontal natural transformation} between functors
+$F, G : C_1\to C_2$
+$(F_O : O_1\to O_2, F_A : A_1\to A_2)$ to
+$(G_O : O_1\to O_2, G_A : A_1\to A_2)$ is
+defined to be a pair of natural transformations
+$\tau_O: F_O\Rightarrow G_O, \tau_A : F_A\Rightarrow G_A$
+commuting with the domain, codomain identity and composition functors
+of the two categories; $(\tau_O, \tau_A)$ should
+define a functor from the category of objects
+and vertical morphisms of $C_1$ to the category of
+vertical morphisms and 2-cells of $C_2$.
+
+We do not consider vertical natural transformations.
+\section{2-categorical universal algebra}
+\subsection{2-Sketches}
+A $2$-sketch is a 2-category $\mathcal{C}$ together with a family
+$\left\{ (\mathcal{R}_i,F_i,J_i,c_i,\lambda_i) \right\}_{i\in I}$, where
+$\mathcal{R}_i$ is a finite 2-category, $F_i: \mathcal{R}_i\to
+\mathcal{C}$ is a 2-functor, $J_i: \mathcal{R}_i\to \mathbf{FinCat}$ is a
+2-functor valued in finite categories, $c_i$ is an object of
+$\mathcal{C}$, and $\lambda_i : c_i\to F_i$ is a $J_i$-weighted cone.
+
+2-sketches have been studied in
+\cite{powerFormalismSpecificationEssentiallyalgebraic1992}.
+Power and Wells take care to distinguish between a
+sketch as a \textit{presentation} of a theory by generators and
+relations, as opposed to the structure generated;
+for this reason they work with computads rather than 2-categories.
+
+To elaborate, $\lambda_i$ is a 2-natural transformation
+\begin{equation}
+\label{eq:12}
+J_i \to \mathcal{C}(c_i,F_i(-))
+\end{equation}
+a family of functors $J_i(a)\to \mathcal{C}(c_i,F_i(a))$, 2-natural in
+$a$.
+
+A \textbf{model} of a sketch $\mathcal{C}$ in a 2-category
+$\mathcal{E}$  is a 2-functor $G: \mathcal{C}\to \mathcal{E}$ such that
+each cone $\lambda_i$ gets sent to a weighted 2-limit cone
+$G\lambda_i: Gc_i\to GF_i$. For a theory $T$, write
+$\operatorname{Mod}(T,\mathcal{E})$ for the models of $T$ in $\mathcal{E}$.
+
+The definition of a morphism of models and a 2-cell between morphisms
+of models has some degree of freedom to it, one could potentially
+choose strict, lax or oplax notions. We will use the strict notion
+here.
+
+\begin{definition}[Morphism of models, 2-cell between morphisms of models]
+  A \textbf{morphism of models} is a 2-natural transformation between
+  the underlying 2-functors.  A \textbf{2-cell between morphisms of
+    models} is a modification between 2-natural transformations.
+\end{definition}
+
+Models, morphisms of models, and 2-cells between morphisms in $\mathcal{E}$ inherit a
+2-category structure from the functor category
+$[\mathcal{C};\mathcal{E}]$.
+
+\begin{proposition}
+  Let $\mathcal{E},\mathcal{E}'$ be arbitrary 2-categories.
+  There is a one-to-one correspondence between objects of
+  $\operatorname{Mod}(T,[\mathcal{E};\mathcal{E}'])$ and 2-functors
+  $\mathcal{E}\to \operatorname{Mod}(T,\mathcal{E}')$.
+\end{proposition}
+\begin{proof}
+  This is a consequence of the fact that weighted limits in a functor category are
+  computed objectwise.
+\end{proof}
+\begin{proposition}
+  Let $\mathcal{E}$ be a 2-category and
+  $\hat{\mathcal{E}} = \left[ \mathcal{E}^{\rm op}; \mathbf{Cat}\right]$ the
+  2-category of 2-presheaves on $\mathcal{E}$. The Yoneda embedding $y
+  : \mathcal{E}\to \hat{\mathcal{E}}$
+  induces a functor
+  $\operatorname{Mod}(T,\mathcal{E})\to
+  \operatorname{Mod}(T,\hat{\mathcal{E}})$.
+\end{proposition}
+\begin{proof}
+  The Yoneda embedding preserves weighted limits.
+\end{proof}
+\begin{proposition}\label{model-lifting-theorem}
+  Let $T$ be a sketch with underlying 2-category $\mathcal{C}$.
+
+  Let $\mathcal{A}$ be a subcategory of $\mathcal{C}$ containing all
+  the objects (faithful on 1- and 2-cells) with inclusion $i :
+  \mathcal{A}\subset \mathcal{C}$.
+
+  Let $K: \mathcal{A}\to \mathcal{E}$ be a 2-functor.
+
+  Let $F : \mathcal{C}\to \hat{\mathcal{E}}$ be a 2-functor which is a
+  model of $T$ and which strictly extends $K$, i.e., $y\circ i=F\circ
+  K$.
+
+  Then there is a unique model of $T$ in $\mathcal{E}$, $G :
+  \mathcal{C}\to \mathcal{E}$, such that $G\circ i= K$ and $y\circ G =
+  F$.
+\end{proposition}
+\begin{proof}
+  $G$ is already specified on $0$-cells of $\mathcal{C}$ by $K$.
+  
+  The Yoneda embedding is fully faithful on 1-cells and 2-cells, so
+  once the functor $G$ is specified on 0-cells, it extends uniquely to
+  1- and 2-cells. There is no possibility of conflict here with the
+  values prescribed by $K$ on 1- and 2-cells because of the assumption
+  that
+  $y\circ K = F\circ k$.
+  
+  To see that the functor $G$ is a model (sends specified weighted
+  cones to 2-limits) it suffices to observe that the Yoneda embedding,
+  being fully faithful, reflects weighted limits, so $G$ is a model if
+  $F$ is.
+\end{proof}
+\subsection{Pseudocategories}
+Given a diagram
+\begin{equation}
+\label{eq:3}
+B\xrightrightarrows{\partial_0,\partial_1} A
+\end{equation}
+in a 2-category, we write $B^{(n)}_A$ for the 2-limit of the diagram
+\begin{equation}
+\label{eq:4}
+\begin{tikzcd}
+  B\arrow[dr,"\partial_0"] &    &
+  B\arrow[dl,"\partial_1"]\arrow[dr,"\partial_0"] &    & B & \dots & B\arrow[dl,"\partial_1"] \\
+   & A & & A &\dots & A
+\end{tikzcd}
+\end{equation}
+where there are $n-1$ copies of $A$ in the diagram.
+
+\begin{definition}[Pseudocategory, \cite{grandisIntercategories2015}]
+  A \textit{pseudocategory} $\mathcal{C}$ in a 2-category is:
+  \begin{itemize}
+  \item a pair of objects $\mathbf{O}, \mathbf{A}$
+  \item 1-cells $\partial_0,\partial_1 : \mathbf{A}\to \mathbf{O}$ such that $\mathbf{A}^{(n)}$
+    exists for all $n$
+  \item 1-cells $\iota: \mathbf{O}\to \mathbf{A}$ and $\mu: \mathbf{A}^{(2)}\to \mathbf{A}$
+  \item coherence
+  isomorphisms $\kappa : \mu\circ \mu_{23}\cong \mu\circ \mu_{12}$, $\lambda :
+  \mu\circ ( \iota, 1_B) \cong 1_B$, $\rho : 1_B\cong \mu\circ
+  (1_B, \iota)$
+  \end{itemize}
+  such that
+  $\partial_0\circ \iota=1_A$,
+  $\partial_1\circ \iota=1_A$, and the pentagon identity
+  and triangle identities are satisfied for the associator and
+  unitors.
+\end{definition}
+
+For example, a pseudocategory in the 2-category $\mathbf{Cat}$ is a
+weak double category.
+
+Pseudocategories are examples of models of sketches, as described in
+the previous section. The sketch $\mathbf{Pseudocat}$ for a pseudocategory
+has two objects $O$ and $A$, two morphisms $d, c : A\to O$, $i : O\to
+A$ with $ci=1_O$, $di=1_O$. It also has objects $A^{(n)}_O$ for $n\geq
+2$, and a composition map $\mu : A^{(n)}_O\to A$ respecting the domain
+and codomain maps. Each object $A^{(n)}_O$ is equipped with a
+distinguished weighted cone over the diagram $A\to O\leftarrow A\to
+O\dots A$ saying that it must be the strict 2-limit of the
+diagram; we have associator and unitor 2-cells in the sketch
+satisfying the pentagon and triangle identities.
+
+For the rest of this section, let $\mathbf{Pseudocat}$ denote the sketch for
+the theory of pseudocategories, and by abuse of notation, its
+underlying 2-category as well.
+
+Let $\mathbf{Pseudocat}_1$ be the subsketch of $\mathbf{Pseudocat}$ containing only
+its 1-skeleton; that is, $\mathbf{Pseudocat}_1$ contains
+$O,A,d,c,i, \mu: A\times_OA\to A$, and the higher powers
+$A^{(n)}_{O}$, together with the weighted cones imposing the
+requirement that $A^{(n)}_{O}$ is the weighted limit of the diagram
+$A\to O\leftarrow A\to O\dots A$. The only nontrivial equations in
+$\mathbf{Pseudocat}_1$ are that $di=ci=1_O$.
+
+We will be interested in two distinct notions of a morphism of
+pseudocategories: the strict notion, which agrees with the earlier
+notion of a morphism of models of a sketch, and the lax notion. The
+latter notion also gives rise to a 2-category of pseudocategories.
+
+\begin{definition}[Lax functor between pseudocategories]
+  Let $C_1 = (O_1, A_1, d_1,c_1, i_1,\mu_1)$ and
+  $C_2 = (O_2, A_2, d_2, c_2, i_2,\mu_2)$ be two pseudocategories.
+  A \textbf{lax functor} $F : C_1\to C_2$ is given by a pair of
+  1-cells $F_O : O_1\to O_2, F_A : A_1\to A_2$,
+  such that $F_O\circ c_1 = c_2\circ F_A$ and
+  $F_O\circ d_1 = d_2\circ F_A$,
+  together with lax unit constraint 2-cells
+  $F^0 : i_2\circ F_O\Rightarrow F_A\circ i_1$ and
+  a lax composition constraint 2-cell
+  $F^2 : \mu_2\circ (F_A\times_{F_O}F_A) \Rightarrow F_A\circ \mu_1$
+  which are subject to the left and right unit constraints
+  and the associativity constraint familiar from
+  the definition of a lax functor between 2-categories
+  (as in \cite{johnson2dimensionalCategories2021}, p. 149);
+  additionally we impose the constraints $c_2F^0=d_2F^0=1_{F_O}$
+  and $\operatorname{id}(c_2\circ \mu_2\circ (F_A\times_{F_O} F_A))=c_2F^2$,
+  $\operatorname{id}(d_2\circ \mu_2\circ (F_A\times_{F_O}
+  F_A))=d_2F^2$.
+
+  An \textbf{oplax} functor is the evident dualization, where we
+  reverse the direction of the lax unit constraint and lax composition
+  constraint cells. A \textbf{pseudofunctor} is a
+  lax functor where the lax unit constraint and lax composition
+  constraint cells are invertible.
+\end{definition}
+
+\begin{definition}[Horizontal natural transformation between
+  pseudocategories]
+  Let $C_1, C_2$ be pseudo double categories and
+  $F = (F_O,F_A, F^0, F^2)$ and $G = (G_O, G_A, G^0, G^2)$ be lax
+  double functors between them.
+  A \textbf{horizontal natural transformation} $\tau : F\Rightarrow G$
+  is given by a pair of 2-cells $(\tau_O : F_O\Rightarrow G_O, \tau_A
+  : F_A\Rightarrow G_A)$ commuting with the maps $c_1, c_2$ and $d_1,
+  d_2$
+  on the nose, and satisfying the evident pasting diagrams with
+  respect to the lax unit constraint and lax composition constraint
+  cells.
+  (see \cite{johnson2dimensionalCategories2021}, p.164-165)
+\end{definition}
+
+\begin{proposition}
+  If $\mathcal{C}$ is a 2-category, there is a 2-category of
+  pseudocategories internal to $\mathcal{C}$, whose 0-cells are
+  pseudocategories, 1-cells are lax functors, and whose 2-cells are
+  natural transformations between lax functors.
+\end{proposition}
+
+We write $\mathbf{Pseudo}(\mathcal{C})$ for the 2-category of
+pseudocategories in $\mathcal{C}$.
+
+The following observation is a specialization of the proposition in
+the previous section about models of sketches.
+\begin{proposition}\label{models-in-functor-cat}
+  Let $\mathcal{X}$ and $\mathcal{Y}$ be 2-categories. There is a
+  one-to-one correspondence between 2-functors
+  $\mathcal{X}\to \mathbf{Pseudo}(\mathcal{Y})$ and objects of
+  $\mathbf{Pseudo}([\mathcal{X};\mathcal{Y}])$.
+\end{proposition}
+\begin{proof}
+  Let $F : \mathcal{X}\to \mathbf{Pseudo}(\mathcal{Y})$ be a
+  2-functor. For each $X$ in $\mathcal{X}$, there is a pseudocategory
+  $(O_{F(X)},A_{F(X)},d_{F(X)},c_{F(X)},i_{F(X)},\circ_{F(X)},
+  \alpha_{F(X)},\lambda_{F(X)},\rho_{F(X)})$.  Both $O_{F(-)}$ an
+  $A_{F(-)}$ determine 2-functors $\mathcal{X}\to \mathcal{Y}$, and
+  $d_{F(-)},c_{F(-)},i_{F(-)}$ determine 2-natural transformations
+  between these.  The 2-pullback in a functor category is computed
+  ``pointwise'' by the 2-pullbacks of the individual objects involved,
+  so $\circ_{F(-)}$ also determines a morphism in
+  $[\mathcal{X};\mathcal{Y}]$. The associator and left and right
+  unitor and higher cells transfer through this correspondence as
+  well.
+\end{proof}
+
+\section{Generalized Double Profunctors}
+If $\mathbb{J}$ and $\mathbb{K}$ are two strict (small) double categories, then there
+are at least two common definitions of a double profunctor
+$\mathbb{J}\pfun \mathbb{K}$, and they are known to be equivalent. The
+first definition is inherited from internal category theory, where
+there is a general definition of an internal profunctor between
+internal categories. Since a double category is a category internal to
+$\mathbf{Cat}$, this definition applies. Second, one can define a
+double profunctor to be a lax functor $\mathbb{J}^{\rm op}\times
+\mathbb{K}\to \dbl{S}ets$ into the weak double category of sets and spans.
+
+The first main theorem of this paper establishes an equivalence
+between two proposed definitions of a profunctor between strict
+\textit{triple} categories. One of these definitions is obvious and
+the other is more subtle. This section will discuss the second
+definition, which is presumed to be original.
+
+\subsection{The pseudocategory of spans}
+
+The following definition generalizes the construction of the double
+category of spans of sets from the 1-category of sets.
+
+In this section we fix a 2-category $\mathcal{C}$. As in the previous
+definition, it is obviously necessary for the limits discussed to
+exist in order for the category of spans to be well-defined, but in
+general for our applications it will be too strong to require that
+$\mathcal{C}$ has all finite 2-limits, so we will assume they exist on
+an individual basis where they are required for the definitions to
+make sense.
+
+\subsubsection{The object of spans}
+
+\begin{definition}[2-presheaf of spans]
+  Let $A,B,C$ be objects in $\mathcal{C}$. If $t$ is a span in the
+  category $\mathcal{C}(B,C)$, and $\alpha: A\to B$ is a 1-cell, then
+  the whiskering $t\alpha$ is a span in $\mathcal{C}(A,B)$.
+
+  In this way $\mathbf{Span}(\mathcal{C}(-,C))$ determines a presheaf on
+  the underlying 1-category of $\mathcal{C}$.
+
+  Moreover, $\mathbf{Span}(\mathcal{C}(-,C))$ is a 2-functor, as
+  whiskering is 2-functorial.
+\end{definition}
+\begin{definition}[Object of spans]
+  The \textit{object of spans} of $X$, denoted $\mathcal{S}(X)$, is the representing object of
+  the 2-presheaf $\mathbf{Span}(\mathcal{C}(-,C))$ of
+  spans, so that there is a isomorphism of categories
+  $\mathbf{Span}(\mathcal{C}(Y,X))\cong
+  \mathcal{C}(Y,\mathcal{S}(X))$ for all $Y$, 2-natural in $Y$.
+  
+  Equivalently, it is the lax limit of the diagram
+  $X\leftarrow X\rightarrow X$.
+\end{definition}
+
+\subsubsection{Pseudocategory structure}
+
+\begin{definition}[Pullbacks in a 0-cell]
+  Let $A$ be a 0-cell in $\mathcal{C}$. If $B$ is a 0-cell, and $t = (f,g,h, \kappa_1: f\Rightarrow
+  g, \kappa_2: h\Rightarrow g)$ is a cospan in $\mathcal{C}(B,A)$, an
+  \textbf{absolute pullback} for the cospan is an ordinary
+  1-categorical pullback $(p : B\to A, \rho_1 : p\Rightarrow f,
+  \rho_2:p\Rightarrow h)$ which is stable under whiskering; i.e., if
+  $\alpha : C\to B$ is a 1-cell, then
+  $(p\alpha,\rho_1\alpha,\rho_2\alpha)$ is the 1-pullback of
+  $t\alpha$.
+
+  We way $A$ \textbf{has pullbacks} if for all $B$ and for all $t \in
+  \mathbf{Cospan}(\mathcal{C}(B,A))$, $t$ has a pullback and all
+  pullbacks are absolute.
+\end{definition}
+
+In general we will use the stronger notion where it is relevant and so
+``pullback'' will mean ``absolute pullback'' where this is
+applicable.
+
+In the following definition we assume that $X$ has pullbacks, and that
+the 2-pullback $\mathcal{S}(X)\times_X\mathcal{S}(X)$ exists. For notation
+$\pi_1,\pi_2 : \mathcal{S}(X)\times_X \mathcal{S}(X)$ be the left and
+right projections of the pullback, and let $(d,u,c,\alpha,\beta)$ be
+the universal span in $\mathcal{C}(\mathcal{S}(X),X)$. 
+
+\begin{definition}[Composition 1-cell]
+  \label{composition-of-spans}
+  Let
+  $e_1, e_2, e_3: \mathcal{S}(X)\times_X\mathcal{S}(X)\to X$ be
+  defined as follows:
+  \begin{itemize}
+  \item $e_1 = u\circ \pi_1$
+  \item $e_2 = c\circ \pi_1= d\circ \pi_2$
+  \item $e_3 = u\circ \pi_2$
+  \end{itemize}
+
+  Let $t: \mathcal{S}(X)\times_X\mathcal{S}(X)\to X$ be
+  the pullback of $\beta\pi_1: e_1\Rightarrow e_2$ and $\alpha\pi_2:
+  e_3\Rightarrow e_2$.
+
+  By definition, $t$ is equipped with
+  projection morphisms $x: t\Rightarrow e_1$ and $y :t\Rightarrow
+  e_3$.
+
+  The \textbf{composition of spans} morphism
+  $\mu:\mathcal{S}(X)\times_X\mathcal{S}(X)\to \mathcal{S}(X)$ is
+  the map constructed by applying the universal property of
+  $\mathcal{S}(X)$ to the span $(d\circ \pi_1,t,c\circ \pi_2,
+  (\alpha\pi_1)\circ x, (\beta\pi_2)\circ y)$.
+\end{definition}
+\begin{definition}[Unit map]
+  The unit map $i: X\to \mathcal{S}(X)$ arises from applying the
+  universal property to the maps $1,1,1 : X\to X$ together with the
+  identity natural transformations.
+\end{definition}
+
+At this point we have constructed all the 0- and 1-cells of
+the pseudocategory of spans. Rather than modify
+the standard argument that spans in a category with
+pullbacks form a double category, we can
+appeal to this theorem by a Yoneda argument,
+constructing our 2-cells in the presheaf category $\hat{\cal{E}}$
+and pulling them back down to $\cal{E}$ along the Yoneda embedding.
+The following lemma makes this formal.
+
+In the following lemma, let $\mathbf{Dbl}$ be the 2-category of \textit{weak} double
+categories, \textbf{strict} double functors between them, and
+horizontal natural transformations. $\mathcal{A}$ is, as before, the
+subsketch of $\mathcal{C}$ containing only the 1-skeleton. Here, it is
+important that this definition of $\mathbf{Dbl}$ agrees with the
+characterization of $\mathbf{Dbl}$ as the 2-category of models for the
+theory of pseudocategories in $\mathbf{Cat}$.
+
+\begin{lemma}\label{pseudocategory-lifting-theorem}
+  Let $O,A$ be two objects in a 2-category $\mathcal{E}$. Let $d, c: A
+  \to O$ be given, and let $i : O\to A$ with $di=ci=1_O$. Assume that all higher powers $A^{(n)}_O$ of $A$ over
+  $O$ exist, and let $\mu : A\times_OA\to A$.
+
+  By the Yoneda embedding, $(O, A,d,c,i,\mu)$ induce a functor
+  $\mathcal{V}: \mathcal{E}^{\rm op}\to
+  \operatorname{Mod}(\mathcal{A},\mathbf{Cat})$ into the category of
+  models of $\mathcal{A}$.
+
+  Let $\mathcal{U} : \mathcal{E}^{\rm op}\to \mathbf{Dbl}$ be a lift
+  of $\mathcal{V}$ along the forgetful functor
+ $\operatorname{Mod}(\mathcal{C},\mathbf{Cat})\to
+  \operatorname{Mod}(\mathcal{A},\mathbf{Cat})$ given by
+  precomposition with $i : \mathcal{A}\to \mathcal{C}$; that is,
+  $\mathcal{U}$ extends each $\mathcal{A}$-model $\mathcal{V}(Y)$ with
+  the structure of a double category in a compatible way, 2-naturally
+  in $V$. Thus the underlying category of arrows functor of $\mathcal{U}$ is precisely
+  $\mathcal{C}(-,A)$, the underlying category of objects functor of
+  $\mathcal{U}$ is precisely $\mathcal{C}(-,O)$, and so on.
+
+  Then there is a unique pseudocategory structure on $(O,A,d,c)$
+  compatible with $\mathcal{U}$, i.e., from the structure of $U$ one can recover $i :
+  O\to A$, a composition law, left and right unitors, and an
+  associator satisfying the pentagon and triangle identities.
+\end{lemma}
+\begin{proof}
+  This is an application of \ref{model-lifting-theorem}.
+\end{proof}
+
+
+\begin{proposition}[$\mathcal{U}_{X}$]
+  Let $X$ be as above. Assume $X$ has pullbacks. Assume $\mathcal{S}(X)$ exists and that all
+  higher pullbacks $\mathcal{S}(X)^{(n)}_{X}$ exist. There is a
+  2-functor $\mathcal{U}_X: \mathcal{C}^{\rm op}\to \mathbf{Dbl}$
+  sending $Y$ to the double category of objects, arrows and spans in $\mathcal{C}(Y,X)$.
+\end{proposition}
+\begin{proof}
+  One can form the double category of arrows and spans associated to
+  any category that has pullbacks, and since we have assumed that for
+  $g : Y\to Y'$, the
+  whiskering functor $\mathcal{C}(g,X)$ preserves pullbacks, it is
+  easy to see that we get a functor into the 2-category of double categories,
+  \textit{strong} functors and horizontal natural transformations.
+
+  However, we want a functor into the 2-category of double categories,
+  \textit{strict} functors and horizontal natural transformations.
+  That is, we want $\mathcal{U}_X(g) :\mathcal{U}_X(Y')\to
+  \mathcal{U}_X(Y)$ to be a \textit{strict}
+  2-functor, i.e., to preserve composition and units
+  on-the-nose. This holds because by virtue of the composition of spans
+  morphism $\mu$ and the unit morphism $i : \mathcal{S}(X)$, there is
+  a functorial and uniform choice of composition of spans in $\mathcal{C}(Y,X)$
+  \textbf{globally} for all $Y$, i.e., 2-functorial in $Y$.
+\end{proof}
+\begin{proposition}\label{pseudocategory-of-spans}
+  Let $X$ be an object in $\mathcal{C}$ with pullbacks. Assume
+  $\mathcal{S}(X)$ exists and all higher pullbacks
+  $\mathcal{S}(X)^{(n)}_{X}$ exist. There is a pseudocategory
+  structure extending $(X,\mathcal{S}(X),d,c,i,\mu)$. We call this
+  pseudocategory the \textbf{pseudocategory of spans in $X$}.
+\end{proposition}
+\begin{proof}
+  This is an application of \ref{pseudocategory-lifting-theorem}.
+\end{proof}
+
+% We now define an isomorphism
+% \begin{equation}
+% \label{eq:6}
+% \lambda : 1_{\mathcal{S}(X)}\cong \mu \circ
+% (i\times_X1_{\mathcal{S}(X)})\circ \pi_2^{-1}
+% \end{equation}
+% where $\pi_2 : X\times_X\mathcal{S}(X)\to \mathcal{S}(X)$.
+% \begin{definition}[Left unitor]
+%   Write $\zeta$ to abbreviate
+%   $(i\times_X1_{\mathcal{S}(X)})\circ \pi_2^{-1}$, and
+%   $\omega$ to abbreviate the universal span
+%   $(d, u, c, \alpha,\beta)\in
+%   \mathbf{Span}(\mathcal{C}(\mathcal{S}(X),X))$. By the universal
+%   property of $\mathcal{S}(X)$, there is a 2-natural isomorphism of
+%   categories between $\mathcal{C}(\mathcal{S}(X),\mathcal{S}(X))$ and
+%   $\mathbf{Span}(\mathcal{C}(\mathcal{S}(X),X))$, so it it is
+%   sufficient to show that there is an isomorphism of spans between the
+%   universal span $\omega$ and the whiskering
+%   $\omega(\mu\circ \zeta)$.
+
+%   We will use the notation $e_1,e_2,e_3,x,y$ as in
+%   \ref{composition-of-spans}.
+
+%   First, a computation shows that 
+%   \begin{equation}
+%     \label{eq:7}
+%     (e_1,e_2,e_3,\beta\pi_1,\alpha \pi_2)\zeta=(d,d,u,1_d,\alpha)
+%   \end{equation}
+%   i.e., the whiskering of the span $(e_1,e_2,e_3,\beta
+%   \pi_1,\alpha \pi_2)$ with the 1-cell $\zeta$ is $(d,d,u,1_d,\alpha)$.
+
+%   Because we have assumed that whiskering preserves pullbacks, it
+%   follows that the whiskering $t\zeta$ 
+%   is a pullback of $1_d$ and $\alpha$, and
+%   $y\zeta : t\zeta\to u$ is an isomorphism.
+
+%   Similarly, we can compute $d(\mu\circ \zeta)=d$, $c(\mu\circ \zeta)=c$, 
+%   $\alpha(\mu\circ\zeta)=(\alpha\pi_1\circ x)\zeta =\alpha \pi_1 \zeta\circ x\zeta=1_d\circ
+%   x\zeta= x\zeta$, and $\beta(\mu\circ \zeta)=((\beta\pi_2)\circ y)\zeta=\beta(\pi_2\circ
+%   \zeta)\circ y\zeta = \beta\circ y\zeta$. Thus,
+%   \begin{equation}
+%     \label{eq:8}
+%     (d,u,c,\alpha,\beta)(\mu\circ \zeta)=(d,t\zeta,c,x\zeta,\beta\circ y\zeta)
+%   \end{equation}
+%   As we have already said, $y\zeta$ is an isomorphism, and it is
+%   obvious that $(1_d,y\zeta,1_c)$ is an isomorphism of spans
+%   $\omega\cong \omega\zeta$. Thus, the isomorphism lifts to an
+%   isomorphism $\lambda : 1_{\mathcal{S}(X)}\cong \mu\circ \zeta$,
+%   which we call the \textbf{left unitor}.
+% \end{definition}
+
+% The construction of the \textbf{right unitor} is dual and we will not
+% explicitly construct it.
+
+% Let $E :(\mathcal{S}(X)\times_X\mathcal{S}(X))\times_X\mathcal{S}(X)\cong
+% \mathcal{S}(X)\times_X(\mathcal{S}(X)\times_X\mathcal{S}(X))$ be the
+% associator isomorphism for the iterated pullback of $\mathcal{S}(X)$
+% over $X$.
+
+% We next construct an \textbf{associator} isomorphism $\mu\circ
+% (\mu\times_X1_{\mathcal{S}(X)})\cong \mu\circ
+% (1_{\mathcal{S}(X)}\times_X\mu)\circ E$.
+
+% We will use Yoneda. This result is in Leinster 1998b, ``Basic Bicategories''
+% \begin{lemma}
+%   Let $A,B$ be objects in a 2-category, and let $F, G : A\to B$ be
+%   1-cells. Then to construct a 2-cell $\alpha : F\Rightarrow G$, it
+%   suffices to construct a 2-natural transformation
+%   $\beta: \mathcal{C}(-,F)\Rightarrow \mathcal{C}(-,G)$; 2-cells
+%   $F\Rightarrow G$ are in one-to-one correspondence with modifications
+%   $\mathcal{C}(-,F)\Rightarrow \mathcal{C}(-,G)$.
+% \end{lemma}
+% \begin{proof}
+%   If $\beta : \mathcal{C}(-,F)\Rightarrow \mathcal{C}(-,G)$ is a given modification,
+%   then $\beta(A):\mathcal{C}(A,F)\Rightarrow \mathcal{C}(A,G)$ is a
+%   natural transformation between functors $\mathcal{C}(A,A)\to
+%   \mathcal{C}(A,B)$. Apply $\beta_A$ to the 1-cell $1_A$ to get a 2-cell
+%   $F\to G$.
+% \end{proof}
+
+% As a corollary, to prove a coherence theorem for 2-cells in a
+% 2-category, i.e. to establish an equation between two 2-cells, it
+% suffices to prove that both 2-cells determine the same modification
+% between 2-natural transformations.
+
+% Because the Yoneda embedding is 2-fully faithful, we propose to lift
+% the diagram into the functor category $[\mathcal{C}^{\rm op};
+% \mathbf{Cat}]$ and prove that this square commutes up to a
+% modification 2-natural in $Y$.
+% \begin{equation}
+% \label{eq:9}
+% \begin{tikzcd}
+%   \mathcal{C}(Y,(\mathcal{S}(X)\times_X\mathcal{S}(X))\times_X\mathcal{S}(X))
+%   \arrow[rr,"\cong"]
+%   \arrow[d,"\mu\circ(\mu\times_X1_{\mathcal{S}(X)})"]
+%   & &
+%   \mathcal{C}(Y,\mathcal{S}(X)\times_X(\mathcal{S}(X))\times_X\mathcal{S}(X))
+%   \arrow[d,"\mu\circ(1_{\mathcal{S}(X)}\times_X1_{\mathcal{S}(X)})"]
+%   \\
+%   \mathcal{C}(Y,\mathcal{S}(X)\times_X\mathcal{S}(X))\arrow[r,"\mu"] &
+%   \mathcal{C}(Y,\mathcal{S}(X) &
+%   \mathcal{C}(Y,\mathcal{S}(X)\times_X\mathcal{S}(X)) \arrow[l,"\mu"]
+% \end{tikzcd}
+% \end{equation}
+
+% Let $\mathcal{S}$ be the ``walking span'' category $\bullet\leftarrow
+% \bullet\rightarrow \bullet$ . Let $\mathcal{S}^{(2)}$ be the category
+% \begin{equation}
+% \label{eq:13}
+% \mathcal{S}^{(2)}=\bullet\leftarrow\bullet\rightarrow\bullet\leftarrow\bullet\rightarrow\bullet
+% \end{equation}
+% \begin{equation}
+% \label{eq:14}
+% \mathcal{S}^{(3)}= \bullet\leftarrow\bullet\rightarrow
+% \bullet\leftarrow\bullet\rightarrow\bullet\leftarrow\bullet\rightarrow\bullet
+% \end{equation}
+% and so on.
+
+% Intuitively,
+% $\mathcal{S}^{(2)}$ is the ``walking formal composition of spans;'' we have
+% an isomorphism of categories
+% \begin{equation}
+% \label{eq:10}
+% \mathbf{Cat}(\mathcal{S}^{(2)},\mathcal{C}(Y,X))\cong \mathcal{C}(Y,\mathcal{S}(X)\times_X\mathcal{S}(X))
+% \end{equation}
+% 2-naturally in $Y$, and this correspondence demonstrates a 2-universal
+% property of $\mathcal{S}(X)\times_X\mathcal{S}(X)$. The composition
+% cell $\mu$ fits into a commutative diagram (again, 2-natural in $Y$)
+% \begin{equation}
+% \label{eq:11}
+% \begin{tikzcd}
+% \mathbf{Cat}(\mathcal{S}^{(2)},\mathcal{C}(Y,X))\arrow[r,"\cong"]\arrow[d,"\mu'"]&
+% \mathcal{C}(Y,\mathcal{S}(X)\times_X\mathcal{S}(X))\arrow[d,"\mathcal{C}(Y{,}\mu)"]
+% \\
+% \mathbf{Span}(\mathcal{C}(Y,X))\arrow[r,"\cong"] & \mathcal{C}(Y,\mathcal{S}(X))
+% \end{tikzcd}
+% \end{equation}
+% where the arrow $\mu'$ is new, and constructed from the others in the
+% diagram; $\mu'$ shows that there is a functorial choice of composition
+% of arbitrary composable pairs of spans in $\mathcal{C}(Y,X)$ for all
+% $Y$, 2-natural in $Y$.
+
+% Likewise, there is a natural isomorphism
+% \begin{equation}
+% \label{eq:15}
+% \mathbf{Cat}(\mathcal{S}^{(3)}\mathcal{C}(Y,X))\cong
+% \mathcal{C}(Y,(\mathcal{S}(X)\times_X\mathcal{S}(X))\times_X\mathcal{S}(X))
+% \end{equation} and using this isomorphism we can construct a ``left
+% composition'' $\mu_{\ell}'$
+% \begin{equation}
+%   \begin{tikzcd}
+% \mathbf{Cat}(\mathcal{S}^{(3)},\mathcal{C}(Y,X))\arrow[r,"\cong"]\arrow[d,"\mu_{\ell}'"]&
+% \mathcal{C}(Y,(\mathcal{S}(X)\times_X\mathcal{S}(X))\times_X\mathcal{S}(X))\arrow[d,"\mathcal{C}(Y{,}\mu\times_X1)"]
+% \\
+% \mathbf{Cat}(\mathcal{S}^{(2)},\mathcal{C}(Y,X))\arrow[r,"\cong"] & \mathcal{C}(Y,\mathcal{S}(X)\times_X\mathcal{S}_X)
+% \end{tikzcd}
+% \end{equation}
+% And similarly for multiplication on the right. This gives a
+% (not in general commutative) square
+% \begin{equation}
+%   \label{eq:16}
+%   \begin{tikzcd}
+%     \mathbf{Cat}(\mathcal{S}^{(3)},\mathcal{C}(Y,X))
+%     \arrow[r,"\mu'_r"]
+%     \arrow[d,"\mu'_\ell"]
+%     &
+%     \mathbf{Cat}(\mathcal{S}^{(2)},\mathcal{C}(Y,X))\arrow[d,"\mu'"]\\
+%     \mathbf{Cat}(\mathcal{S}^{(2)},\mathcal{C}(Y,X))\arrow[r,"\mu'"]&
+%     \mathbf{Cat}(\mathcal{S},\mathcal{C}(Y,X))\\
+%   \end{tikzcd}
+% \end{equation}
+% which is lies in a parallel plane to the square \ref{eq:9} and is
+% connected to it by the 2-natural isomorphisms which characterize
+% $\mathcal{S}(X), \mathcal{S}(X)\times_X\mathcal{S}(X)$,
+% $(\mathcal{S}(X)\times_X\mathcal{S}(X)_X)\times_X\mathcal{S}(X)$ and
+% $\mathcal{S}(X)\times_X(\mathcal{S}(X)_X\times_X\mathcal{S}(X))$ by
+% their universal properties as representing objects for the presheaves.
+
+% \begin{proposition}
+%   Modifications in the square \ref{eq:9} are in one-to-one
+%   correspondence with modifications in the square \ref{eq:16}.
+% \end{proposition}
+% \begin{proof}
+%   This is straightforward, it suffices to observe that the
+%   modifications can be transported along the characteristic 2-natural
+%   isomorphisms of the representing objects.
+% \end{proof}
+
+% Therefore, to construct the associator isomorphism, it suffices to
+% construct a modification in the square \ref{eq:16}. This in turn says
+% that, given a functorial choice of composite $\odot$ of spans in
+% $\mathcal{C}(Y,X)$, and given an arbitrary composable triple
+% $\bullet\xrightarrow{a}\bullet\xrightarrow{b}\bullet\xrightarrow{c}\bullet$,
+% we would like to construct a natural isomorphism
+% $a\odot(b\odot c)\cong (a\odot b)\odot c$ of the
+% spans, natural in the underlying composable triple, and 2-natural in
+% $Y$. This of course will simply be the usual associativity isomorphism
+% in the bicategory of spans in $\mathcal{C}(Y,X)$.
+
+% I claim that the pentagon axiom for a pseudocategory, as well as the
+% left and right triangle identities for the unitor, can likewise be
+% reduced to the pentagon axiom and left and right triangle identities
+% for the unitor, in the bicategory of spans in $\mathcal{C}(Y,X)$ for
+% $Y$ ranging across $0$-cells of $Y$, and in this way we will guarantee
+% that $(X,\mathcal{S}(X))$ is a pseudocategory.
+
+% (TODO)
+\subsection{Lax functor valued in spans}
+In the previous section, we have defined the pseudocategory of
+spans. In this section, for an arbitrary pseudocategory $\mathcal{E}$ in
+$\mathcal{C}$, we will describe sufficient conditions to
+construct a functor $\mathcal{E}\to \mathcal{S}(X)$.
+
+When $\mathcal{C}$ is the 2-category $\mathbf{CAT}$ of large
+categories, and we take $X= \mathbf{Set}$, we will obtain in
+particular the notion of a lax functor from a double category
+$\mathbb{C}$ into the double category of spans of sets, which agrees
+with the accepted notion of a presheaf on a double category.
+
+\begin{definition}[Lax functor valued in spans]
+Let $\mathcal{E}$ be a pseudocategory internal to $\mathcal{C}$.
+Let $X$ be an object in $\mathcal{C}$ with pullbacks.
+
+Let $\mathcal{C}/X$ be the lax slice 2-category of $X$.
+Let $\pi_X : \mathcal{C}/X\to \mathcal{C}$ be the
+forgetful 2-functor.
+
+A \textbf{lax functor from $\mathcal{E}$ valued in $X$-spans} is defined to
+be a strict lift of the pseudocategory structure
+$\mathcal{E} \in \operatorname{Mod}(\mathbf{Pseudocat},\mathcal{C})$
+along $\pi_X$ to $\operatorname{Mod}(\mathbf{Pseudocat}, \mathcal{C}/X)$.  
+\end{definition}
+
+We can use this notion to give a universal property of the
+\textit{pseudocategory} $\mathcal{S}(X)$, as distinguished from its
+definitional universal property as an object in a 2-category.
+
+\begin{theorem}
+  Let $\mathcal{C}$ be a 2-category, let $X$ be an object in $\mathcal{C}$,
+  and suppose that $\mathcal{S}(X)$ exists as a pseudocategory
+  (i.e., it exists as a representing object and all higher powers of
+  $\mathcal{S}(X)\to X$ exist). Then for any pseudocategory
+  $\mathcal{E}$
+  in $\mathcal{C}$, 
+  lax functors $\mathcal{E}$ valued in $X$-spans
+  are in one-to-one correspondence with lax functors
+  from $\mathcal{E}$ to $Span(X)$.
+\end{theorem}
+\begin{proof}
+  Let $F \in \operatorname{Mod}(\mathbf{Pseudocat},\mathcal{C}/X)$
+  be a lax functor valued in spans.
+\end{proof}
+\pagebreak
+UNDER CONSTRUCTION
+\pagebreak
+
+\subsection{Lax functor valued in spans}
+In the previous section we have defined the pseudocategory of
+spans. In this section, for an arbitrary pseudocategory $\mathcal{E}$ in
+$\mathcal{C}$, we will describe concretely sufficient conditions to
+construct a functor $\mathcal{E}\to \mathcal{S}(X)$.
+
+When $\mathcal{C}$ is the 2-category $\mathbf{CAT}$ of large
+categories, and we take $X= \mathbf{Set}$, we will obtain in
+particular the notion of a lax functor from a double category
+$\mathbb{C}$ into the double category of spans of sets, which agrees
+with the accepted notion of a presheaf on a double category.
+
+In what follows, we assume that the pseudocategory of spans in $X$ exists.
+\begin{definition}[Lax functor valued in $X$-spans]
+  Let $\mathcal{E}=(O,A,d,c,i,\bullet)$ be a pseudocategory in a fixed
+  2-category $\mathcal{C}$, with $d, c : A\to O$ the domain and codomain 1-cells, $i :
+  O\to A$ the identity 1-cell and $\bullet : A\times_OA\to A$ the
+  composition $1$-cell.
+
+  Let $\mathsf{fst}, \mathsf{snd}$ denote the projections
+  $A\times_OA \to A$.
+  
+  Let $\pi_1^{A\times_OA}, \pi_2^{A\times_OA}$ denote the projections
+  $A\times_OA\to A$.
+
+  If $\kappa_1: a\to b, \kappa_2:c\to b$ are 2-cells, let
+  $\epsilon^{\kappa_1,\kappa_2}_1: \kappa_1\times_b\kappa_2\to a$ and
+  $\epsilon^{\kappa_1,\kappa_2}_2 \kappa_1\times_b\kappa_2\to c$ be
+  the projection maps of the pullback.
+
+  Let $s_1=F_A\circ \pi_1^{A\times_OA}$ and $s_2=F_A\circ
+  \pi_2^{A\times_OA}$.
+  Let $t =
+  s_1\times_{F_Oc\pi_1^{A\times_OA}}s_2=s_1\times_{F_Od\pi_2^{A\times_OA}}s_2$,
+  so 
+
+  Let $X$ be a 0-cell. A \textit{lax functor into $X$-spans} is a
+  tuple
+  
+  \begin{itemize}
+  \item $F_O : O\to X$
+  \item $F_A : A\to X$
+  \item $\gamma^d : F_A\Rightarrow F_Od$, $\gamma^c : F_A\Rightarrow F_Oc$
+  \item a laxity cell for composition,
+    $\xi : s_1\times_{F_Oc\pi_1^{A\times_OA}}s_2\Rightarrow
+    F_A\circ\mu_A$, commuting with the span projections $\gamma^d$ and
+    $\gamma^c$ - i.e.,
+    \begin{equation}
+      \label{eq:17}
+      (\gamma^d\mu_A)\circ \xi = \gamma^d\pi_1^{A\times_OA}\circ\epsilon_1^{s_1,s_2}
+    \end{equation}
+    \begin{equation}
+      \label{eq:18}
+      (\gamma^c\mu_A)\circ \xi = \gamma^c\pi_2^{A\times_OA}\circ\epsilon_2^{s_1,s_2}
+    \end{equation}
+  \item a unit cell $\omega: F_O\to F_A\circ i$ commuting with the
+    span projections $\gamma^d,\gamma^c$ - i.e, such that $\gamma^ci
+    \circ \omega=1_{F_O}$ and $\gamma^di\circ \omega=1_{F_O}$
+ \end{itemize}
+ such that $\xi$ and $\varepsilon$ are compatible with the associator
+ and left/right unitors of the pseudocategory.
+\end{definition}
+We elaborate on the compatibility conditions.
+
+ i.e. (letting $m:
+ O\times_OA\cong A$)
+ \begin{equation}
+   \label{eq:leftunitor}
+   \begin{tikzcd}
+     F_Od\times_{F_Od}F_A\arrow[d,"\cong"]\arrow[r,"\omega\times_{F_Od}1_{F_A}"]&
+     (F_A\pi_1^{A_O^{(2)}}\times_{F_Od\pi_1}F_A\pi_2^{A^{(2)}_O})\circ
+     (i\times_O1_A)\circ m^{-1}\\
+     F_A&     F_A\circ\mu\circ
+     (i\times_O1_A)\circ m^{-1}     
+   \end{tikzcd}
+ \end{equation}
+
+% In their paper \cite{grandisIntercategories2015}, Grandis and Par\'e
+% work in the 2-category $\mathcal{L}x\mathcal{D}bl$ of weak double
+% categories, lax double functors, and horizontal natural
+% transformations. They prove that if $F: \dbl{A}\to \dbl{C}$ and
+% $G : \dbl{B}\to \dbl{C}$ are not just lax but \textit{strict}, then
+% the 2-pullback of $F$ and $G$ exists. Therefore, given two weak double
+% categories $\mathbb{A}$ and $\mathbb{O}$ and strict double functors
+% $\mathbb{d},\mathbb{c}: \mathbb{A}\to \mathbb{O}$, it is sensible to
+% speak about a partial composition functor
+% $\mathbb{A}\times_{\dbl{O}}\mathbb{A}\to \mathbb{A}$ which extends
+% this structure to an internal category structure. Moreover, because
+% $\mathcal{L}x\mathcal{D}bl$ is a 2-category, it is possible to define
+% an internal ``pseudocategory'' where associativity and unitality of
+% composition are only required to hold up to isomorphism. Thus, they
+% define an intercategory to be a pseudocategory internal to the
+% 2-category $\mathcal{L}x\mathcal{D}bl$.
+
+ \section{Intercategories}
+
+The first main theorem of this note establishes an equivalence
+
+
+We will recapitulate some of
+\cite{grandisIntercategoriesFrameworkThreedimensional2017} here, but
+when we omit details they are spelled out in
+\cite{grandisIntercategoriesFrameworkThreedimensional2017} and \cite{grandisIntercategories2015}.
+An \textit{intercategory} is a three-dimensional category. It has one
+class of objects, three classes of arrows (called horizontal, vertical
+and transversal), three classes of 2-cells (which lie in the $xy$
+plane, the $yz$ plane, and the $xz$ plane), and a class of 3-cells
+which are ``cubes''.
+
+As a naming convention, 2-cells in the $xy$ plane are called
+\textit{basic}; $2$-cells in the $xz$ plane are called
+\textit{horizontal} and $2$-cells in the $yz$ plane are called
+\textit{vertical}.
+
+The transversal composition is strict. Both the
+horizontal and vertical compositions are weak, they are associative
+and unital up to transversal isomorphism.
+
+There is one piece of asymmetry in the definition. The horizontal and vertical arrows are not interchangeable in the
+definition, as the ``interchange law'' for 2-cells in the
+horizontal-vertical plane is lax. If the interchange law is an
+isomorphism then we call it a \textit{weak triple category}; if all
+coherence isomorphisms are identities we call it a \textit{strict
+  triple category}, which is a category internal to the category of
+(strict) double categories.
+
+One has various notions of functor between intercategories, depending
+on whether they are lax, pseudo or colax in the horizontal and
+vertical directions. There are (lax,lax) functors, (lax, colax)
+functors, and (colax, colax) functors, but not (colax, lax) functors,
+because due to the fact that the interchange map is not required to be
+an isomorphism. We will consider here only the (lax, lax) functors.
+
+\section{Quintets}
+Let $\dbl{J}$ be a weak double category, where the vertical
+arrows are weak and the horizontal ones are strict. I denote vertical
+arrows as $v : a\todot b$ and horizontal ones as $h : x\to y$. I
+denote vertical composition with $\cdot$ and horizontal composition by concatenation.
+
+In \cite{grandisIntercategoriesFrameworkThreedimensional2017} (pg. 20) it is shown
+how to construct a so-called ``intercategory of quintets'' from
+$\dbl{J}$, called $\mathbf{Q}(\dbl{J})$:
+\begin{itemize}
+\item the \textit{transversal} arrows of $\mathbf{Q}(\mathbb{J})$ are
+  the \textit{horizontal} arrows of $\dbl{J}$;
+\item both the \textit{horizontal} and \textit{vertical} arrows of
+  $\mathbf{Q}(\dbl{J})$ are the \textit{vertical} arrows of $\dbl{J}$;
+\item the basic 2-cells of $\mathbf{Q}(\dbl{J})$ framed by $h : a\todot b, v' : b\todot d,v : a\todot c,
+  h': c\todot d$ are exactly the ``special'' 2-cells in $\dbl{J}$ from
+  $v'\cdot h \Rightarrow h'\cdot v$, the ones lying over horizontal
+  identities
+\item the horizontal and vertical 2-cells are those of $\dbl{J}$
+\item the cubes are ``flat'', i.e., unique when they exist, and they
+  exist if and only if the 2-dimensional boundary of the cube is commutative.
+\end{itemize}
+
+I will say that a quintet is \textit{split} if it has a choice of left
+inverse. That is, a split quintet is a quintet $\alpha : v'\cdot
+h\Rightarrow h'\cdot v$ together with a quintet $\beta : h'\cdot
+v\Rightarrow v'\cdot h$  such that $\beta\alpha=1_{v'\cdot h}$.
+
+It is (mostly) clear that \textit{split quintets} form an
+intercategory as well, which we will denote
+$\mathbf{SQ}(\dbl{J})$. There are two details in the construction that
+may not be immediately obvious. The first is whether horizontal and
+vertical composition of quintets (by pasting) preserves the splitting,
+so that the composition of split quintets is again a split quintet, so
+we check this. It suffices to check the horizontal version, as the
+vertical version is an immediate dualization.
+
+Given a diagram 
+\begin{equation}
+\label{eq:1}
+\begin{tikzcd}
+	\bullet & \bullet & \bullet \\
+	\bullet & \bullet & \bullet
+	\arrow["{p_1}", "\shortmid"{marking}, from=1-1, to=1-2]
+	\arrow["{p_2}", "\shortmid"{marking}, from=1-2, to=1-3]
+	\arrow["q"'{pos=0.2}, "\shortmid"{marking}, from=1-1, to=2-1]
+	\arrow["{t_1}"', "\shortmid"{marking}, from=2-1, to=2-2]
+	\arrow["{t_2}"', "\shortmid"{marking}, from=2-2, to=2-3]
+	\arrow["r"'{pos=0.2}, "\shortmid"{marking}, from=1-2, to=2-2]
+	\arrow["s"'{pos=0.2}, "\shortmid"{marking}, from=1-3, to=2-3]
+	\arrow["{\alpha_1}", shift left=2, shorten <=4pt, shorten >=4pt, Rightarrow, from=2-1, to=1-2]
+	\arrow["{\beta_1}", shift left=2, shorten <=4pt, shorten >=4pt, Rightarrow, from=1-2, to=2-1]
+	\arrow["{\alpha_2}", shift left=2, shorten <=4pt, shorten >=4pt, Rightarrow, from=2-2, to=1-3]
+	\arrow["{\beta_2}", shift left=2, shorten <=4pt, shorten >=4pt, Rightarrow, from=1-3, to=2-2]
+\end{tikzcd}
+\end{equation}
+
+Grandis and Par\'e have given a definition of the horizontal composition of
+quintets by pasting, which we now recapitulate.
+
+Let $\lambda_{p,q,r} : (p \cdot q)\cdot r\cong p\cdot
+(q\cdot r)$ denote the associator isomorphism in the bicategory of
+spans. Let us denote whiskering in the underlying bicategory of $\dbl{J}$ by concatenation.
+
+We will denote the horizontal composition of spans as
+$\alpha_1\mid \alpha_2 : (t_2\cdot t_1)\cdot q\Rightarrow s\cdot
+(p_2\cdot p_1) $ (so that $\mid$ reflects diagrammatic order of
+composition).
+
+We have
+\begin{equation}
+\label{eq:2}
+\alpha_1\mid \alpha_2 =\lambda_{s,p_2,p_1}(\alpha_2p_1)\lambda_{t_2,r,p_1}^{-1}(t_2\alpha_1)\lambda_{t_2,t_1,q}
+\end{equation}
+
+From this expression it is elementary to check that if $\beta_1$
+is left inverse to $\alpha_1$ and $\beta_2$ is left inverse to
+$\beta_1$, $(\beta_2\mid \beta_1)(\alpha_1\mid \alpha_2)=1_{(t_2\cdot
+  t_1)\cdot q}$. Therefore the notion of composition of horizontal
+composition of quintets given by Grandis and Par\'e extends to the
+horizontal composition of strict quintets.
+
+The second detail which should be specified is the notion of a cube in
+the intercategory. Because a basic face is a pair of quintets in
+opposite directions, a cube between two basic faces in
+$\mathbf{SQ}(\dbl{J})$ should be a family of four faces between the
+basic face boundary arrows (i.e, four 2-cells in $\dbl{J}$) which are
+at once a morphism with respect to both pairs of quintets.)
+
+There is a forgetful functor $U_{\mathbf{Q}(\dbl{J})}$ from
+$\mathbf{SQ}(\dbl{J})$ to $\mathbf{Q}(\dbl{J})$ which is strict in all
+regards, and it is sensible to talk about ``lifting a diagram in
+$\mathbf{Q}(\dbl{J})$ to a diagram in $\mathbf{SQ}(\dbl{J})$'' if a
+(say, lax-lax) functor between intercategories
+$F : \mathcal{E}\to \mathbf{Q}(\dbl{J})$ factors through the forgetful
+functor $U_{\mathbf{Q}(\dbl{J}}$ on-the-nose, i.e., up to equality on
+objects, 1-cells, 2-cells, 3-cells, and unitor and associator laxity
+cells. In this way we can talk about what it means to equip a diagram
+in $\mathbf{Q}(\dbl{J})$ ``with a coherent choice of splittings for
+quintets'', by asking that there is a lifting of this diagram along
+the forgetful functor, strictly.
+
+\section{Spans}
+
+There is another construction which can give an intercategory from a
+weak double category. A weak double category $\dbl{A}$ has a
+\textit{lax choice of pullbacks} if:
+\begin{itemize}
+\item the category of arrows of $\dbl{A}$ has a choice
+  of pullbacks
+\item the category of objects of $\dbl{A}$ has a choice of pullbacks
+\item the codomain and domain functors respect these choices strictly
+\end{itemize}
+
+The third assumption is nontrivial. Even if the domain and codomain
+functors preserve pullbacks, it may not be possible to choose them strictly.
+
+If every horizontal isomorphism in $\dbl{A}$ has a vertical companion,
+then this is equivalent to
+\begin{itemize}
+\item the category of arrows of $\dbl{A}$ has pullbacks
+\item the category of objects of $\dbl{A}$ has pullbacks
+\item the codomain and domain functors preserve pullbacks
+\end{itemize}
+
+In such a situation there is necessarily a lax comparison cell relating the
+pullback of the vertical composition of arrows to the vertical
+composition of pullbacks.
+
+If $\dbl{A}$ has pullbacks, then we can form the intercategory of
+\textbf{spans} in $\dbl{A}$.
+\begin{itemize}
+\item The objects of $\mathsf{Span}(\dbl{A})$ are the objects of
+  $\dbl{A}$
+\item The transversal arrows of $\mathsf{Span}(\dbl{A})$ are the
+  horizontal arrows of $\dbl{A}$
+\item The vertical arrows of $\mathsf{Span}(\dbl{A})$ are the vertical
+  arrows of $\dbl{A}$
+\item The horizontal arrows of $\mathsf{Span}(\dbl{A})$ are spans
+  composed of horizontal arrows in $\dbl{A}$
+\item The basic 2-cells of $\mathsf{Span}(\dbl{A})$ are spans in the
+  category of arrows in $\dbl{A}$
+\item The vertical 2-cells of $\mathsf{Span}(\dbl{A})$ are 2-cells in
+  $\dbl{A}$
+\item The horizontal 2-cells of $\mathsf{Span}(\dbl{A})$ are the usual
+  2-cells in the double category of morphisms and spans in the
+  category $\operatorname{Obj}(\dbl{A})$
+\item The cubes of $\mathsf{Span}(\dbl{A})$ are the usual 2-cells
+  morphisms in the double category of morphisms and spans in $\operatorname{Arr}(\dbl{A})$
+\end{itemize}
+
+In \cite{grandisIntercategoriesFrameworkThreedimensional2017} (p. 48/49) it is
+then shown how to construct a (lax, lax) functor of intercategories
+from $\mathbf{Q}(\dbl{C}at)$ to $\mathsf{Span}^2(\mathbf{Cat})$, by
+associating to each profunctor its category of elements. If wwe regard sets
+as discrete categories, and spans as degenerate profunctors, it is
+clear that we can specialize this construction to obtain a functor of intercategories
+$\mathbf{Q}(\dbl{S}pan(\mathbf{Sets}))\to
+\mathsf{Span}^2(\mathbf{Sets})$ as follows:
+
+\begin{itemize}
+\item on
+0-cells and 1-cells, the functor acts as the identity
+\item  if $u : a\todot b, v'
+: b\todot d, v : a\todot c, u' : c\todot d$ is a square of spans and
+$\phi : v'\cdot u \Rightarrow u'\cdot v$ is a morphism of spans, then
+the inclusion functor sends this cell to the double span whose central
+object is $v'\cdot u$. Because $v'\cdot u$ is a pullback, it is
+naturally equipped with projections onto the spans $u$ and $v'$, and its
+projections onto $v$ and $u'$ are derived from the map $\phi$ and the
+projections of $v'\cdot u$ onto $v$ and $u'$.
+\end{itemize}
+
+
+The importance of this observation is that in
+\cite{grandisIntercategoriesFrameworkThreedimensional2017} it is
+argued (p. 2) that $\mathsf{Span}^2(\mathbf{Sets})$ is ``rightfully
+... called $\mathsf{Set}$, the intercategory of sets.'' It follows that
+for (say, strict) triple categories $\mathbf{J}$ and $\mathbf{K}$, a
+(lax,lax) double functor $\mathbf{J}^{\rm op}\times \mathbf{K}\to
+\mathsf{Span}^2(\mathbf{Sets})$ can be regarded as kind of ``triple
+profunctor.'' 
+
+Thus, by virtue of the inclusion, a (lax,lax) double functor
+$\mathbf{J}^{\rm op}\times \mathbf{K}\to
+\mathbf{Q}(\dbl{S}pan(\mathbf{Sets}))$ can be regarded as a special
+kind of profunctor, one with a special form, where the body of the
+central set of the ``double span'' happens to be exactly the
+composition of the left and bottom legs of the frame of the basic
+2-cell.
+
+\section{Profunctors in $\mathsf{Span}^2(\mathbf{Set})$}
+In their paper
+\cite{grandisIntercategoriesFrameworkThreedimensional2017}, Grandis
+and Pare show that for an intercategory $\mathcal{A}$, and a fixed
+object $X\in \mathcal{A}$, there is an associated Hom functor
+$\operatorname{Hom}(X,-) : \mathcal{A}\to
+\mathsf{Span}^2(\mathbf{Sets})$, and take this as evidence that
+$\mathsf{Span}^2(\mathbf{Sets})$ is a natural ``intercategory of
+sets'' that presheaves on intercategories might take values in.
+
+This section will extend that work to show that ``profunctors between
+triple categories'' are naturally valued in
+$\mathsf{Span}^2(\mathbf{Set})$; thus in particular presheaves, as a
+degenerate special case of this.
+
+Note that there is an obvious answer to the question of ``what is a
+profunctor between triple categories?''. Since triple categories are
+exactly strict functors internal to the category of double categories,
+it is possible to draw on the existing notion of an internal
+profunctor from internal category theory. Thus more specifically our
+goal in this section is to explain how the concept of internal
+profunctor relates to the idea of a profunctor as a functor
+$\mathcal{J}^{\rm op}\times \mathcal{K}\to
+\mathsf{Span}^2(\mathbf{Sets})$.
+
+
+% We now propose to generalize the notion of ``internal profunctor'' to
+% the 2-categorical setting, defining a ``pseudoprofunctor.''
+
+
+% We now adapt the definition of an ``internal profunctor'' to this
+% setting by carrying out a similar weakening.
+
+% Suppose
+% $\mathcal{X} = (\mathbb{O}(\mathcal{X}), \mathbb{A}(\mathcal{X},
+% \mathbb{d}_{\mathcal{X}}, \mathbb{c}_{X}, \mathit{i}_{\mathcal{X}},
+% \circledcirc_{\mathcal{X}})$ and
+% $\mathcal{Y} = (\mathbf{O}(\mathcal{Y}), \mathbb{A}(\mathcal{Y}),
+% \mathbb{d}_{\mathcal{Y}}, \mathcal{c}_{Y}, \mathbb{i}_{\mathcal{Y}},
+% \circledcirc_{\mathcal{Y}})$ are two pseudocategories in a
+% 2-category together with their domain, codomain, identity and
+% composition 1-cells. If $P$ is an object and $S : P\to
+% \mathbb{O}(\mathcal{X}), T : P \to \mathbb{O}(Y)$ are given, we say
+% that $P$ can be a bimodule for $\mathcal{X}$ 
+% and $\mathcal{Y}$ if for all $n,m$, the limits
+% $\mathbb{A}(\mathcal{X})^{(n)}\times_{\mathbb{O}(\mathcal{X})}P\times_{\mathbb{O}(\mathcal{Y})}\mathbb{A}(\mathcal{Y})^{(m)}$ exist.
+
+% \begin{definition}[Pseudoprofunctor]
+%   Let $\mathcal{X}, \mathcal{Y}$ be pseudocategories in a 2-category.
+% A \textit{pseudoprofunctor} from $\mathcal{X}$ to $\mathcal{Y}$ is
+% \begin{itemize}
+% \item an object $P$ together with maps $S: P\to
+%   \mathbb{O}(\mathcal{X}),T : P\to \mathbb{O}(\mathcal{Y})$ such that
+%   $P$ can be a bimodule for $\mathcal{X}$ and $\mathcal{Y}$
+% \item action 1-cells $L :
+%   \mathbb{A}(\mathcal{X})\times_{\mathbb{O}(X)}P\to P$ and $R:
+%   P\times_{\mathbb{O}(\mathcal{Y})}\mathbb{A}(\mathcal{Y})\to P$ such
+%   that $S\circ L = \mathbb{d}_{\mathcal{X}}\circ
+%   \pi_{\mathbb{A}(\mathcal{X})}$ and $T\circ R =
+%   \mathbb{c}_{\mathcal{Y}}\circ \pi_{\mathbb{A}(\mathcal{Y})}$
+%   on-the-nose
+% \item associators $\epsilon : L\circ (1_{\mathbb{A}(\mathcal{X})},L)
+%   \cong L\circ (1_P,\circledcirc_{\mathcal{X}})$ and $\tau : R\circ
+%   (R,1_{\mathbb{A}(\mathcal{Y})})\cong R\circ
+%   (1,\circledcirc_{\mathcal{Y}})$ and unitors $\gamma : L\circ
+%   (\mathbb{i}_{\mathcal{X}},1_P)\cong \pi_P$, $\nu : R\circ
+%   (1_P,\mathbb{i}_{\mathcal{Y}})\cong \pi_P$, subject to the analogues
+%   of the pentagon and triangle identities, and all reduce to the
+%   identity 2-cell 
+%   when whiskered with $S$ and $T$
+% \item an interchange law $\alpha : L\circ
+%   (1_{\mathbb{A}(\mathcal{X})},R)\cong R\circ
+%   (L,1_{\mathbb{A}(\mathcal{Y}})$ which should satisfy four coherence
+%   laws, one for each of the left and right associators and unitors
+% \end{itemize}
+% \end{definition}
+
+
+
+% The purpose of this section is to prove that $\mathsf{Span}^2(\mathbf{Set})$
+
+
+% This section will require the notion of weak profunctors, etc.
+
+
+A strict double category is defined to be an internal category in
+$\mathbf{Cat}$. A strict triple category is defined to be an internal
+category in $\mathbf{Dbl}$, the category of double
+categories. Internal category theory has an associated notion of
+``internal profunctor.'' We have suggested previously that if
+$\mathcal{E}, \mathcal{F}$ are strict triple categories, a (lax,lax) functor
+$\mathcal{E}^{\rm op}\times \mathcal{F}\to
+\mathsf{Span}^2(\mathbf{Sets})$ is an appropriate notion of
+profunctor; we will here investigate whether these two agree.
+
+Some notation:
+\begin{itemize}
+\item I denote triple categories with mathcal,
+  $\mathcal{E},\mathcal{F},\dots$
+\item I denote double categories with mathbb, $\mathbb{X},\mathbb{Y},\dots$
+\item If $\mathcal{E}$ is a triple category, write
+  $\mathbb{A}[\mathcal{E}]$ for its double category of arrows and
+  $\dbl{O}[\mathcal{E}]$ for its double category of objects.
+\item If $\mathbb{X}$ is a double category, write
+  $\mathbf{A}[\mathbb{X}]$ for its double category of arrows and
+  $\mathbf{O}[\mathbb{X}]$ for its double category of objects.
+\item The domain double functor, codomain double functor, identity
+  double functor and composition double functor of a triple category
+  $\mathcal{E}$ are denoted
+  $\mathbb{d}_{\mathcal{E}},
+  \mathbb{c}_{\mathcal{E}},\mathbb{i}_{\mathcal{E}},$ and
+  $\circledcirc_{\mathcal{E}}$
+\item The domain 1-functor, codomain 1-functor, identity 1-functor and
+  composition 1-functor of a double category $\mathbb{X}$ are denoted
+  $\mathbf{d}_{\mathbb{X}}, \mathbf{c}_{\mathbb{X}},
+  \mathbf{i}_{\mathbb{X}}$, and $\bullet_{\mathbb{X}}$.
+\item If $F : \mathbb{X}\to \mathbb{Y}$ is a double functor between
+  double categories, then $\mathbf{O}[F]$ and $\mathbf{A}[F]$ denote
+  the constituent 1-functors $\mathbf{O}[\mathbb{X}]\to
+  \mathbf{O}[\mathbb{Y}]$ and $\mathbf{A}[\mathbb{X}]\to
+  \mathbf{A}[\mathbb{Y}]$ respectively.
+\end{itemize}
+
+\subsection{Translation between ``internal category'' language and
+  informal geometric language}
+
+Speaking of horizontal edges, basic cells and so on is easier to
+visualize, but we will need to use the more formal language of
+internal category theory in order to describe weak functors between
+intercategories. Therefore we explain our conventions for translating
+the geometric terminology of ``horizontal'', ``vertical'' and so on
+into the language of internal categories.
+
+In this section, let $\mathcal{E}$ be a triple category.
+\begin{itemize}
+\item the double category $\mathbb{O}(\mathcal{E})$ is collectively
+  referred to as ``the horizontal-vertical double category of
+  basic 2-cells, horizontal 1-cells and vertical 2-cells''
+\item the category $\mathbf{O}(\mathbb{O}(\mathcal{E}))$ has for its
+  objects the 0-cells of $\mathcal{E}$ and for its morphisms the
+  horizontal $1$-cells of $\mathcal{E}$. The composition law of
+  $\mathbf{O}(\mathbb{O}(\mathcal{E}))$ is called ``horizontal
+  composition.''
+\item the category $\mathbf{A}(\mathbb{O}(\mathcal{E}))$ has for its
+  objects the vertical 1-cells of $\mathcal{E}$ and for its morphisms the
+  basic $2$-cells of $\mathcal{E}$. The composition law of
+  $\mathbf{A}(\mathbb{O}(\mathcal{E}))$ is called ``horizontal
+  composition of basic cells.''
+\item the domain and codomain functors
+  $\mathbf{d}_{\mathbb{O}(\mathcal{E})}$ and
+  $\mathbf{c}_{\mathbb{O}(\mathcal{E})}$ are referred to as the
+  ``vertical domain and codomain'' functors. Their object components
+  operate on vertical 1-cells, and their arrow components act on basic
+  2-cells. The term ``vertical'' here refers to the implicit
+  orientation of the input, the direction the input is ``facing'' when
+  we take its domain and codomain, \textit{not} to the orientation of
+  the output. In particular, the vertical domain and codomain of a
+  basic 2-cell are horizontal 1-cells, not horizontal 1-cells.
+\item the double category composition law
+  $\bullet_{\mathbb{O}(\mathcal{E})}$ is called ``vertical
+  composition.''
+\item the double category $\mathbb{A}(\mathcal{E})$ is collectively
+  referred to as ``the horizontal-vertical double category of
+  cubes, horizontal 2-cells and vertical 2-cells''
+\item the category $\mathbf{O}(\mathbb{A}(\mathcal{E}))$ has for its
+  objects the transversal 1-cells and for its morphisms the horizontal
+  2-cells, its composition law is called ``horizontal composition of
+  horizontal 2-cells''
+\item the category $\mathbf{A}(\mathbb{A}(\mathcal{E}))$ has for its
+  objects the vertical 2-cells and for its morphisms the cubes, its
+  composition law is called ``horizontal composition of cubes''
+\item the domain and codomain functors
+  $\mathbf{d}_{\mathbb{A}(\mathcal{E})}$ and
+  $\mathbf{c}_{\mathbb{A}(\mathcal{E})}$ are called the ``vertical
+  domain and codomain'' functors. Their object components operate on
+  vertical 2-cells and cubes, and return transversal edges and
+  horizontal 2-cells respectively.
+\item the composition functor $\bullet_{\mathbb{A}(\mathcal{E})}$ is
+  called ``vertical composition'' of vertical 2-cells and cubes.
+\end{itemize}
+This completes the description of the double categories
+$\mathbb{O}(\mathcal{E})$ and $\mathbb{A}(\mathcal{E})$, so we turn to
+the double functors which connect them. We describe two pairs of
+domain and codomain functors, which are all collectively referred to
+as the ``transversal domain and codomain functors,'' and the composition
+law, which is referred to as ``transversal composition.'' Each functor
+has an object component and a morphism component, so there are eight
+operators.
+\begin{itemize}
+\item the functors $\mathbf{O}[\mathbb{d}_{\mathcal{E}}]$ and
+  $\mathbf{O}[\mathbb{c}_{\mathcal{E}}]$, from
+  $\mathbf{O}[\mathbb{A}[\mathcal{E}]] \to
+  \mathbf{O}[\mathbb{O}[\mathcal{E}]]$, send a transversal 1-cell to
+  its domain and codomain, and send a horizontal 2-cell to its
+  transversal domain and codomain (which are horizontal 1-cells)
+\item the functors $\mathbf{A}[\mathbb{d}_{\mathcal{E}}]$ and
+  $\mathbf{A}[\mathbb{c}_{\mathcal{E}}]$, from
+  $\mathbf{A}[\mathbb{A}[\mathcal{E}]] \to
+  \mathbf{A}[\mathbb{O}[\mathcal{E}]]$, send a vertical 2-cell to its
+  transversal domain and codomain (which are vertical 1-cells) and
+  send a cube to its transversal domain and codomain (which are basic
+  2-cells)
+\item the composition law $\circledcirc_{\mathcal{E}}$ is called
+  ``transversal composition'' wherever it is defined; it has four
+  components, which act on appropriate pairs of transversal 1-cells,
+  horizontal 2-cells cells, vertical 2-cells, and cubes respectively.
+\end{itemize}
+
+Note that the restriction of $\mathbb{d},\mathbb{c},\mathbb{i}$ and
+$\circledcirc_{\mathcal{E}}$ to $\mathbf{O}[\mathbb{A}[\mathcal{E}]]$
+and $\mathbf{O}[\mathbb{O}[\mathcal{E}]$ forms an internal category in
+$\mathbf{Cat}$, i.e., a double category, which we call 
+$\mathbb{O}(\mathcal{E}^{\top})$. Thus, we have
+$\mathbf{d}_{\mathbb{O}(\mathcal{E}^{\top})}=\mathbf{O}(\mathbb{d}_{\mathcal{E}}),
+\mathbf{c}_{\mathbb{O}(\mathcal{E}^{\top})}=\mathbf{O}(\mathbb{c}_{\mathcal{E}})$,
+and so on.
+
+Similarly, the restriction of these operators to
+$\mathbf{A}[\mathbb{O}[\mathcal{E}]]$ forms a double category, called
+$\mathbb{A}[\mathcal{E}^{\top}]$, with
+$\mathbf{d}_{\mathbb{A}{\mathcal{E}^{\top}}}=
+\mathbf{A}(\mathbb{d}_{\mathcal{E}}),
+\mathbf{c}_{\mathbb{A}(\mathcal{E}^{\top})}=
+\mathbf{A}(\mathbb{c}_{\mathcal{E}})$, etc.  This use of the transpose
+operator is justified from the perspective of viewing a triple
+category as a double category internal to $\mathbf{Cat}$. Intuitively,
+$\mathcal{E}^{\top}$ swaps the vertical and transversal morphisms. We
+can write $\mathcal{E}_{\mathbf{xzy}}$ for this category.
+
+On the other hand ``transpose'' operator on strict double categories
+is functorial with respect to double functors (it sends
+$F: \mathbb{A}\to \mathbb{B}$ to $F^{\top}: \mathbb{A}\to \mathbb{B}$)
+and preserves finite limits, so for any algebraic object internal to
+$\mathbf{Dbl}$, such as a monoid in a double category or an internal
+category in the double category, by taking the transpose of the double
+categories and double categories internal to the diagram. Thus, there
+is a triple category associated to
+$(\mathbb{O}[\mathcal{E}]^{\top}, \mathbb{A}[\mathcal{E}]^{\top},
+\mathbb{d}_{\mathcal{E}}^{\top},\mathbb{c}_{\mathcal{E}}^{\top},
+\mathbb{i}_{\mathcal{E}}^{\top},\circledcirc^{\top})$, which
+intuitively swaps the vertical and horizontal morphisms. We denote
+this category $\mathcal{E}_{yxz}$. Since we can represent any
+permutation of the set $\left\{ x,y,z \right\}$ by decomposing it as
+the product of transpositions, it is clear that one has an operation
+on triple categories associated to each permutation of this set.
+
+In speaking of double categories, $\mathbb{A}^{\rm op}$ is the
+horizontal dual of $\mathbb{A}$, the dual along the strict axis, and
+$\mathbb{A}^{\rm co}$ is the vertical dual, the dual along the weak
+axis.
+
+For triple categories, $\mathcal{E}^{\rm op}$ represents transversal duality.
+
+\subsection{Definition of intercategory, functor between intercategories}
+
+We will need to rigorously define an intercategory.
+
+% Grandis and Par\'e have given a notion of a \textit{pseudocategory}
+% in a 2-category with (enough) pullbacks.
+
+\begin{definition}[$\mathcal{L}x\mathcal{D}bl$]
+  $\mathcal{L}x\mathcal{D}bl$ is the 2-category whose objects are
+  (weak) double categories, whose 1-cells are lax double functors, and
+  whose 2-cells are horizontal morphisms of double functors.
+\end{definition}
+
+\begin{definition}[Intercategory]
+  An \textit{intercategory} is a pseudocategory internal to
+  $\mathcal{L}x\mathcal{D}bl$.
+\end{definition}
+
+\begin{definition}[Lax functor, pseudofunctor]
+  A \textit{lax functor} $\Phi$ between pseudocategories
+  $\mathcal{E}=(\mathbb{O}(\mathcal{E}), \mathbb{A}(E),
+  \mathbb{d}_{\mathcal{E}}, \mathbb{c}_{\mathcal{E}},
+  \mathbb{i}_{\mathcal{E}}, \circledcirc_{\mathcal{E}})$ and
+  $\mathcal{F}=(\mathbb{O}(\mathcal{F}),
+  \mathbb{A}(\mathcal{F}),\mathbb{d}_{\mathcal{F}},
+  \mathbb{c}_{\mathcal{F}},\mathbb{i}_{\mathcal{F}},\circledcirc_{\mathcal{F}})$
+  is a pair of 1-cells
+  $\mathbb{O}(\Phi): \mathbb{O}(\mathcal{E})\to
+  \mathbb{O}(\mathcal{F})$,
+  $\mathbb{A}(\Phi): \mathbb{A}(\mathcal{E})\to
+  \mathbb{A}(\mathcal{F})$ such that
+  $\mathbb{d}_{\mathcal{F}}\mathbb{A}(\Phi)=\mathbb{O}(\Phi)\mathbb{d}_{\mathcal{E}}$
+  and
+  $\mathbb{c}_{\mathcal{F}}\mathbb{A}(\Phi)=\mathbb{O}(\Phi)\mathbb{c}_{\mathcal{E}}$
+  on the nose, and unitor and associator cells
+  $\iota: \mathbb{i}_{\mathcal{F}}\mathbb{O}(\Phi)\to
+  \mathbb{A}(\Phi)\mathbb{i}_{\mathcal{E}}$ and
+  $\psi :
+  \circledcirc_{\mathcal{F}}(\mathbb{A}(\Phi)\times_{\mathbb{O}(\Phi)}\mathbb{A}(\Phi))\to
+  \mathbb{A}(\Phi)\circledcirc_{\mathcal{E}}$ satisfying coherence
+  laws analogous to the ones in the definition of a lax functor
+  between bicategories.
+
+  If $\iota$ and $\psi$ are both isomorphisms, then $\Phi$ is said to
+  be a \textit{pseudofunctor}.
+\end{definition}
+
+\begin{definition}[The intercategory of sets]
+  The intercategory of sets, denoted $\mathsf{Span}^2(\mathbf{Sets})$ has:
+  \begin{itemize}
+  \item
+    $\mathbb{O}(\mathsf{Span}^2(\mathbf{Sets}))=
+    \mathsf{Span}(\mathbf{Sets})$, the double category whose objects
+    are sets, whose horizontal 1-cells are functions, and whose
+    vertical cells are spans; 2-cells are morphisms of spans (coherent
+    triples of functions).
+  \item $\mathbb{A}(\mathsf{Span}^2(\mathbf{Sets}))=
+    \mathsf{Span}(\mathsf{Span}(\mathbf{Sets}))$, the double category
+    whose objects are \textit{spans} of sets, whose horizontal 1-cells
+    are morphisms of spans (triples of functions), and whose vertical
+    1-cells are spans in the category of spans; 2-cells are morphisms
+    of spans (coherent octets of functions)
+  \item $\mathbb{d}, \mathcal{c}$ project a span of spans onto its
+    domain span and codomain span respectively
+  \item $\mathbb{i}$ sends a span to the identity span on it
+  \item $\circledcirc$ is the usual composition of spans in a 1-category
+    with finite limits (as $\mathsf{Span}(\mathbf{Sets})$ is)
+  \end{itemize}
+\end{definition}
+
+\subsection{The definition of $\mathsf{Span}^2(\mathbf{Set})$;
+  definition of a doubly lax functor}
+
+
+
+
+
+% \subsection{Lax-Lax functors from a triple category into
+%   $\mathsf{Span}^2(\mathbf{Sets})$}
+
+
+\subsection{Relationship between the two notions of profunctor}
+In this section, let $\mathcal{E}$ and $\mathcal{F}$ be a pair of triple
+categories, and let $\mathcal{P}$ be an internal profunctor from
+$\mathcal{E}\pfun \mathcal{F}$.
+
+We will construct a (lax, lax) functor $\Phi : (\mathcal{E}^{\rm
+  op})^{\top}\times \mathcal{F}^{\top}\to \mathsf{Span}^2(\mathbf{Sets})$.
+
+Let us remind the reader what this consists of. We must give:
+\begin{itemize}
+\item a lax double functor between double categories, $\mathbb{O}(\Phi): \mathbb{O}((\mathcal{E}^{\rm
+    op})^{\top}\times \mathcal{F}^{\top})\to
+  \mathbf{Span}(\mathbf{Set)}$
+\item a lax double functor between double categories, $\mathbb{A}(\Phi): \mathbb{A}((\mathcal{E}^{\rm
+    op})^{\top}\times \mathcal{F}^{\top})\to
+  \mathsf{Span}(\mathsf{Span}(\mathbf{Set)})$ which is compatible
+  on-the-nose with the domain and codomain double functors
+  $\mathbb{d}_{\mathcal{E}^{\top}}, \mathbb{c}_{\mathcal{E}^{\top}}:
+  \mathbb{A}(\mathcal{E}^{\top})\to \mathbb{O}(\mathcal{E}^{\top})$
+  and $\mathbb{d}_{\mathsf{Span}^2(\mathbf{Sets})},\mathbb{c}_{\mathsf{Span}^2(\mathbf{Sets})}$
+\end{itemize}
+
+% Let $\mathcal{E}'= \mathcal{(E^{\rm op})}_{zxy}$ denote the triple category
+% \begin{itemize}
+% \item whose \textit{horizontal} morphisms are the (opposite) \textit{transversal}
+%   morphisms of $\mathcal{E}$;
+% \item whose \textit{vertical} morphisms are the \textit{horizontal}
+%   morphisms of $\mathcal{E}$;
+% \item and whose \textit{transversal} morphisms are the
+%   \textit{vertical} morphisms of $\mathcal{E}$.
+% \end{itemize}
+
+% Distinguishing carefully between $\mathcal{E}$ and $\mathcal{E}'$ will
+% be necessary in what follows, because intercategories in general do
+% not have any kind of transpose duality, and to construct a (lax,lax)
+% functor $\mathcal{E}\to \mathsf{Span}^2(\mathbf{Sets})$ is not the
+% same as to construct a (lax,lax) functor
+% $\mathcal{E}'\to \mathsf{Span}^2(\mathbf{Sets})$.
+
+The first component of $\mathcal{P}$ is a double category $\mathbb{P}$
+together with double projection functors
+$S : \mathbb{P}\to \mathbb{O}(\mathcal{E})$ and
+$T : \mathbb{P}\to \mathbb{O}(\mathcal{F})$, together with action maps
+(double functors)
+$H:
+\mathbb{A}[\mathcal{E}]\times_{\mathbb{O}[\mathcal{E}]}\mathbb{P}\to
+\mathbb{P}$ and
+$J:
+\mathbb{P}\times_{\mathbb{O}[\mathcal{F}]}\mathbb{A}[\mathcal{F}]\to
+\mathbb{P}$. It is clear that, restricting to objects,
+$(\mathbf{O}(\mathbb{P}), \mathbf{O}(S), \mathbf{O}(T), \mathbf{O}(H),
+\mathbf{O}(J))$ forms a double profunctor
+$\mathbb{O}^\top(\mathcal{P}): \mathbb{O}[\mathcal{E}^{\top}]\pfun
+\mathbb{O}[\mathcal{F}^{\top}]$, and similarly
+$(\mathbf{A}(\mathbb{P}), \mathbf{A}(S),\mathbf{A}(T),\mathbf{A}(H),
+\mathbf{A}(J))$ forms a double profunctor
+$\mathbb{A}^{\top}(\mathcal{P}): \mathbb{A}[\mathcal{E}^{\top}]\pfun
+\mathbb{A}[\mathcal{F}^{\top}]$. 
+
+Now, the operators $\mathbf{d}_{\mathcal{E}}$ and
+$\mathbf{c}_{\mathcal{E}}$ combine to yield double functors
+$\mathbf{d}_{\mathcal{E}}, \mathbf{c} :
+\mathbb{A}(\mathcal{E}^{\top})\to \mathbb{O}(\mathcal{E}^{\top})$ and
+similarly
+$\mathbf{d}_{\mathcal{F}}, \mathbf{c}_{\mathcal{F}}:
+\mathbb{A}(\mathcal{F}^{\top})\to \mathbb{O}(\mathcal{F}^{\top})$.
+
+The 1-functor
+$\mathbf{d}(\mathbb{P}) : \mathbf{A}(\mathbb{P})\to
+\mathbf{O}(\mathbb{P})$ is compatible with the double functors
+$\mathbf{d}_{\mathcal{E}}$ and $\mathbf{c}_{\mathcal{E}}$ in the sense
+that it lies over the functors $\mathbf{d}(\mathbb{O}(\mathcal{E}))$
+and $\mathbf{d}(\mathbb{O}(\mathcal{F}))$ and is equivariant with
+respect to the functors $\mathbf{d}(\mathbb{A}(\mathcal{E}))$ and
+$\mathbf{d}(\mathbb{A}(\mathcal{F}))$.
+
+In internal category theory, it is always possible to restrict a
+profunctor along a pair of functors, and so there are internal
+double profunctors $\mathbf{d}^{\ast}(\mathbb{O}^{\top}(\mathcal{P})),
+\mathbf{c}^{\ast}(\mathbb{O}^{\top}(\mathcal{P})) :
+\mathbb{A}[\mathcal{E}^{\top}]\pfun
+\mathbb{A}[\mathcal{F}^{\top}]$. These are related to
+$\mathbb{A}^{\top}[\mathcal{P}]$ by natural maps of profunctors;
+
+It is known that internal double profunctors
+between strict double categories $\mathbb{A}\pfun \mathbb{B}$ are
+equivalent to lax functors $\mathbb{A}^{\rm op}\times \mathbb{B}\to
+\mathsf{Span}(\mathbf{Sets})$, so we have lax double functors
+
+$\mathbb{O}^{\top}(\mathcal{P}) : \mathbb{O}(\mathcal{E}^{\top})^{\rm
+  op}\times \mathbb{O}(\mathcal{F}^{\top})\to
+\mathsf{Span}(\mathbf{Sets})$,
+
+$\mathbb{A}^{\top}(\mathcal{P}) : \mathbb{A}(\mathcal{E}^{\top})^{\rm
+  op}\times \mathbb{A}(\mathcal{F}^{\top})\to
+\mathsf{Span}(\mathbf{Sets})$.
+
+
+
+
+What this means is that
+
+\begin{itemize}
+\item to each pair of objects $(e,f)$ in $\mathcal{E}\times
+  \mathcal{F}$, we associate a set
+  $\mathbb{O}^{\top}(\mathcal{P})(e,f)$
+\item to each pair of objects $(e,f)$ in $\mathcal{E}\times
+  \mathcal{F}$, we associate a set
+  $\mathbb{O}^{\top}(\mathcal{P})(e,f)$
+\end{itemize}
+
+
+
+We will prove that this defines a (lax,lax) triple functor from
+$\mathcal{E}^{\rm op}\times \mathcal{F}\to
+\mathsf{Span}^2(\mathbf{Sets})$.
+
+% As a motivating example, let $p : E\to B$ be a Grothendieck fibration
+% between 1-categories, and assume for simplicity that everything is
+% small. It is well known that one can define a pseudofunctor
+% $p^{-1}: B^{\rm op}\to \mathbf{Cat}$ which associates to each $b$ in
+% $B$ the fiber $p^{-1}(b)$. However, note that even if $p$ is not a
+% Grothendieck fibration, it is always possible to define a lax functor
+% from $B^{\rm op}$ to the bicategory of profunctors, which acts in the
+% same way on categories and associates to $f : b\to c$ the profunctor
+% $p^{-1}(f)(x,y) = \left\{ g : x\to y \mid p(g)=f \right\}$.
+
+
+, so we will start by describing how to view
+$\mathbb{P}$ as a structure indexed by $\mathbb{O}(\mathcal{E})\times
+\mathbb{O}(\mathcal{F})$. 
+
+\begin{itemize}
+\item to each pair of objects $(e,f)$, a set $\Pi(e,f)$ (the 0-cells of
+  $\mathbb{P}$ such that $S(x) = e$ and $T(x)=f$)
+\item for each pair of horizontal 1-cells $(v,w)$ in
+  $\mathcal{E}, \mathcal{F}$ respectively, a set
+  $P_h(v,w)$ (the morphisms of $\mathbf{O}(\mathbb{P})$ lying over $(v,w)$)
+\item projection maps
+  $\operatorname{dom}_P: P_h(v,w)\to P(\operatorname{dom} v, \operatorname{dom}w)$ and
+  $\operatorname{cod}_P : P_h(v,w)\to P(\operatorname{cod} v, \operatorname{cod}w)$ arising
+  from the domain and codomain operators in $\mathbf{O}(\mathbb{P})$
+\item an identity function
+  $\operatorname{id}_{P}: P(e,f)\to P_h(1_e,1_f)$ which is a section
+  of the domain and codomain projection maps
+\item a fibered composition law
+  $P_h(v',w')\times_{P(\operatorname{dom}v',\operatorname{dom}(w'))}
+  P_h(v,w) \to P_h(v'v, w'w)$ which is associative and unital (the
+  composition law of $\mathbf{O}(\mathbb{P})$ restricted to the
+  fibers; here ``unital'' must be understood with reference to the
+  identity function in the previous section)
+\item for each pair of vertical 1-cells $(v_1,v_2)$, a set
+  $P_v(v_1,v_2)$ (the vertical arrows of $\mathbb{P}$ over $v_1$ and
+  $v_2$)
+\item for each vertical 
+\end{itemize}
+
+\newpage
+
+\newpage
+We will make the following naming conventions. Letting $\mathcal{E}$
+be a triple category,
+\begin{itemize}
+\item the double category $\mathbb{O}(\mathcal{E})$ is collectively
+  referred to as ``the horizontal-transversal double category of horizontal 2-cells,
+  horizontal 1-cells and transversal 1-cells''
+\item  the double category $\mathbb{A}(\mathcal{E})$ is collectively
+  referred to as ``the horizontal-transversal double category of cubes, vertical 2-cells and basic 2-cells''.
+\item the objects and morphisms of
+  $\mathbf{O}(\mathbb{O}(\mathcal{E}))$ are called the 0-cells and
+  transversal 1-cells of $\mathcal{E}$. The composition law in this
+  category is called ``transversal composition''.
+\item the objects and morphisms of
+  $\mathbf{A}(\mathbb{O}(\mathcal{E}))$ are called horizontal 1-cells
+  and horizontal 2-cells of $\mathcal{E}$. The composition law in
+  $\mathbf{A}(\mathbb{O}(\mathcal{E}))$ is called ``transversal
+  composition of horizontal 2-cells.''
+\item the objects and morphisms of
+  $\mathbf{O}(\mathbb{A}(\mathcal{E}))$ are called vertical 1-cells
+  and vertical 2-cells of $\mathcal{E}$. The composition law in this
+  category is called ``transversal composition of vertical 2-cells.''
+\item the objects and morphisms of
+  $\mathbf{A}(\mathbb{A}(\mathcal{E}))$ are called basic 2-cells and
+  cubes, and the composition law in this category is called
+  ``transversal composition of cubes.''
+\item $\mathbf{d}_{\mathbb{O}(\mathcal{E})}$ and
+  $\mathbf{c}_{\mathbb{O}(\mathcal{E})}$ are said to send a horizontal
+  1-cell (object in $\mathbf{A}(\mathbb{O}(\mathcal{E}))$) to its
+  horizontal domain and codomain (although there is no need for
+  disambiguation here), and to send a horizontal 2-cell (morphism in
+  $\mathbf{A}(\mathbb{O}(\mathcal{E}))$) to its \textit{horizontal}
+  domain edge and codomain edge. The term ``horizontal'' here refers
+  to the implicit orientation of the input, the direction the input is
+  ``facing'' when we take its domain and codomain, \textit{not} to the
+  orientation of the output. That is, the horizontal domain and
+  codomain of a horizontal 2-cell are transversal 1-cells, not
+  horizontal 1-cells.  The composition law
+  $\bullet_{\mathbb{O}(\mathcal{E})}$ is called ``horizontal
+  composition'' of horizontal 1-cells (when it acts on objects) and of
+  horizontal 2-cells (when it acts on morphisms).
+\item $\mathbf{d}_{\mathbb{A}(\mathcal{E})}$ and
+  $\mathbf{c}_{\mathbb{A}(\mathcal{E})}$ are said to send a
+  basic 2-cell to its \textit{horizontal} boundary and a cube to its
+  \textit{horizontal} boundary; note that these operators return a
+  vertical 1-cell and a vertical 2-cell respectively. The composition
+  law $\bullet_{\mathbb{O}\mathcal{E}}$ is called ``horizontal
+  composition'' of basic cells (when it acts on objects) and cubes
+  (when it acts on morphisms)
+\end{itemize}  
+
+This completes the description of the double categories
+$\mathbb{O}(\mathcal{E})$ and $\mathbb{A}(\mathcal{E})$, so we turn to
+the double functors which connect them. We describe two pairs of
+domain and codomain functors, which are all collectively referred to
+as the ``vertical domain and codomain functors,'' and the composition
+law, which is referred to as ``vertical composition.'' Each functor
+has an object component and a morphism component, so there are eight
+operators.
+\begin{itemize}
+\item The functors
+  $\mathbf{O}[\mathbb{d}_{\mathcal{E}}]$ and
+  $\mathbf{O}[\mathbb{c}_{\mathcal{E}}]$, from $\mathbf{O}[\mathbb{A}[\mathcal{E}]] \to
+  \mathbf{O}[\mathbb{O}[\mathcal{E}]]$, send a vertical
+  1-cell to its domain and codomain (disambiguation
+  is unnecessary here) and send a basic 2-cell to its
+  cell to its vertical domain and codomain (which are horizontal 1-cells)
+\item The functors
+  $\mathbf{A}[\mathbb{d}_{\mathcal{E}}]:
+  \mathbf{A}[\mathbb{A}[\mathcal{E}]] \to
+  \mathbf{A}[\mathbb{O}[\mathcal{E}]]$ send a vertical
+  2-cell to its vertical domain and codomain (which are
+  \textit{transversal} 1-cells) and send a cube to its vertical
+  domain and codomain (which are \textit{horizontal} 2-cells).
+\item The composition operator $\circledcirc_{\mathcal{E}}$ is called
+  \textit{vertical composition} wherever it is defined; it has four
+  components, which act on appropriate pairs of vertical 1-cells,
+  basic cells, vertical 2-cells, and cubes respectively.
+\end{itemize}
+
+
+\newpage
+
+Now, let $\mathcal{E}$ and $\mathcal{F}$ be a pair of triple categories.
+
+$P$ is, first of all, a double category $\mathbb{P}$ together
+with double projection functors $S : \mathbb{P}\to
+\mathbb{O}(\mathcal{E})$ and $T : \mathbb{P}\to
+\mathbb{O}(\mathcal{F})$. In particular, $\mathbb{P}$ should contain
+\begin{itemize}
+\item for each pair of objects $(e,f)$, a set $P(e,f)$
+\item for each pair of transversal 1-cells $(v_1,v_2)$ in
+  $\mathcal{E}, \mathcal{F}$ respectively, a set
+  $P(v_1,v_2)$
+\item for each pair of transversal 1-cells $(v_1,v_2)$, a set $P(v_1,v_2)$
+  $\mathcal{E}, \mathcal{F}$ 
+
+\end{itemize}
+
+What is a profunctor $P: \mathcal{E}\pfun \mathcal{F}$?
+\begin{itemize}
+\item 
+\item 
+\end{itemize}
+\printbibliography
+\end{document}
