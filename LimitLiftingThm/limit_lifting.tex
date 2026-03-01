@@ -541,12 +541,178 @@ strict natural transformations.
    coherence
    condition for $G$. The analogous theorem for $\lambda$, $F^0$ and
    $F^2$ is similar.
-   \textbf{Still remaining:}
-   \begin{itemize}
-   \item 7.2.(i,iii) of ``Limits in Double Categories'' for
-     $\overline{F}$ (naturality and compatibility with associator)
-   \item 7.3 - all?
-   \end{itemize}
+
+   Next, we prove that the lax composition cell for $\overline{F}^2$
+   is natural with respect to composition (7.2.(i)) of
+   \cite{grandisLimitsDoubleCategories1999}.
+
+   Therefore let $u : A \todot B, v :  B \todot C, u' : A'\todot B',
+   v' : B'\todot C'$, $a : u \Rightarrow u', b : v\Rightarrow v'$.
+   We want to show:
+   \begin{equation}
+%https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG92ZXJsaW5le0Z9QSJdLFswLDEsIlxcb3ZlcmxpbmV7Rn1CIl0sWzAsMiwiXFxvdmVybGluZXtGfUMiXSxbMSwwLCJcXG92ZXJsaW5le0Z9QSciXSxbMSwxLCJcXG92ZXJsaW5le0Z9QiciXSxbMSwyLCJcXG92ZXJsaW5le0Z9QyciXSxbMiwwLCJcXG92ZXJsaW5le0Z9QSciXSxbMiwyLCJcXG92ZXJsaW5le0Z9QyciXSxbMCwxLCJcXG92ZXJsaW5le0Z9dSIsMl0sWzEsMiwiXFxvdmVybGluZXtGfXYiLDJdLFswLDNdLFszLDQsIlxcb3ZlcmxpbmV7Rn11JyJdLFs0LDUsIlxcb3ZlcmxpbmV7Rn12JyJdLFsyLDVdLFsxLDRdLFsxLDMsIlxcb3ZlcmxpbmV7Rn1hIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNCwiXFxvdmVybGluZXtGfWIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMyw2LCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDcsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNywiXFxvdmVybGluZXtGfSh1J1xcY2RvdCB2JykiXSxbNSw2LCJcXG92ZXJsaW5le0Z9XjJfe3UnLHYnfSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\begin{tikzcd}
+	{\overline{F}A} & {\overline{F}A'} & {\overline{F}A'} \\
+	{\overline{F}B} & {\overline{F}B'} \\
+	{\overline{F}C} & {\overline{F}C'} & {\overline{F}C'}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\overline{F}u}"', from=1-1, to=2-1]
+	\arrow[equals, from=1-2, to=1-3]
+	\arrow["{\overline{F}u'}", from=1-2, to=2-2]
+	\arrow["{\overline{F}(u'\cdot v')}", from=1-3, to=3-3]
+	\arrow["{\overline{F}a}"{description}, draw=none, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{\overline{F}v}"', from=2-1, to=3-1]
+	\arrow["{\overline{F}v'}", from=2-2, to=3-2]
+	\arrow["{\overline{F}b}"{description}, draw=none, from=3-1, to=2-2]
+	\arrow[from=3-1, to=3-2]
+	\arrow["{\overline{F}^2_{u',v'}}"{description}, draw=none, from=3-2, to=1-3]
+	\arrow[equals, from=3-2, to=3-3]
+      \end{tikzcd}
+      =
+      % https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG92ZXJsaW5le0Z9QSJdLFswLDEsIlxcb3ZlcmxpbmV7Rn1CIl0sWzAsMiwiXFxvdmVybGluZXtGfUMiXSxbMSwwLCJcXG92ZXJsaW5le0Z9QSJdLFsxLDIsIlxcb3ZlcmxpbmV7Rn1DJyJdLFsyLDAsIlxcb3ZlcmxpbmV7Rn1BJyJdLFsyLDIsIlxcb3ZlcmxpbmV7Rn1DJyJdLFswLDEsIlxcb3ZlcmxpbmV7Rn11IiwyXSxbMSwyLCJcXG92ZXJsaW5le0Z9diIsMl0sWzAsMywiIiwyLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDVdLFs0LDZdLFs1LDYsIlxcb3ZlcmxpbmV7Rn0odSdcXGNkb3QgdicpIl0sWzIsMywiXFxvdmVybGluZXtGfV4yX3t1LHZ9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiXFxvdmVybGluZXtGfSh1XFxjZG90IHYpIiwwLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzQsNSwiXFxvdmVybGluZXtGfShiXFxjZG90IGEpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\begin{tikzcd}
+	{\overline{F}A} & {\overline{F}A} & {\overline{F}A'} \\
+	{\overline{F}B} \\
+	{\overline{F}C} & {\overline{F}C'} & {\overline{F}C'}
+	\arrow[equals, from=1-1, to=1-2]
+	\arrow["{\overline{F}u}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\overline{F}(u\cdot v)}"{pos=0.2}, from=1-2, to=3-2]
+	\arrow["{\overline{F}(u'\cdot v')}", from=1-3, to=3-3]
+	\arrow["{\overline{F}v}"', from=2-1, to=3-1]
+	\arrow["{\overline{F}^2_{u,v}}"{description}, draw=none, from=3-1, to=1-2]
+	\arrow[equals, from=3-1, to=3-2]
+	\arrow["{\overline{F}(a\cdot b)}"{description}, draw=none, from=3-2, to=1-3]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}
+   \end{equation}
+    Because $\overline{\tau}_{u'\cdot v'}$ is horizontally Cartesian,
+    thus monic, it suffices to show both sides are equal after
+    composing
+    with $\overline{\tau}_{u'\cdot v'}$.
+    Unfolding definitions, it suffices to show
+    \begin{equation}
+      % https://q.uiver.app/#q=WzAsMTEsWzAsMCwiXFxvdmVybGluZXtGfUEiXSxbMCwxLCJcXG92ZXJsaW5le0Z9QiJdLFswLDIsIlxcb3ZlcmxpbmV7Rn1DIl0sWzEsMCwiXFxvdmVybGluZXtGfUEnIl0sWzEsMSwiXFxvdmVybGluZXtGfUInIl0sWzEsMiwiXFxvdmVybGluZXtGfUMnIl0sWzMsMCwiR0EnIl0sWzMsMiwiR0MnIl0sWzIsMSwiR0InIl0sWzIsMCwiR0EnIl0sWzIsMiwiR0MnIl0sWzAsMSwiXFxvdmVybGluZXtGfXUiLDJdLFsxLDIsIlxcb3ZlcmxpbmV7Rn12IiwyXSxbMCwzXSxbMyw0LCJcXG92ZXJsaW5le0Z9dSciLDAseyJsYWJlbF9wb3NpdGlvbiI6MjB9XSxbNCw1LCJcXG92ZXJsaW5le0Z9diciLDAseyJsYWJlbF9wb3NpdGlvbiI6MjB9XSxbMiw1XSxbMSw0XSxbMSwzLCJcXG92ZXJsaW5le0Z9YSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIlxcb3ZlcmxpbmV7Rn1iIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNywiRyh1J1xcY2RvdCB2JykiXSxbNCw4XSxbNSwxMF0sWzUsOCwiXFxvdmVybGluZXtcXHRhdX1fe3YnfSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDksIlxcb3ZlcmxpbmV7XFx0YXV9X3t1J30iLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMyw5XSxbOSw4LCJHdSciLDAseyJsYWJlbF9wb3NpdGlvbiI6MzB9XSxbOCwxMCwiR3YnIiwwLHsibGFiZWxfcG9zaXRpb24iOjMwfV0sWzksNiwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMTAsNywiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMTAsNiwiR14yX3t1Jyx2J30iLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\begin{tikzcd}
+	{\overline{F}A} & {\overline{F}A'} & {GA'} & {GA'} \\
+	{\overline{F}B} & {\overline{F}B'} & {GB'} \\
+	{\overline{F}C} & {\overline{F}C'} & {GC'} & {GC'}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\overline{F}u}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\overline{F}u'}"{pos=0.2}, from=1-2, to=2-2]
+	\arrow[equals, from=1-3, to=1-4]
+	\arrow["{Gu'}"{pos=0.3}, from=1-3, to=2-3]
+	\arrow["{G(u'\cdot v')}", from=1-4, to=3-4]
+	\arrow["{\overline{F}a}"{description}, draw=none, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{\overline{F}v}"', from=2-1, to=3-1]
+	\arrow["{\overline{\tau}_{u'}}"{description}, draw=none, from=2-2, to=1-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow["{\overline{F}v'}"{pos=0.2}, from=2-2, to=3-2]
+	\arrow["{Gv'}"{pos=0.3}, from=2-3, to=3-3]
+	\arrow["{\overline{F}b}"{description}, draw=none, from=3-1, to=2-2]
+	\arrow[from=3-1, to=3-2]
+	\arrow["{\overline{\tau}_{v'}}"{description}, draw=none, from=3-2, to=2-3]
+	\arrow[from=3-2, to=3-3]
+	\arrow["{G^2_{u',v'}}"{description}, draw=none, from=3-3, to=1-4]
+	\arrow[equals, from=3-3, to=3-4]
+      \end{tikzcd}=
+      % https://q.uiver.app/#q=WzAsOSxbMCwwLCJcXG92ZXJsaW5le0Z9QSJdLFswLDEsIlxcb3ZlcmxpbmV7Rn1CIl0sWzAsMiwiXFxvdmVybGluZXtGfUMiXSxbMSwwLCJcXG92ZXJsaW5le0Z9QSJdLFsxLDIsIlxcb3ZlcmxpbmV7Rn1DJyJdLFsyLDAsIlxcb3ZlcmxpbmV7Rn1BJyJdLFsyLDIsIlxcb3ZlcmxpbmV7Rn1DJyJdLFszLDAsIkdBJyJdLFszLDIsIkdDJyJdLFswLDEsIlxcb3ZlcmxpbmV7Rn11IiwyXSxbMSwyLCJcXG92ZXJsaW5le0Z9diIsMl0sWzAsMywiIiwyLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDVdLFs0LDZdLFs1LDYsIlxcb3ZlcmxpbmV7Rn0odSdcXGNkb3QgdicpIiwwLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzIsMywiXFxvdmVybGluZXtGfV4yX3t1LHZ9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiXFxvdmVybGluZXtGfSh1XFxjZG90IHYpIiwwLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzQsNSwiXFxvdmVybGluZXtGfShiXFxjZG90IGEpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsN10sWzcsOCwiRyh1J1xcY2RvdCB2JykiXSxbNiw4XSxbNiw3LCJcXG92ZXJsaW5le1xcdGF1fV97dSdcXGNkb3Qgdid9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\begin{tikzcd}
+	{\overline{F}A} & {\overline{F}A} & {\overline{F}A'} & {GA'} \\
+	{\overline{F}B} \\
+	{\overline{F}C} & {\overline{F}C'} & {\overline{F}C'} & {GC'}
+	\arrow[equals, from=1-1, to=1-2]
+	\arrow["{\overline{F}u}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\overline{F}(u\cdot v)}"{pos=0.2}, from=1-2, to=3-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{\overline{F}(u'\cdot v')}"{pos=0.2}, from=1-3, to=3-3]
+	\arrow["{G(u'\cdot v')}", from=1-4, to=3-4]
+	\arrow["{\overline{F}v}"', from=2-1, to=3-1]
+	\arrow["{\overline{F}^2_{u,v}}"{description}, draw=none, from=3-1, to=1-2]
+	\arrow[equals, from=3-1, to=3-2]
+	\arrow["{\overline{F}(b\cdot a)}"{description}, draw=none, from=3-2, to=1-3]
+	\arrow[from=3-2, to=3-3]
+	\arrow["{\overline{\tau}_{u'\cdot v'}}"{description}, draw=none, from=3-3, to=1-4]
+	\arrow[from=3-3, to=3-4]
+\end{tikzcd}
+\end{equation}
+It suffices to prove the equality after composing vertically
+with the
+2-cells that compose $\overline{\tau}_{b\cdot a}$.
+\begin{equation}
+  % https://q.uiver.app/#q=WzAsOSxbMCwwLCJcXG92ZXJsaW5le0Z9QSJdLFswLDEsIlxcb3ZlcmxpbmV7Rn1CIl0sWzAsMiwiXFxvdmVybGluZXtGfUMiXSxbMSwwLCJcXG92ZXJsaW5le0Z9QSJdLFsxLDIsIlxcb3ZlcmxpbmV7Rn1DIl0sWzIsMCwiR0EiXSxbMiwyLCJHQyJdLFszLDAsIkdBJyJdLFszLDIsIkdDJyJdLFswLDEsIlxcb3ZlcmxpbmV7Rn11IiwyXSxbMSwyLCJcXG92ZXJsaW5le0Z9diIsMl0sWzAsMywiIiwyLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw0LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDVdLFs0LDZdLFs1LDYsIkcodSdcXGNkb3QgdicpIiwwLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzIsMywiXFxvdmVybGluZXtGfV4yX3t1LHZ9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiXFxvdmVybGluZXtGfSh1XFxjZG90IHYpIiwwLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzQsNSwiXFxvdmVybGluZXtcXHRhdX1fe3VcXGNkb3Qgdn0iLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSw3XSxbNyw4LCJHKHUnXFxjZG90IHYnKSJdLFs2LDhdLFs2LDcsIkcoYVxcY2RvdCBiKSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\begin{tikzcd}
+	{\overline{F}A} & {\overline{F}A} & GA & {GA'} \\
+	{\overline{F}B} \\
+	{\overline{F}C} & {\overline{F}C} & GC & {GC'}
+	\arrow[equals, from=1-1, to=1-2]
+	\arrow["{\overline{F}u}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\overline{F}(u\cdot v)}"{pos=0.2}, from=1-2, to=3-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{G(u'\cdot v')}"{pos=0.2}, from=1-3, to=3-3]
+	\arrow["{G(u'\cdot v')}", from=1-4, to=3-4]
+	\arrow["{\overline{F}v}"', from=2-1, to=3-1]
+	\arrow["{\overline{F}^2_{u,v}}"{description}, draw=none, from=3-1, to=1-2]
+	\arrow[equals, from=3-1, to=3-2]
+	\arrow["{\overline{\tau}_{u\cdot v}}"{description}, draw=none, from=3-2, to=1-3]
+	\arrow[from=3-2, to=3-3]
+	\arrow["{G(a\cdot b)}"{description}, draw=none, from=3-3, to=1-4]
+	\arrow[from=3-3, to=3-4]
+\end{tikzcd}
+      =
+% https://q.uiver.app/#q=WzAsMTEsWzAsMCwiXFxvdmVybGluZXtGfUEiXSxbMCwxLCJcXG92ZXJsaW5le0Z9QiJdLFswLDIsIlxcb3ZlcmxpbmV7Rn1DIl0sWzEsMCwiR0EiXSxbMSwxLCJHQiJdLFsxLDIsIkdDIl0sWzMsMCwiR0EnIl0sWzMsMiwiR0MnIl0sWzIsMSwiR0InIl0sWzIsMCwiR0EnIl0sWzIsMiwiR0MnIl0sWzAsMSwiXFxvdmVybGluZXtGfXUiLDJdLFsxLDIsIlxcb3ZlcmxpbmV7Rn12IiwyXSxbMCwzXSxbMyw0LCJHdSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjoyMH1dLFs0LDUsIkd2IiwwLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzIsNV0sWzEsNF0sWzEsMywiXFxvdmVybGluZXtcXHRhdX1fdSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIlxcb3ZlcmxpbmV7XFx0YXV9X3YiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiw3LCJHKHUnXFxjZG90IHYnKSJdLFs0LDhdLFs1LDEwXSxbNSw4LCJHYiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDksIkdhIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsOV0sWzksOCwiR3UnIiwwLHsibGFiZWxfcG9zaXRpb24iOjMwfV0sWzgsMTAsIkd2JyIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMH1dLFs5LDYsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEwLDcsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEwLDYsIkdeMl97dScsdid9IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\begin{tikzcd}
+	{\overline{F}A} & GA & {GA'} & {GA'} \\
+	{\overline{F}B} & GB & {GB'} \\
+	{\overline{F}C} & GC & {GC'} & {GC'}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\overline{F}u}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["Gu"{pos=0.2}, from=1-2, to=2-2]
+	\arrow[equals, from=1-3, to=1-4]
+	\arrow["{Gu'}"{pos=0.3}, from=1-3, to=2-3]
+	\arrow["{G(u'\cdot v')}", from=1-4, to=3-4]
+	\arrow["{\overline{\tau}_u}"{description}, draw=none, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{\overline{F}v}"', from=2-1, to=3-1]
+	\arrow["Ga"{description}, draw=none, from=2-2, to=1-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow["Gv"{pos=0.2}, from=2-2, to=3-2]
+	\arrow["{Gv'}"{pos=0.3}, from=2-3, to=3-3]
+	\arrow["{\overline{\tau}_v}"{description}, draw=none, from=3-1, to=2-2]
+	\arrow[from=3-1, to=3-2]
+	\arrow["Gb"{description}, draw=none, from=3-2, to=2-3]
+	\arrow[from=3-2, to=3-3]
+	\arrow["{G^2_{u',v'}}"{description}, draw=none, from=3-3, to=1-4]
+	\arrow[equals, from=3-3, to=3-4]
+      \end{tikzcd}
+    \end{equation}
+      Applying naturality of $G^2$ and the definition of
+      $\overline{F}^{2}$,
+      we get the desired result.
+
+      The proof for the compatibility of the associator is similar.
+      We use the fact that $\overline{\tau}_{u(vw)}$ is horizontally
+      monic to reduce the condition for $\overline{F}$ to the analogous
+      condition for $G$. We use the naturality of the associator
+      for the double category and repeatedly unfold the definitions
+      for $\overline{F}^2$.
+
+      We conclude that $\overline{F}$ is a lax functor.
+
+      We remark that $\overline{\tau}$ is
+      obviously pseudonatural by construction;
+      the coherence conditions 7.3.lht1, 7.3.lht2
+      and 7.3.lht3 of 
+      \cite{grandisLimitsDoubleCategories1999}
+      are all immediate by
+      construction of $\overline{F}^0$ and $\overline{F}^2$
+      and $\overline{\tau}$.
 \end{proof}
 
 \newpage
