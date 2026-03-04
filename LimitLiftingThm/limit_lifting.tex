@@ -373,11 +373,15 @@ strict natural transformations.
   
   \begin{itemize}
   \item $\tau$ is strict, rather than pseudo.
-  \item $\mathbb{E}, \mathbb{B}$ are strict, rather than pseudo,
-    so that $\mathbf{V}_0(p)$ and $\mathbf{V}_1(p)$
-    are 2-functors; moreover, $\mathbf{V}_0(p)$ and
-    $\mathbf{V}_1(p)$ are locally and horizontally split 2-fibrations,
-    with the splitting being compatible with the source and target functors.
+  % \item $\mathbb{E}, \mathbb{B}$ are strict, rather than pseudo,
+  %   so that $\mathbf{V}_0(p)$ and $\mathbf{V}_1(p)$
+  %   are 2-functors; moreover, $\mathbf{V}_0(p)$ and
+  %   $\mathbf{V}_1(p)$ are locally and horizontally split 2-fibrations,
+  %   with the splitting being compatible with the source and target
+  %   functors.
+  \item $\mathbf{H}_0(p)$ and $\mathbf{H}_1(p)$ are locally
+    and horizontally split 2-fibrations, with the splitting being
+    compatible with the source and target functors.
   \end{itemize}
 \end{theorem}
 \begin{proof}
@@ -392,7 +396,7 @@ strict natural transformations.
   Let us regard $\tau_f$ as a 2-cell in
   $\mathbf{V}_0(\mathbb{B})$ with domain 1-cell
   $\tau_{a'}\circ Ff$ and codomain 1-cell $pG(f)\circ\tau_a$.
-  If $\mathbf{V}_0(p)$ is a 2-fibration that is locally and
+  If $\mathbf{H}_0(p)$ is a 2-fibration that is locally and
   horizontally split, then let $\overline{\tau}_f$ be the 2-cell
   over $\tau_{f}$ with codomain
   $G(f)\circ\overline{\tau}_a$
@@ -408,7 +412,7 @@ strict natural transformations.
   an isomorphism, $\overline{\tau}_f$ is an isomorphism
   by construction, as required by 3.2.(c) of \cite{parePersistentDoubleLimits2019}.
   
-  It is now easy to see that if $\mathbf{V}_0(p)$ is locally and
+  It is now easy to see that if $\mathbf{H}_0(p)$ is locally and
   horizontally split, then $\overline{F}$ is a functor
   on the category of objects and horizontal arrows of $\mathbb{A}$.
 
@@ -419,7 +423,6 @@ strict natural transformations.
   to be the horizontally Cartesian 2-cell given by the cleavage
   living over $\tau_s$ and with horizontal codomain $Gs$,
   and define $\overline{F}s$ to be its horizontal codomain.
-
 
   Similarly, if $\alpha$ is a 2-cell in $\mathbb{A}$
   with horizontal domain and codomain $s: x_0 \todot x_1, t :
@@ -713,7 +716,83 @@ with the
       are all immediate by
       construction of $\overline{F}^0$ and $\overline{F}^2$
       and $\overline{\tau}$.
+
+\textbf{Now let us prove that} $\overline{\tau}$ is
+\textbf{Cartesian}.
+
+In fact, the only properties that we will need of $\overline{\tau}$
+are that:
+\begin{itemize}
+\item for an object $A$ in $\mathbb{A}$, the 1-cell
+  $\overline{\tau}_A$
+  is Cartesian
+\item for a vertical morphism $u : A\todot B$ in $\mathbb{A}$, the 2-cell
+  $\overline{\tau}_u$ is horizontally Cartesian
+\item $\overline{\tau}$ is strict, or
+  $\mathbf{H}_0(p):\mathbf{H}_0(\mathbb{E})\to
+  \mathbf{H}_0(\mathbb{B})$ is a 2-categorical fibration,
+  and
+  for a horizontal morphism $f : A\to B$,
+  the 2-cell $\overline{\tau}_f$ (the ``pseudo'' cell) is vertically
+  Cartesian, i.e., Cartesian with respect to the local
+  Hom functors of $\mathbf{V}_0(p): \mathbf{V}_0(\mathbb{E})\to \mathbf{V}_0(\mathbb{B})$.
+\end{itemize}
+
+Therefore, this establishes a characterization of the pseudonatural
+transformations
+which are Cartesian with respect to
+$p : \mathbf{Lax}(\mathbb{A},\mathbb{E}) \to
+\mathbf{Lax}(\mathbb{A},\mathbb{B})$.
+
+Therefore, introduce a pseudofunctor
+$H : \mathbb{A} \to \mathbb{E}$, and pseudonatural transformations
+$\sigma : pH \Rightarrow F, \rho : H\Rightarrow G$ with the property
+that
+$\tau\circ\sigma = p\rho$. We will prove that there is a unique
+pseudonatural transformation $\hat{\sigma} : H\Rightarrow
+\overline{F}$ such that $\overline{\tau}\circ\hat{\sigma}=\rho$.
+
+The definition of $\hat{\sigma}$ on objects and on vertical 1-cells
+should be evident; the proof here proceeds as in the 1-categorical
+case. That is:
+\begin{itemize}
+\item for $A$ in $\mathbb{A}$, $\hat{\sigma}_{A} : HA\to
+  \overline{F}A$ is the unique 1-cell such that
+  $p(\hat{\sigma}_A)=\sigma_A$
+  and $\overline{\tau}_{A}\circ \hat{\sigma}_A = \rho_{A}$.
+\item for $u : A \todot B$ in $\mathbb{A}$, $\hat{\sigma}_{u} : HA\to
+  \overline{F}A$ is the unique 2-cell such that
+  $p(\hat{\sigma}_u)=\sigma_u$
+  and $\overline{\tau}_u\circ \hat{\sigma}_u = \rho_u$.
+\end{itemize}
+
+Now, for $f : A\to A'$, $\overline{\tau}_f$ is either
+the identity if $\tau$ is strict, or it is vertically Cartesian if
+$p$ is a 2-categorical fibration; in either case, the pasting with
+the vertical cell $e_{\sigma f}$ is vertically Cartesian.
+Furthermore,  since $\overline{\tau}_{a'}$ is horizontally Cartesian,
+so is the vertical 2-cell $e_{\overline{\tau}_{a'}}$.
+
+Therefore, $\rho_f$ factors as the 
+pasting of $\overline{\tau}_f$ with a unique cell $\hat{\sigma}_f$
+lying over $\sigma_f$.
+
+\textbf{Now we prove that $\sigma$ is pseudonatural.}
+We consider each of the axioms of
+\cite{parePersistentDoubleLimits2019}
+in turn.
+
+\begin{itemize}
+\item 3.2.pht1 - pseudonaturality on a cell - postcompose on the right with
+  $\overline{\tau}_v$ and paste $\overline{\tau}_j$ below.
+  $\overline{\tau}_v$ is horizontally monic (as it is horizontally
+  Cartesian)
+  and $\overline{\tau}_j$ is an invertible 2-cell.
+  This allows us to reduce to the analogous axiom for $\rho$.
+\end{itemize}
+To see that $\sigma$ is pseudonatural
 \end{proof}
+
 
 \newpage
 
